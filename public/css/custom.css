@@ -1,0 +1,14 @@
+.panel-fab {
+    text-align: right;
+    position: relative;
+    top: -45px;
+    height: 25px;
+}
+
+.panel-fab .btn-fab {
+    background: #009688 !important;
+}
+
+.panel-fab .btn-fab:hover {
+    background: #009688 !important;
+}
