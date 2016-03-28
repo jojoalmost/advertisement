@@ -18,7 +18,7 @@ class AdvertisementController extends Controller
     public function index()
     {
         $data = Advertisement::orderBy('sorting', 'asc')->get();
-        return view('advertisement.index',compact('data'));
+        return view('admin.advertisement.index',compact('data'));
     }
 
     /**
@@ -28,7 +28,7 @@ class AdvertisementController extends Controller
      */
     public function create()
     {
-        return view('advertisement.insert');
+        return view('admin.advertisement.insert');
     }
 
     /**
@@ -74,7 +74,7 @@ class AdvertisementController extends Controller
     public function edit($id)
     {
         $data = Advertisement::query()->findOrFail($id);
-        return view('advertisement.edit',compact('data'));
+        return view('admin.advertisement.edit',compact('data'));
     }
 
     /**

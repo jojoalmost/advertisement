@@ -29,6 +29,7 @@ class HomeController extends Controller
             ->has('log', '=', 0)
             ->get()
             ->first();
+        if (empty($data)) return view('errors.503');
         return view('index', compact('data'));
     }
 
@@ -104,9 +105,15 @@ class HomeController extends Controller
         //
     }
 
-    public function fetch($sorting)
+    public function fetch(Request $request)
     {
-        $data = Advertisement::query()->where('sorting', '=', $sorting)->first();
-        return $data;
+        $this->ip = $request->ip();
+        $data = Advertisement::with(['log' => function ($query) {
+            $query->where('log.ip_address', $this->ip);
+        }])
+            ->where('played','<','max_played')
+            ->has('log', '=', 0)
+            ->get()
+            ->first();
     }
 }

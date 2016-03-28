@@ -3,7 +3,7 @@ header("Content-Type: text/plain");
 /**
  * secret - Shared secret between server and node
  */
-$secret = "verysecretstring";
+$secret = "advertisement";
 /**
  * response - Standard response (is modified depending on the result
  */

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Laravel Quickstart - Basic</title>
+    <title>Advertisement</title>
 
     <!-- CSS And JavaScript -->
     <script src="{{url('/js/jquery-2.2.2.min.js')}}"></script>

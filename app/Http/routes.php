@@ -11,12 +11,25 @@
 |
 */
 
-Route::resource('admin/advertisement', 'AdvertisementController');
-Route::post('admin/advertisement/sorting', 'AdvertisementController@sorting');
 Route::get('/', function()
 {
     return view('terms-of-use');
 });
-Route::resource('/index', 'HomeController');
-Route::resource('/cloudtraxauth', 'CloudtraxController');
-Route::get('/fetch/{sorting}', 'HomeController@fetch');
+//backend
+Route::resource('admin/advertisement', 'AdvertisementController');
+Route::post('admin/advertisement/sorting', 'AdvertisementController@sorting');
+Route::get('admin',function(){ return view('admin.login');});
+
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+//frontend
+Route::resource('index', 'HomeController');
+Route::resource('cloudtraxauth', 'CloudtraxController');
+Route::post('fetch/{sorting}', 'HomeController@fetch');
