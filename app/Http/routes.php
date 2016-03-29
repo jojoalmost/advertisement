@@ -16,9 +16,18 @@ Route::get('/', function()
     return view('terms-of-use');
 });
 //backend
-Route::resource('admin/advertisement', 'AdvertisementController');
-Route::post('admin/advertisement/sorting', 'AdvertisementController@sorting');
-Route::get('admin',function(){ return view('admin.login');});
+
+//Route::group(['middleware' => 'auth'], function()
+//{
+    Route::resource('admin/advertisement', 'AdvertisementController');
+    Route::post('admin/advertisement/sorting', 'AdvertisementController@sorting');
+//});
+
+
+Route::get('admin', function () {
+    return redirect('admin/login');
+});
+Route::get('admin/login',function(){ return view('admin.login');});
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

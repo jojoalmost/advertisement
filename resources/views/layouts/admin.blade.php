@@ -41,9 +41,9 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> User <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{Session::get('email')}} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="{{url('auth/logout')}}">Logout</a></li>
                     </ul>
                 </li>
             </ul>
