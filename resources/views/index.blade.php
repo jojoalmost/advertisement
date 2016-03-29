@@ -70,7 +70,7 @@
 
         // initialize the plugin, passing in autoDisable
         player.disableProgress({
-            autoDisable: false
+            autoDisable: true
         });
 
         player.on('progress', on_progress);
@@ -87,15 +87,15 @@
         player.on('ended', function () {
             skipbool = false;
             $('#skip').hide();
-            $.ajax({
-                type: 'POST',
-                url:  '{{url('cloudtraxauth')}}',
-                data: $('form').serialize(),
+            {{--$.ajax({--}}
+                {{--type: 'POST',--}}
+                {{--url:  '{{url('cloudtraxauth')}}',--}}
+                {{--data: $('form').serialize(),--}}
 
-                success:function(){
-//                    location.reload();
-                }
-            })
+                {{--success:function(){--}}
+                    window.location.href = "{{url('cloudtraxauth')}}";
+//                }
+//            })
         });
 
 

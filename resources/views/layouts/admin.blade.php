@@ -35,7 +35,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"> </span> Menu</a>
                     <ul class="dropdown-menu">
                         <li><a href="{{url('admin/advertisement')}}">Advestisement</a></li>
-                        <li><a href="#">Cloudrax Setting</a></li>
+                        <li><a href="{{url('admin/log')}}">Advertisement Log</a></li>
                     </ul>
                 </li>
             </ul>

@@ -21,6 +21,7 @@ Route::get('/', function()
 //{
     Route::resource('admin/advertisement', 'AdvertisementController');
     Route::post('admin/advertisement/sorting', 'AdvertisementController@sorting');
+    Route::resource('admin/log', 'LogController');
 //});
 
 
