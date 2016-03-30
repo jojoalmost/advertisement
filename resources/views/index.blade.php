@@ -54,7 +54,7 @@
         // save a reference to the video element
         video = document.querySelector('video');
 
-        //        disable right click
+        // disable right click
         if (video.addEventListener) {
             video.addEventListener('contextmenu', function (e) {
                 e.preventDefault();
@@ -66,15 +66,16 @@
         }
 
         // save a reference to the video.js player for that element
-        player = videojs(video, {"controls": true, "autoplay": true, "preload": "auto"});
-
-
-        // initialize the plugin, passing in autoDisable
-        player.disableProgress({
-            autoDisable: true
-        });
-
         $(function () {
+            player = videojs(video, {"controls": true, "autoplay": true, "preload": "auto"});
+
+
+            // initialize the plugin, passing in autoDisable
+            player.disableProgress({
+                autoDisable: true
+            });
+
+
             player.on('progress', on_progress);
         });
 
