@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-6 pull-right">
-                    <a href="{{url('extras/axa')}}" class="btn btn-default">Cancel</a>
+                    <a href="{{url('admin/advertisement')}}" class="btn btn-default">Cancel</a>
                     <button class="btn btn-raised btn-primary">Save</button>
                 </div>
             </div>
