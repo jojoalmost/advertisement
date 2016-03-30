@@ -9,7 +9,8 @@
             width: auto;
             height: 480px;
         }
-        .panel{
+
+        .panel {
             padding-top: 20px;
             padding-bottom: 20px;
         }
@@ -46,16 +47,16 @@
     <script>
         var skipped = "{{$data->skipped}}";
         var skipbool = false;
-        if (skipped == "yes"){
+        if (skipped == "yes") {
             skipbool = true;
         }
 
         // save a reference to the video element
         video = document.querySelector('video');
 
-//        disable right click
+        //        disable right click
         if (video.addEventListener) {
-            video.addEventListener('contextmenu', function(e) {
+            video.addEventListener('contextmenu', function (e) {
                 e.preventDefault();
             }, false);
         } else {
@@ -73,13 +74,14 @@
             autoDisable: true
         });
 
-        player.on('progress', on_progress);
+        $(function () {
+            player.on('progress', on_progress);
+        });
 
         function on_progress(event) {
             var skip_duration = {{$data->skip_duration}};
-            if (skipbool){
+            if (skipbool) {
                 if (player.currentTime() >= skip_duration) {
-                    alert('skip');
                     $('#skip').show();
                 }
             }
