@@ -11,18 +11,21 @@
 |
 */
 
+use App\Http\Middleware\Authenticate;
+
 Route::get('/', function()
 {
     return view('terms-of-use');
 });
 //backend
 
-//Route::group(['middleware' => 'auth'], function()
-//{
+Route::group(['middleware' => Authenticate::class], function()
+{
+    Route::get('admin/dashboard',function (){ return view('admin.dashboard');});
     Route::resource('admin/advertisement', 'AdvertisementController');
     Route::post('admin/advertisement/sorting', 'AdvertisementController@sorting');
     Route::resource('admin/log', 'LogController');
-//});
+});
 
 
 Route::get('admin', function () {
@@ -31,9 +34,8 @@ Route::get('admin', function () {
 Route::get('admin/login',function(){ return view('admin.login');});
 
 // Authentication routes...
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
+Route::post('auth/login', 'LoginController@authenticate');
+Route::get('auth/logout', 'LoginController@getLogout');
 
 // Registration routes...
 Route::get('auth/register', 'Auth\AuthController@getRegister');
