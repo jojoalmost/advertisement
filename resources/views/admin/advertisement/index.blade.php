@@ -32,7 +32,6 @@
                 </div>
                 <div class="panel-body">
                     <div class="panel-fab">
-                        {{--<button class="btn btn-primary btn-fab" type="button" onclick="sorting();"><i class="material-icons">save</i></button>--}}
                         <a href="{{url('admin/advertisement/create')}}" class="btn btn-primary btn-fab">
                             <i class="material-icons">add</i>
                         </a>
@@ -63,11 +62,14 @@
                                         <a href="{{url('admin/advertisement/'.$value->id.'/edit')}}">
                                             <i class="material-icons">edit</i>
                                         </a>
+                                        <a href="#"
+                                           class="text-info" id="save_sorting">
+                                            <i class="material-icons">save</i>
+                                        </a>
                                         <a href="{{url('admin/advertisement/'.$value->id)}}" data-id="{{$value->id}}"
                                            class="text-danger" name="delete_link">
                                             <i class="material-icons">delete_forever</i>
                                         </a>
-                                        <button type="button" onclick="sorting();"><i class="material-icons">save</i></button>
                                     </div>
                                 </td>
                             </tr>
@@ -124,7 +126,7 @@
             placeholder: '<tr class="placeholder"/>',
         });
 
-        function sorting() {
+        $('#save_sorting').click(function (){
             var data = $('.sorted_table').sortable("serialize").get();
             $.ajax({
                 type: "POST",
@@ -134,7 +136,7 @@
                     location.reload();
                 }
             });
+        });
 
-        }
     </script>
 @endsection
