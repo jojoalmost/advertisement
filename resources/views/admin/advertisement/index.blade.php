@@ -32,7 +32,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="panel-fab">
-                        <button class="btn btn-primary btn-fab" type="button" onclick="sorting();"><i class="material-icons">save</i></button>
+                        {{--<button class="btn btn-primary btn-fab" type="button" onclick="sorting();"><i class="material-icons">save</i></button>--}}
                         <a href="{{url('admin/advertisement/create')}}" class="btn btn-primary btn-fab">
                             <i class="material-icons">add</i>
                         </a>
@@ -67,6 +67,7 @@
                                            class="text-danger" name="delete_link">
                                             <i class="material-icons">delete_forever</i>
                                         </a>
+                                        <button type="button" onclick="sorting();"><i class="material-icons">save</i></button>
                                     </div>
                                 </td>
                             </tr>
