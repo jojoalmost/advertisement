@@ -66,18 +66,15 @@
         }
 
         // save a reference to the video.js player for that element
-        $(function () {
-            player = videojs(video, {"controls": true, "autoplay": true, "preload": "auto"});
+        player = videojs(video, {"controls": true, "autoplay": true, "preload": "auto"});
 
 
-            // initialize the plugin, passing in autoDisable
-            player.disableProgress({
-                autoDisable: true
-            });
-
-
-            player.on('progress', on_progress);
+        // initialize the plugin, passing in autoDisable
+        player.disableProgress({
+            autoDisable: true
         });
+
+        player.on('progress', on_progress);
 
         function on_progress(event) {
             var skip_duration = {{$data->skip_duration}};
