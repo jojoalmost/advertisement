@@ -79,6 +79,7 @@
             var skip_duration = {{$data->skip_duration}};
             if (skipbool){
                 if (player.currentTime() >= skip_duration) {
+                    alert('skip');
                     $('#skip').show();
                 }
             }
