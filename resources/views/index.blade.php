@@ -74,16 +74,23 @@
             autoDisable: true
         });
 
-        player.on('progress', on_progress);
+        video.onpause = function() {
+            clearInterval(window.interval);
+        };
 
-        function on_progress(event) {
-            var skip_duration = {{$data->skip_duration}};
-            if (skipbool) {
-                if (player.currentTime() >= skip_duration) {
-                    $('#skip').show();
+
+        video.onplay =  function() {
+            window.interval = setInterval(function(){
+                var skip_duration = {{$data->skip_duration}};
+                if (skipbool) {
+                    if (player.currentTime() >= skip_duration) {
+                        $('#skip').show();
+                    }
                 }
-            }
-        }
+            },1000);
+        };
+
+
 
         player.on('ended', function () {
             skipbool = false;
