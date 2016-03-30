@@ -87,15 +87,15 @@
         player.on('ended', function () {
             skipbool = false;
             $('#skip').hide();
+            $.ajax({
+                type: 'POST',
+                url: '{{url('cloudtraxauth')}}',
+                data: $('form').serialize(),
+                success: function () {
+                    window.location.href = "{{url('cloudtraxauth')}}";
+                }
+            });
         })
-        $.ajax({
-            type: 'POST',
-            url:  '{{url('cloudtraxauth')}}',
-            data: $('form').serialize(),
-            success:function(){
-                window.location.href = "{{url('cloudtraxauth')}}";
-            },
-        });
 
 
     </script>
