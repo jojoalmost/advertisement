@@ -4,6 +4,7 @@
     <script src="{{url('/js/videojs/video.js')}}"></script>
     <script src="{{url('/js/videojs/videojs.disableProgress.js')}}"></script>
     <script src="{{url('/js/videojs/videojs-playlist.js')}}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <style>
         .my-video-dimensions {
             width: auto;
