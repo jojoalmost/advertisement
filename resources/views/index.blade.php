@@ -9,19 +9,18 @@
             width: auto;
             height: 480px;
         }
-
         .panel {
             padding-top: 20px;
-            padding-bottom: 20px;
+            min-height: 620px;
         }
     </style>
 @endsection
 @section('content')
-    <div class="row panel">
+    <div class="row panel panel-default">
         <div class="col-xs-12">
-            <h1 class="text-center">{{ $data->name }}</h1>
+            <h2 class="text-center">{{ $data->name }}</h2>
         </div>
-        <div class="col-xs-12 ">
+        <div class="col-xs-12">
             <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls
                    width="640" height="360"
                    poster="" data-setup='{}'>

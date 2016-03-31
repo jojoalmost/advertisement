@@ -19,8 +19,6 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-//        $data = Advertisement::query()->whereRaw('played <= max_played')->first();
-
         $this->ip = $request->ip();
         $data = Advertisement::with(['log' => function ($query) {
             $query->where('log.ip_address', $this->ip);
