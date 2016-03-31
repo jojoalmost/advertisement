@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Advertisement;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
@@ -17,9 +15,9 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(Request $request)
+    public function index()
     {
-        $this->ip = $request->ip();
+        $this->ip = Request::ip();
         $data = Advertisement::with(['log' => function ($query) {
             $query->where('log.ip_address', $this->ip);
         }])

@@ -45,7 +45,7 @@
             </ol>
             <div class="margin-base-vertical">
                 <div class="col-xs-12 text-center">
-                    <a href="{{url('index')}}" class="btn btn-raised btn-primary btn-lg">I Agree</a>
+                    <a href="{!!url('ads')!!}" class="btn btn-raised btn-primary btn-lg">I Agree</a>
                 </div>
             </div>
         </div><!-- //main content -->

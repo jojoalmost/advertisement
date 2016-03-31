@@ -9,9 +9,22 @@
             width: auto;
             height: 480px;
         }
+
         .panel {
             padding-top: 20px;
             min-height: 620px;
+        }
+
+        @media screen and (max-device-width: 380px) {
+            .my-video-dimensions {
+                height: 180px;
+            }
+        }
+
+        @media screen and (max-device-height: 380px) {
+            .my-video-dimensions {
+                height: 300px;
+            }
         }
     </style>
 @endsection
@@ -73,7 +86,7 @@
             autoDisable: true
         });
 
-        video.onprogress = function() {
+        video.onprogress = function () {
             var skip_duration = {{$data->skip_duration}};
             if (skipbool) {
                 if (video.currentTime >= skip_duration) {
