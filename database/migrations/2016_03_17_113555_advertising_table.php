@@ -17,7 +17,7 @@ class AdvertisingTable extends Migration
             $table->string('name');
             $table->string('video');
             $table->integer('max_played');
-            $table->integer('played')->default(0);
+            $table->string('played')->default(0);
             $table->integer('skip_duration');
             $table->string('skipped');
             $table->integer('sorting')->default(0);
