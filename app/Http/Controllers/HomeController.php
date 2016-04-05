@@ -22,26 +22,29 @@ class HomeController extends Controller
         $this->ip = Request::ip();
 		$this->maxPlayed = AdsLog::where('log.ip_address', $this->ip)
 				->max('played');
-				
 		if($this->maxPlayed===null) {
 			$this->maxPlayed = 1;
-		}
-        $data = Advertisement::whereHas('log', function($q){
-				$q->where('log.ip_address', $this->ip)
-					->where('log.played', $this->maxPlayed);
-			},'=',0)
-            ->where('played','<','max_played');
-        $count = $data->count();
-		if($count==0 && $this->maxPlayed>=1){
-			$this->maxPlayed=$this->maxPlayed+1;
+		}else{
 			
+			$data = Advertisement::whereHas('log', function($q){
+					$q->where('log.ip_address', $this->ip)
+						->where('log.played', $this->maxPlayed);
+				},'=',0)
+				->where('played','<',DB::raw('max_played'));
+			$count = $data->count();
+			if($count==0 && $this->maxPlayed>1){
+				$this->maxPlayed=$this->maxPlayed+1;
+				
+			}
 		}
-		
+        
+
+		DB::enableQueryLog();
         $data = Advertisement::whereHas('log', function($q){
 				$q->where('log.ip_address', $this->ip)
 					->where('log.played', $this->maxPlayed);
 			},'=',0)
-			->where('advertisement.played','<','max_played')
+			->where('advertisement.played','<',DB::raw('max_played'))
 			
 			->get()
 			->first();
