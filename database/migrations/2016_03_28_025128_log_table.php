@@ -17,6 +17,7 @@ class LogTable extends Migration
             $table->string('advertisement_id');
             $table->string('ip_address');
             $table->string('user_agent');
+            $table->integer('played')->default(1);
             $table->timestamps();
         });
     }

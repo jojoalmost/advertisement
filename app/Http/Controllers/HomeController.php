@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Advertisement;
+use App\AdsLog;
 use Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -17,15 +18,39 @@ class HomeController extends Controller
 
     public function index()
     {
+		
         $this->ip = Request::ip();
-        $data = Advertisement::with(['log' => function ($query) {
-            $query->where('log.ip_address', $this->ip);
-        }])
-            ->where('played','<','max_played')
-            ->has('log', '=', 0)
-            ->get()
-            ->first();
-        if (empty($data)) return view('errors.503');
+		$this->maxPlayed = AdsLog::where('log.ip_address', $this->ip)
+				->max('played');
+				
+		if($this->maxPlayed===null) {
+			$this->maxPlayed = 1;
+		}
+        $data = Advertisement::whereHas('log', function($q){
+				$q->where('log.ip_address', $this->ip)
+					->where('log.played', $this->maxPlayed);
+			},'=',0)
+            ->where('played','<','max_played');
+        $count = $data->count();
+		if($count==0 && $this->maxPlayed>=1){
+			$this->maxPlayed=$this->maxPlayed+1;
+			
+		}
+		
+        $data = Advertisement::whereHas('log', function($q){
+				$q->where('log.ip_address', $this->ip)
+					->where('log.played', $this->maxPlayed);
+			},'=',0)
+			->where('advertisement.played','<','max_played')
+			
+			->get()
+			->first();
+				
+		
+        if (empty($data)){
+//            return view('errors.503');
+            return redirect('cloudtraxauth');
+        }
         return view('index', compact('data'));
     }
 
@@ -101,15 +126,15 @@ class HomeController extends Controller
         //
     }
 
-    public function fetch(Request $request)
-    {
-        $this->ip = $request->ip();
-        $data = Advertisement::with(['log' => function ($query) {
-            $query->where('log.ip_address', $this->ip);
-        }])
-            ->where('played','<','max_played')
-            ->has('log', '=', 0)
-            ->get()
-            ->first();
-    }
+//    public function fetch(Request $request)
+//    {
+//        $this->ip = $request->ip();
+//        $data = Advertisement::with(['log' => function ($query) {
+//            $query->where('log.ip_address', $this->ip);
+//        }])
+//            ->where('played','<','max_played')
+//            ->has('log', '=', 0)
+//            ->get()
+//            ->first();
+//    }
 }

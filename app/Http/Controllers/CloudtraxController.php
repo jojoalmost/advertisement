@@ -40,9 +40,34 @@ class CloudtraxController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+		$this->ip = $request->ip();
+		$this->maxPlayed = AdsLog::where('advertisement_id',$data['advertisement_id'])
+				->where('log.ip_address', $this->ip)
+				->max('played');
+				
+		if($this->maxPlayed===null) {
+			$this->maxPlayed = 1;
+		}
+		$vidPlayedCount = Advertisement::whereHas('log', function($q) use ($data){
+				$q->where('log.ip_address', $this->ip)
+				->where('log.advertisement_id',$data['advertisement_id'])
+				->where('log.played', $this->maxPlayed);
+			},'=',0)
+			->where('id',$data['advertisement_id'])
+			->count();
+		
+		$played = $this->maxPlayed;
+		
+		if($this->maxPlayed>=1 && $vidPlayedCount == 0)
+			$played=$played+1;
+		
         $data['ip_address'] = $request->ip();
         $data['user_agent'] = $request->header('User-Agent');
-        AdsLog::create($data);
+		$data['played'] = $played;
+		
+		
+        AdsLog::create($data);		
+		
         $ads = Advertisement::query()->findOrFail($data['advertisement_id']);
         $ads->played++;
         $ads->save();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AdsLog;
+use App\Advertisement;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -17,7 +18,7 @@ class LogController extends Controller
      */
     public function index()
     {
-        $data = AdsLog::orderBy('id', 'desc')->get();
+        $data = AdsLog::with('advertisement')->get();
         return view('admin.log.index',compact('data'));
     }
 

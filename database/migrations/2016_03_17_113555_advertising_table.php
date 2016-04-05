@@ -16,11 +16,11 @@ class AdvertisingTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('video');
-            $table->string('max_played');
-            $table->string('played')->default(0);
-            $table->string('skip_duration');
+            $table->integer('max_played');
+            $table->integer('played')->default(0);
+            $table->integer('skip_duration');
             $table->string('skipped');
-            $table->string('sorting')->default(0);
+            $table->integer('sorting')->default(0);
             $table->timestamps();
         });
     }
