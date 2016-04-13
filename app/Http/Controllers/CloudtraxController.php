@@ -19,7 +19,63 @@ class CloudtraxController extends Controller
      */
     public function index()
     {
-//        include 'example_server.php';
+        $DEBUG = false;
+        $uam_secret = "advertisement";
+        function encode_password($plain, $challenge, $secret)
+        {
+            if ((strlen($challenge) % 2) != 0 ||
+                strlen($challenge) == 0
+            )
+                return FALSE;
+            $hexchall = hex2bin($challenge);
+            if ($hexchall === FALSE)
+                return FALSE;
+            if (strlen($secret) > 0) {
+                $crypt_secret = md5($hexchall . $secret, TRUE);
+                $len_secret = 16;
+            } else {
+                $crypt_secret = $hexchall;
+                $len_secret = strlen($hexchall);
+            }
+            /* simulate C style \0 terminated string */
+            $plain .= "\x00";
+            $crypted = '';
+            for ($i = 0; $i < strlen($plain); $i++)
+                $crypted .= $plain[$i] ^ $crypt_secret[$i % $len_secret];
+            $extra_bytes = 0;//rand(0, 16);
+            for ($i = 0; $i < $extra_bytes; $i++)
+                $crypted .= chr(rand(0, 255));
+            return bin2hex($crypted);
+        }
+
+        $parameter = Session::get('cloudtrax');
+        $username = 'admin';
+        $password = 'open2arevainna';
+        $uamip = $parameter["uamip"];
+        $uamport = $parameter["uamport"];
+        $challenge = $parameter["challenge"];
+        $encoded_password = encode_password($password, $challenge, $uam_secret);
+        $redirect_url = "http://$uamip:$uamport/logon?" .
+            "username=" . urlencode($username) .
+            "&password=" . urlencode($encoded_password);
+# point them toward a different landing page if you want ...
+# (couldn't get this working)
+#$redirect_url .= "&redir=" . urlencode("http://www.nytimes.com");
+        if ($DEBUG) {
+            echo "userurl: {" . $parameter['userurl'] . "}<br/>";
+            echo "REDIRECT_URL: {\"" . $redirect_url . "\"}<br/><br/>";
+
+            echo "POST data:";
+            echo "<pre>";
+            print_r($parameter);
+            echo "</pre>" . "<br/>";
+            echo "SERVER data:";
+            echo "<pre>";
+            print_r($_SERVER);
+            echo "</pre>";
+        } else {
+            return redirect($redirect_url);
+        }
     }
 
     /**
@@ -35,53 +91,50 @@ class CloudtraxController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $data = $request->all();
-		$this->ip = $request->ip();
-		$this->maxPlayed = AdsLog::where('advertisement_id',$data['advertisement_id'])
-				->where('log.ip_address', $this->ip)
-				->max('played');
-				
-		if($this->maxPlayed===null) {
-			$this->maxPlayed = 1;
-		}
-		$vidPlayedCount = Advertisement::whereHas('log', function($q) use ($data){
-				$q->where('log.ip_address', $this->ip)
-				->where('log.advertisement_id',$data['advertisement_id'])
-				->where('log.played', $this->maxPlayed);
-			},'=',0)
-			->where('id',$data['advertisement_id'])
-			->count();
-		
-		$played = $this->maxPlayed;
-		
-		if($this->maxPlayed>=1 && $vidPlayedCount == 0)
-			$played=$played+1;
-		
+        $this->ip = $request->ip();
+        $this->maxPlayed = AdsLog::where('advertisement_id', $data['advertisement_id'])
+            ->where('log.ip_address', $this->ip)
+            ->max('played');
+
+        if ($this->maxPlayed === null) {
+            $this->maxPlayed = 1;
+        }
+        $vidPlayedCount = Advertisement::whereHas('log', function ($q) use ($data) {
+            $q->where('log.ip_address', $this->ip)
+                ->where('log.advertisement_id', $data['advertisement_id'])
+                ->where('log.played', $this->maxPlayed);
+        }, '=', 0)
+            ->where('id', $data['advertisement_id'])
+            ->count();
+
+        $played = $this->maxPlayed;
+
+        if ($this->maxPlayed >= 1 && $vidPlayedCount == 0)
+            $played = $played + 1;
+
         $data['ip_address'] = $request->ip();
         $data['user_agent'] = $request->header('User-Agent');
-		$data['played'] = $played;
-		
-		
-        AdsLog::create($data);		
-		
+        $data['played'] = $played;
+
+
+        AdsLog::create($data);
+
         $ads = Advertisement::query()->findOrFail($data['advertisement_id']);
         $ads->played++;
         $ads->save();
-
-        $parameter = Session::get('cloudtrax');
-        include 'example_server.php';
-
+        return redirect('cloudtraxauth');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -92,7 +145,7 @@ class CloudtraxController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -103,8 +156,8 @@ class CloudtraxController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -115,7 +168,7 @@ class CloudtraxController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
