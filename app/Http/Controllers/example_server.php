@@ -141,4 +141,3 @@ if (array_key_exists('type', $_GET)) {
 /* calculate new request authenticator based on answer and request -> send it out */
 calculate_new_ra($response, $secret);
 print_dictionary($response);
-?>

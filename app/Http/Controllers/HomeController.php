@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Advertisement;
 use App\AdsLog;
+use Illuminate\Support\Facades\Session;
 use Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -127,6 +128,12 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function termsOfUse(){
+        $cloudtrax=Request::all();
+        Session::put(compact('cloudtrax'));
+        return view('terms-of-use');
     }
 
 //    public function fetch(Request $request)

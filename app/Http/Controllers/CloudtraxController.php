@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class CloudtraxController extends Controller
 {
@@ -71,6 +72,10 @@ class CloudtraxController extends Controller
         $ads = Advertisement::query()->findOrFail($data['advertisement_id']);
         $ads->played++;
         $ads->save();
+
+        $parameter = Session::get('cloudtrax');
+        include 'example_server.php';
+
     }
 
     /**
