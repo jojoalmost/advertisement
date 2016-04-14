@@ -51,7 +51,7 @@ class CloudtraxController extends Controller
         $parameter = Session::get('cloudtrax');
         $username = 'admin';
         $password = 'open2arevainna';
-        $uamip = $parameter["uamip"];
+        $uamip = isset($parameter["uamip"]) ? $parameter["uamip"]:'0.0.0.0';
         $uamport = $parameter["uamport"];
         $challenge = $parameter["challenge"];
         $encoded_password = encode_password($password, $challenge, $uam_secret);
