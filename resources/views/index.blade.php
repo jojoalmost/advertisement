@@ -84,7 +84,7 @@
 
         // initialize the plugin, passing in autoDisable
         player.disableProgress({
-            autoDisable: true
+            autoDisable: false
         });
 
         video.onprogress = function () {

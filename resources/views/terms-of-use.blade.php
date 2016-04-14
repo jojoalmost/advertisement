@@ -36,7 +36,7 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-md-6 col-md-offset-3 panel panel-default">
+        <div class="col-xs-6 col-xs-offset-3 panel panel-default">
 
             <h1 class="margin-base-vertical">Terms of use</h1>
             <ol>
