@@ -51,16 +51,14 @@ class CloudtraxController extends Controller
         $parameter = Session::get('cloudtrax');
         $username = 'admin';
         $password = 'open2arevainna';
-        $uamip = isset($parameter["uamip"]) ? $parameter["uamip"]:'0.0.0.0';
+        $uamip = $parameter["uamip"];
         $uamport = $parameter["uamport"];
         $challenge = $parameter["challenge"];
         $encoded_password = encode_password($password, $challenge, $uam_secret);
         $redirect_url = "http://$uamip:$uamport/logon?" .
             "username=" . urlencode($username) .
             "&password=" . urlencode($encoded_password);
-# point them toward a different landing page if you want ...
-# (couldn't get this working)
-#$redirect_url .= "&redir=" . urlencode("http://www.nytimes.com");
+var_dump($parameter);
         if ($DEBUG) {
             echo "userurl: {" . $parameter['userurl'] . "}<br/>";
             echo "REDIRECT_URL: {\"" . $redirect_url . "\"}<br/><br/>";
@@ -74,7 +72,12 @@ class CloudtraxController extends Controller
             print_r($_SERVER);
             echo "</pre>";
         } else {
-            return redirect($redirect_url);
+//            return redirect($redirect_url);
+            $http= curl_init($redirect_url);
+            curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
+//            $http_result = curl_exec($http);
+//            $http_status = curl_getinfo($http, CURLINFO_HTTP_CODE);
+            curl_close($http);
         }
     }
 

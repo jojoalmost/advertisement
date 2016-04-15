@@ -133,7 +133,23 @@ class HomeController extends Controller
     public function termsOfUse(){
         $cloudtrax=Request::all();
         Session::put(compact('cloudtrax'));
-        return view('terms-of-use');
+        switch($cloudtrax['res']) {
+            case "logoff":
+                echo "Goodbye";
+                break;
+            case "success":
+                return redirect($cloudtrax['userurl']);
+                break;
+            case "failed":
+                echo "Authentication Failed";
+                break;
+            case "notyet":
+                return view('cloudtraxResponse/terms-of-use');
+                break;
+            default:
+                http_response_code(400);
+                exit();
+        }
     }
 
 //    public function fetch(Request $request)
