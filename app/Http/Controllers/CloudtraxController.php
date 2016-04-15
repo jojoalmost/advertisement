@@ -19,7 +19,6 @@ class CloudtraxController extends Controller
      */
     public function index()
     {
-        $DEBUG = false;
         $uam_secret = "advertisement";
         function encode_password($plain, $challenge, $secret)
         {
@@ -58,27 +57,12 @@ class CloudtraxController extends Controller
         $redirect_url = "http://$uamip:$uamport/logon?" .
             "username=" . urlencode($username) .
             "&password=" . urlencode($encoded_password);
-var_dump($parameter);
-        if ($DEBUG) {
-            echo "userurl: {" . $parameter['userurl'] . "}<br/>";
-            echo "REDIRECT_URL: {\"" . $redirect_url . "\"}<br/><br/>";
-
-            echo "POST data:";
-            echo "<pre>";
-            print_r($parameter);
-            echo "</pre>" . "<br/>";
-            echo "SERVER data:";
-            echo "<pre>";
-            print_r($_SERVER);
-            echo "</pre>";
-        } else {
-//            return redirect($redirect_url);
-            $http= curl_init($redirect_url);
-            curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
+        return redirect($redirect_url);
+//            $http= curl_init($redirect_url);
+//            curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
 //            $http_result = curl_exec($http);
 //            $http_status = curl_getinfo($http, CURLINFO_HTTP_CODE);
-            curl_close($http);
-        }
+//            curl_close($http);
     }
 
     /**
