@@ -144,7 +144,7 @@ class HomeController extends Controller
                 echo "Authentication Failed";
                 break;
             case "notyet":
-                return view('cloudtraxResponse/terms-of-use');
+                return view('terms-of-use');
                 break;
             default:
                 http_response_code(400);
