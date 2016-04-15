@@ -1,4 +1,4 @@
-@extends('views.layouts.frontend')
+@extends('layouts.frontend')
 @section('head_extra')
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <style>
