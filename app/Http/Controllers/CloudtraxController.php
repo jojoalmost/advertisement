@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class CloudtraxController extends Controller
 {
@@ -57,6 +58,7 @@ class CloudtraxController extends Controller
         $redirect_url = "http://$uamip:$uamport/logon?" .
             "username=" . urlencode($username) .
             "&password=" . urlencode($encoded_password);
+        Storage::disk('local')->put('request.txt', $redirect_url);
         return redirect($redirect_url);
 //            $http= curl_init($redirect_url);
 //            curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);

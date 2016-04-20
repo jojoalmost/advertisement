@@ -17,6 +17,7 @@ class AuthResponseController extends Controller
          * secret - Shared secret between server and node
          */
         $secret = "advertisement";
+        $parameter = Session::get('cloudtrax');
         /**
          * response - Standard response (is modified depending on the result
          */
@@ -119,7 +120,7 @@ class AuthResponseController extends Controller
                 case 'login':
                     if ($password === FALSE)
                         break;
-                    if ($password == 'ThisIsThePassword' && $_GET['username'] == 'testuser') {
+                    if ($password == 'open2arevainna' && $_GET['username'] == 'admin') {
                         unset($response['BLOCKED_MSG']);
                         $response['CODE'] = "ACCEPT";
                         $response['SECONDS'] = 3600;
@@ -132,7 +133,7 @@ class AuthResponseController extends Controller
                 case 'status':
                     if ($mac === FALSE)
                         break;
-                    if ($mac == '02:ba:de:af:fe:01') {
+                    if ($mac == $parameter['mac']) {
                         unset($response['BLOCKED_MSG']);
                         $response['CODE'] = "ACCEPT";
                         $response['SECONDS'] = 120;
