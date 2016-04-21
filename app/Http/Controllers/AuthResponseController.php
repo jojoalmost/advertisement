@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AuthResponseController extends Controller
 {
-    public function response(Request $request)
+    public function response()
     {
         header("Content-Type: text/plain");
         /**
@@ -157,6 +157,6 @@ class AuthResponseController extends Controller
         print_dictionary($response);
 
         Storage::disk('local')->put('log.txt', $response);
-        Storage::disk('local')->put('request.txt', $request->all());
+        Storage::disk('local')->put('request.txt', Request->all());
     }
 }
