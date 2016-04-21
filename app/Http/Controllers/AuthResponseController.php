@@ -18,6 +18,8 @@ class AuthResponseController extends Controller
          */
         $secret = "advertisement";
         $parameter = Session::get('cloudtrax');
+        Storage::disk('local')->put('request.txt', Request::all());
+        Storage::disk('local')->put('session.txt', $parameter);
         /**
          * response - Standard response (is modified depending on the result
          */
@@ -157,6 +159,6 @@ class AuthResponseController extends Controller
         print_dictionary($response);
 
         Storage::disk('local')->put('log.txt', $response);
-        Storage::disk('local')->put('request.txt', Request->all());
+
     }
 }
