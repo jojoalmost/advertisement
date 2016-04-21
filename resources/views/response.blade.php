@@ -40,9 +40,9 @@
     <body>
         <div class="container">
             <div class="content">
-                @if($data = 'logoff')
+                @if($data == "logoff")
                     <div class="title">Good Bye</div>
-                @elseif($data = 'failed')
+                @elseif($data == "failed")
                     <div class="title">Authentication Failed</div>
                 @endif
             </div>
