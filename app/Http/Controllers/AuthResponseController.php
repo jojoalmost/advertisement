@@ -135,7 +135,7 @@ class AuthResponseController extends Controller
                 case 'status':
                     if ($mac === FALSE)
                         break;
-                    if ($mac == $parameter['mac']) {
+                    if (true) {
                         unset($response['BLOCKED_MSG']);
                         $response['CODE'] = "ACCEPT";
                         $response['SECONDS'] = 120;
