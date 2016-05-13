@@ -39,6 +39,7 @@
                     <table class="table table-hover table-striped sorted_table" id="data_table">
                         <thead>
                         <tr>
+                            <th>Play Order</th>
                             <th>Name</th>
                             <th>Video</th>
                             <th>Max Played</th>
@@ -49,8 +50,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($data as $value)
+                        @foreach($data as $i =>$value)
                             <tr data-id="{{$value->id}}">
+                                <td>{{$i}}</td>
                                 <td>{{$value->name}}</td>
                                 <td>{{$value->video}}</td>
                                 <td>{{$value->max_played}}</td>
