@@ -52,7 +52,7 @@
                         <tbody>
                         @foreach($data as $i =>$value)
                             <tr data-id="{{$value->id}}">
-                                <td>{{$i}}</td>
+                                <td>{{$i+1}}</td>
                                 <td>{{$value->name}}</td>
                                 <td>{{$value->video}}</td>
                                 <td>{{$value->max_played}}</td>
