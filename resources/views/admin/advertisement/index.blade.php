@@ -121,8 +121,9 @@
                 });
             });
 
-            $('#save_sorting').click(function (){
-                alert('trigger');
+            $('#save_sorting').click(function (event){
+                event.preventDefault();
+                console.log('test');
                 var data = $('.sorted_table').sortable("serialize").get();
                 console.dir(data);
                 $.ajax({
