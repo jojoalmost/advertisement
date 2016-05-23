@@ -32,6 +32,9 @@
                 </div>
                 <div class="panel-body">
                     <div class="panel-fab">
+                        <button class="btn btn-primary btn-fab text-danger" id="save_sorting">
+                            <i class="material-icons">save</i>
+                        </button>
                         <a href="{{url('admin/advertisement/create')}}" class="btn btn-primary btn-fab">
                             <i class="material-icons">add</i>
                         </a>
@@ -64,9 +67,6 @@
                                         <a href="{{url('admin/advertisement/'.$value->id.'/edit')}}">
                                             <i class="material-icons">edit</i>
                                         </a>
-                                        <button class="text-info" id="save_sorting">
-                                            <i class="material-icons">save</i>
-                                        </button>
                                         <a href="{{url('admin/advertisement/'.$value->id)}}" data-id="{{$value->id}}"
                                            class="text-danger" name="delete_link">
                                             <i class="material-icons">delete_forever</i>
