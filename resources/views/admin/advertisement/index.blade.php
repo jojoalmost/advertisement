@@ -32,9 +32,12 @@
                 </div>
                 <div class="panel-body">
                     <div class="panel-fab">
-                        <a href="{{url('admin/advertisement/create')}}" class="btn btn-primary btn-fab">
-                            <i class="material-icons">add</i>
-                        </a>
+                        {{--<a href="{{url('admin/advertisement/create')}}" class="btn btn-primary btn-fab">--}}
+                            {{--<i class="material-icons">add</i>--}}
+                        {{--</a>--}}
+                        <button class="btn btn-secondary btn-fab" type="button" id="save_sorting">
+                            <i class="material-icons">save</i>
+                        </button>
                     </div>
                     <table class="table table-hover table-striped sorted_table" id="data_table">
                         <thead>
