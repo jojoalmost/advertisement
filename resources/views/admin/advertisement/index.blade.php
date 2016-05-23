@@ -135,7 +135,7 @@
                 url: '{{url('admin/advertisement/sorting')}}' + '?_token=' + $('[name=_xhr_token]').attr('content'),
                 data: {data:JSON.stringify(data[0])},
                 success : function(){
-                    location.reload();
+//                    location.reload();
                 }
             });
         });
