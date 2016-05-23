@@ -64,7 +64,7 @@
                                         <a href="{{url('admin/advertisement/'.$value->id.'/edit')}}">
                                             <i class="material-icons">edit</i>
                                         </a>
-                                        <a href="#"
+                                        <a
                                            class="text-info" name="save_sorting">
                                             <i class="material-icons">save</i>
                                         </a>
