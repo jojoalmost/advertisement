@@ -121,7 +121,7 @@
                 });
             });
 
-            $('[name=save_sorting]').click(function (){
+            $('#save_sorting').click(function (){
                 alert('trigger');
                 var data = $('.sorted_table').sortable("serialize").get();
                 console.dir(data);
