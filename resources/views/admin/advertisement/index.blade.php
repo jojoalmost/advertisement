@@ -129,12 +129,15 @@
         });
 
         $('#save_sorting').click(function (){
+            alert('trigger');
             var data = $('.sorted_table').sortable("serialize").get();
+            console.dir(data);
             $.ajax({
                 type: "POST",
                 url: '{{url('admin/advertisement/sorting')}}' + '?_token=' + $('[name=_xhr_token]').attr('content'),
                 data: {data:JSON.stringify(data[0])},
                 success : function(){
+                    console.log(data);
 //                    location.reload();
                 }
             });
