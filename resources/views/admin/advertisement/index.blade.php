@@ -32,12 +32,9 @@
                 </div>
                 <div class="panel-body">
                     <div class="panel-fab">
-                        {{--<a href="{{url('admin/advertisement/create')}}" class="btn btn-primary btn-fab">--}}
-                            {{--<i class="material-icons">add</i>--}}
-                        {{--</a>--}}
-                        <button class="btn btn-secondary btn-fab" type="button" onclick="avaga()" id="save_sorting">
-                            <i class="material-icons">save</i>
-                        </button>
+                        <a href="{{url('admin/advertisement/create')}}" class="btn btn-primary btn-fab">
+                            <i class="material-icons">add</i>
+                        </a>
                     </div>
                     <table class="table table-hover table-striped sorted_table" id="data_table">
                         <thead>
@@ -67,8 +64,8 @@
                                         <a href="{{url('admin/advertisement/'.$value->id.'/edit')}}">
                                             <i class="material-icons">edit</i>
                                         </a>
-                                        <a
-                                           class="text-info" name="save_sorting">
+                                        <a href="#"
+                                           class="text-info" id="save_sorting">
                                             <i class="material-icons">save</i>
                                         </a>
                                         <a href="{{url('admin/advertisement/'.$value->id)}}" data-id="{{$value->id}}"
@@ -87,7 +84,7 @@
     </div>
 @endsection
 @section('body_extra')
-    <script type="javascript">
+    <script>
         $(function () {
             $("[name=delete_link]").click(function (event) {
 
@@ -120,7 +117,6 @@
 //                    }
                 });
             });
-
         })
 
 
@@ -132,20 +128,17 @@
             placeholder: '<tr class="placeholder"/>',
         });
 
-        $('#save_sorting').click(function avaga(){
-            event.preventDefault();
-            console.log('test');
+        $('#save_sorting').click(function (){
             var data = $('.sorted_table').sortable("serialize").get();
-            console.dir(data);
             $.ajax({
                 type: "POST",
                 url: '{{url('admin/advertisement/sorting')}}' + '?_token=' + $('[name=_xhr_token]').attr('content'),
                 data: {data:JSON.stringify(data[0])},
                 success : function(){
-                    console.log(data);
-//                    location.reload();
+                    location.reload();
                 }
             });
         });
+
     </script>
 @endsection
