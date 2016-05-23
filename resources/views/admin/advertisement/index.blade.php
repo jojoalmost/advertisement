@@ -64,9 +64,9 @@
                                         <a href="{{url('admin/advertisement/'.$value->id.'/edit')}}">
                                             <i class="material-icons">edit</i>
                                         </a>
-                                        <a class="text-info" id="save_sorting">
+                                        <button class="text-info" id="save_sorting">
                                             <i class="material-icons">save</i>
-                                        </a>
+                                        </button>
                                         <a href="{{url('admin/advertisement/'.$value->id)}}" data-id="{{$value->id}}"
                                            class="text-danger" name="delete_link">
                                             <i class="material-icons">delete_forever</i>
