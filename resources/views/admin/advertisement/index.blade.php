@@ -35,7 +35,7 @@
                         {{--<a href="{{url('admin/advertisement/create')}}" class="btn btn-primary btn-fab">--}}
                             {{--<i class="material-icons">add</i>--}}
                         {{--</a>--}}
-                        <button class="btn btn-secondary btn-fab" type="button" id="save_sorting">
+                        <button class="btn btn-secondary btn-fab" type="button" onclick="avaga()" id="save_sorting">
                             <i class="material-icons">save</i>
                         </button>
                     </div>
@@ -121,21 +121,6 @@
                 });
             });
 
-            $('#save_sorting').click(function (event){
-                event.preventDefault();
-                console.log('test');
-                var data = $('.sorted_table').sortable("serialize").get();
-                console.dir(data);
-                $.ajax({
-                    type: "POST",
-                    url: '{{url('admin/advertisement/sorting')}}' + '?_token=' + $('[name=_xhr_token]').attr('content'),
-                    data: {data:JSON.stringify(data[0])},
-                    success : function(){
-                        console.log(data);
-//                    location.reload();
-                    }
-                });
-            });
         })
 
 
@@ -147,5 +132,20 @@
             placeholder: '<tr class="placeholder"/>',
         });
 
+        $('#save_sorting').click(function avaga(){
+            event.preventDefault();
+            console.log('test');
+            var data = $('.sorted_table').sortable("serialize").get();
+            console.dir(data);
+            $.ajax({
+                type: "POST",
+                url: '{{url('admin/advertisement/sorting')}}' + '?_token=' + $('[name=_xhr_token]').attr('content'),
+                data: {data:JSON.stringify(data[0])},
+                success : function(){
+                    console.log(data);
+//                    location.reload();
+                }
+            });
+        });
     </script>
 @endsection
