@@ -42,13 +42,13 @@
                     <table class="table table-hover table-striped sorted_table" id="data_table">
                         <thead>
                         <tr>
-                            <th>Play Order</th>
-                            <th>Name</th>
-                            <th>Video</th>
-                            <th>Max Played</th>
-                            <th>Played</th>
-                            <th>Skip Duration</th>
-                            <th>Skipped</th>
+                            <th>Order</th>
+                            <th>File description</th>
+                            <th>Valid Runs</th>
+                            <th>File upload</th>
+                            <th>Runs completed</th>
+                            <th>Skip duration(in sec)</th>
+                            <th>Disable video</th>
                             <th class="action"></th>
                         </tr>
                         </thead>
@@ -57,8 +57,8 @@
                             <tr data-id="{{$value->id}}">
                                 <td>{{$i+1}}</td>
                                 <td>{{$value->name}}</td>
-                                <td>{{$value->video}}</td>
                                 <td>{{$value->max_played}}</td>
+                                <td>{{$value->video}}</td>
                                 <td>{{$value->played}}</td>
                                 <td>{{$value->skip_duration}}</td>
                                 <td>{{$value->skipped}}</td>
