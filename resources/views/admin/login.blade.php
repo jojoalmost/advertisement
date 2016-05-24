@@ -45,6 +45,7 @@
     </style>
 @endsection
 @section('content')
+
     <form class="form-signin" action="{{url('auth/login')}}" method="POST">
         {!! csrf_field() !!}
         <h2 class="form-signin-heading">Please sign in</h2>
@@ -57,6 +58,9 @@
         {{--<input type="checkbox" value="remember-me"> Remember me--}}
         {{--</label>--}}
         {{--</div>--}}
+        @if($errors->any())
+            <p class="text-danger">*{{$errors->first()}}</p>
+        @endif
         <button class="btn btn-lg btn-primary btn-block btn-raised" type="submit">Sign in</button>
     </form>
 

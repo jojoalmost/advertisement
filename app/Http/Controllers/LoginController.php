@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+
 
 class LoginController extends Controller
 {
@@ -15,6 +17,9 @@ class LoginController extends Controller
         if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
             // Authentication passed...
             return redirect()->intended('admin/dashboard');
+        }
+        else{
+            return Redirect::back()->withErrors(['The username and password you entered did not match our records. Please double-check and try again.', 'The Message']);
         }
     }
 
