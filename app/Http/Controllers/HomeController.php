@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Advertisement;
 use App\AdsLog;
+use App\Setting;
 use Illuminate\Support\Facades\Session;
 use Request;
 use App\Http\Controllers\Controller;
@@ -146,7 +147,8 @@ class HomeController extends Controller
                     return view('response',compact('data'));
                     break;
                 case "notyet":
-                    return view('terms-of-use');
+                    $data = Setting::where('option', 'terms')->firstOrFail();
+                    return view('terms-of-use',compact('data'));
                     break;
                 default:
                     http_response_code(400);

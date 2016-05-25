@@ -1,67 +1,30 @@
 @extends('layouts.admin')
-
+@section('head_extra')
+    <script src="{{url('/js/ckeditor/ckeditor.js')}}"></script>
+@endsection
 @section('content')
     <div class="panel-body">
         <!-- New Task Form -->
-        <form action="{{url('admin/advertisement/')}}" method="POST" class="form-horizontal"
-              enctype="multipart/form-data">
+        <form action="{{url('admin/terms/update')}}" method="POST" class="form-horizontal">
             {!! csrf_field() !!}
             {!! method_field('put') !!}
-            <div class="">
-                <div class="col-lg-offset-2 col-sm-1">
-                    <div class="checkbox pull-right">
-                        <label>
-                            <input type="checkbox">
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group label-floating is-empty">
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control"><label
-                                class="control-label">WISPr-Bandwidth-Max-Up (Max bandwidth upload)</label><span
-                                class="material-input"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="">
-                <div class="col-lg-offset-2 col-sm-1">
-                    <div class="checkbox pull-right">
-                        <label>
-                            <input type="checkbox">
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group label-floating is-empty">
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control"><label
-                                class="control-label">WISPr-Bandwidth-Max-Down (Max bandwidth download)</label><span
-                                class="material-input"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="">
-                <div class="col-lg-offset-2 col-sm-1">
-                    <div class="checkbox pull-right">
-                        <label>
-                            <input type="checkbox">
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group label-floating is-empty">
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control"><label
-                                class="control-label">SESSION_TIMEOUT(in seconds)</label><span
-                                class="material-input"></span>
-                    </div>
-                </div>
-            </div>
-
+            <div class="form-group is-empty">
+                <textarea class="form-control" placeholder="placeholder without label" name="terms" id="terms">
+                    {{$data->value}}
+                </textarea>
+                <span class="material-input"></span></div>
             <div class="form-group">
-                <div class="col-sm-6 pull-right">
-                    <a href="{{url('admin/advertisement')}}" class="btn btn-default">Cancel</a>
+                <div class="col-sm-2 pull-right">
                     <button class="btn btn-raised btn-primary">Save</button>
                 </div>
             </div>
         </form>
     </div>
+@endsection
+@section('body_extra')
+    <script>
+        $(document).ready(function () {
+            CKEDITOR.replace('terms');
+        });
+    </script>
 @endsection
