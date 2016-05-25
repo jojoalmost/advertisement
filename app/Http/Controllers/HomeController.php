@@ -51,7 +51,6 @@ class HomeController extends Controller
 
 
         if (empty($data)) {
-//            return view('errors.503');
             return redirect('cloudtraxauth');
         }
         return view('index', compact('data'));
@@ -155,7 +154,7 @@ class HomeController extends Controller
             }
         }
         else {
-            return view('errors/503');
+            return view('errors/503request');
         }
     }
 
