@@ -22,6 +22,8 @@ Route::group(['middleware' => Authenticate::class], function()
     Route::resource('admin/advertisement', 'AdvertisementController');
     Route::post('admin/advertisement/sorting', 'AdvertisementController@sorting');
     Route::resource('admin/log', 'LogController');
+    Route::resource('admin/bandwith', 'BandwithController');
+    Route::resource('admin/radius', 'RadiusController');
 });
 
 
