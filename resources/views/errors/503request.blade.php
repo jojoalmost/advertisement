@@ -41,7 +41,7 @@
         <div class="container">
             <div class="content">
                 <div class="title">Error 503</div>
-                <div><p>device parameter not match</p></div>
+                <div><p>no response from device</p></div>
             </div>
         </div>
     </body>
