@@ -28,6 +28,7 @@ Route::group(['middleware' => Authenticate::class], function()
     Route::put('admin/radius/update', 'RadiusController@update');
     Route::get('admin/terms', 'TermsController@index');
     Route::put('admin/terms/update', 'TermsController@update');
+    Route::get('admin/report', 'LogController@report');
 });
 
 

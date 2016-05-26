@@ -87,4 +87,17 @@ class LogController extends Controller
     {
         //
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function report(){
+        $data = Advertisement::orderBy('sorting', 'asc')->get();
+        return view('admin.report.index',compact('data'));
+    }
+
+    public function viewreport($id){
+        $data = AdsLog::where('advertisement_id',$id)->findOrFail();
+        return view('admin.report.view',compact('data'));
+    }
 }

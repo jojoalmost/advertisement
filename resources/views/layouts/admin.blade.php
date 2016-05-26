@@ -39,6 +39,7 @@
                         <li><a href="{{url('admin/bandwith')}}">Bandwith Manager</a></li>
                         <li><a href="{{url('admin/terms')}}">Terms Edit</a></li>
                         <li><a href="{{url('admin/log')}}">Advertisement Log</a></li>
+                        <li><a href="{{url('admin/report')}}">Report</a></li>
                     </ul>
                 </li>
             </ul>
