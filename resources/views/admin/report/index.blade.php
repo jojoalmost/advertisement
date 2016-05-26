@@ -36,6 +36,7 @@
                         <tr>
                             <th>Destcription</th>
                             <th>Filename</th>
+                            <th>Total Runs</th>
                             <th class="action"></th>
                         </tr>
                         </thead>
@@ -45,7 +46,7 @@
                                 <td>{{$value->video}}</td>
                                 <td class="column-action">
                                     <div class="button-group">
-                                        <a href="{{url('admin/report/'.$value->id.'/viewreport')}}">
+                                        <a href="{{url('admin/report/viewreport/'.$value->id)}}">
                                             {{$value->played}}
                                         </a>
                                     </div>
