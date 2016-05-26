@@ -45,8 +45,8 @@
                                 <td>{{$value->video}}</td>
                                 <td class="column-action">
                                     <div class="button-group">
-                                        <a href="{{url('admin/advertisement/'.$value->id.'/edit')}}">
-                                            <i class="material-icons">visibility</i>
+                                        <a href="{{url('admin/report/'.$value->id.'/viewreport')}}">
+                                            {{$value->played}}
                                         </a>
                                     </div>
                                 </td>
