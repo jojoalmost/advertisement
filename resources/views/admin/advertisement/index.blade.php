@@ -77,6 +77,23 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="com-sm-12">
+                        <form id="skip_form">
+                            <div class="col-sm-1">
+                                <div class="checkbox pull-right">
+                                    <label>
+                                        <input type="checkbox" name="skip_duration" id="skip_duration_active">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group label-static">
+                                <div class="col-sm-1">
+                                    <input type="text" class="form-control" name="duration" placeholder="Sec" value=""
+                                           id="skip_duration">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,6 +102,26 @@
 @section('body_extra')
     <script>
         $(function () {
+            $("#skip_duration_active").change(function () {
+                if (this.checked) {
+                    $('#skip_duration').removeAttr('disabled');
+                    var  data = $('#skip_form').serialize();
+                    console.dir(data);
+
+                    {{--$.ajax({--}}
+                        {{--type: "POST",--}}
+                        {{--url: '{{url('admin/advertisement/skip_duration')}}' + '?_token=' + $('[name=_xhr_token]').attr('content'),--}}
+                        {{--data: {data: JSON.stringify(data[0])},--}}
+                        {{--success: function () {--}}
+                            {{--location.reload();--}}
+                        {{--}--}}
+                    {{--})--}}
+                }
+                else {
+                    $('#skip_duration').attr('disabled', '');
+                }
+            });
+
             $("[name=delete_link]").click(function (event) {
 
                 event.preventDefault();
@@ -127,13 +164,13 @@
             placeholder: '<tr class="placeholder"/>',
         });
 
-        $('#save_sorting').click(function (){
+        $('#save_sorting').click(function () {
             var data = $('.sorted_table').sortable("serialize").get();
             $.ajax({
                 type: "POST",
                 url: '{{url('admin/advertisement/sorting')}}' + '?_token=' + $('[name=_xhr_token]').attr('content'),
-                data: {data:JSON.stringify(data[0])},
-                success : function(){
+                data: {data: JSON.stringify(data[0])},
+                success: function () {
                     location.reload();
                 }
             });
