@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AdsLog;
 use App\Advertisement;
+use App\Setting;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -20,7 +21,9 @@ class CloudtraxController extends Controller
      */
     public function index()
     {
-        $uam_secret = "advertisement";
+        $data = Setting::where('option', 'radius')->firstOrFail();
+        $data=json_decode($data['value']);
+        $uam_secret = $data->secret;
         function encode_password($plain, $challenge, $secret)
         {
             if ((strlen($challenge) % 2) != 0 ||
@@ -49,8 +52,8 @@ class CloudtraxController extends Controller
         }
 
         $parameter = Session::get('cloudtrax');
-        $username = 'admin';
-        $password = 'open2arevainna';
+        $username = $data->username;
+        $password = $data->password;
         $uamip = $parameter["uamip"];
         $uamport = $parameter["uamport"];
         $challenge = $parameter["challenge"];

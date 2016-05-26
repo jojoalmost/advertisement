@@ -27,7 +27,7 @@ class TermsController extends Controller
         $current = Setting::where('option', 'terms')->firstOrFail();
         $current->value=$data['terms'];
         $current->save();
-        return redirect('admin/terms')->with('message', 'Data Updated');
+        return redirect('admin/terms')->with('message', 'Data Saved');
     }
 
 
