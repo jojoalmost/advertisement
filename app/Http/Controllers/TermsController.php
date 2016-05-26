@@ -14,19 +14,25 @@ class TermsController extends Controller
     public function index()
     {
 //        DB::enableQueryLog();
-        $data = Setting::where('option', 'terms')->firstOrFail();
+        $data = Setting::where('option', 'terms')->first();
 //        dd(DB::getQueryLog());
-        return view('admin.terms.index',compact('data'));
+        return view('admin.terms.index', compact('data'));
     }
 
 
     public function update(Request $request)
     {
         $data = $request->all();
-        unset($data['_token'],$data['_method']);
-        $current = Setting::where('option', 'terms')->firstOrFail();
-        $current->value=$data['terms'];
-        $current->save();
+        $current = Setting::where('option', 'terms')->first();
+        if (!empty($current)) {
+            $current->value = $data['terms'];
+            $current->save();
+        }else{
+            $create['option']='terms';
+            $create['value']= $data['terms'];
+            Setting::create($create);
+        }
+
         return redirect('admin/terms')->with('message', 'Data Saved');
     }
 

@@ -14,21 +14,27 @@ class RadiusController extends Controller
     public function index()
     {
 //        DB::enableQueryLog();
-        $data = Setting::where('option', 'radius')->firstOrFail();
+        $data = Setting::where('option', 'radius')->first();
 //        dd(DB::getQueryLog());
-        $data=json_decode($data['value']);
-        return view('admin.radius.index',compact('data'));
+        $data = json_decode($data['value']);
+        return view('admin.radius.index', compact('data'));
     }
 
 
     public function update(Request $request)
     {
         $data = $request->all();
-        unset($data['_token'],$data['_method']);
+        unset($data['_token'], $data['_method']);
         $data = json_encode($data);
-        $current = Setting::where('option', 'radius')->firstOrFail();
-        $current->value=$data;
-        $current->save();
+        $current = Setting::where('option', 'radius')->first();
+        if (!empty($current)) {
+            $current->value = $data;
+            $current->save();
+        } else {
+            $create['option'] = 'radius';
+            $create['value'] = $data;
+            Setting::create($create);
+        }
         return redirect('admin/radius')->with('message', 'Data Updated');
     }
 

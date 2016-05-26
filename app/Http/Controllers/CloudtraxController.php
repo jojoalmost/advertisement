@@ -21,9 +21,9 @@ class CloudtraxController extends Controller
      */
     public function index()
     {
-        $data = Setting::where('option', 'radius')->firstOrFail();
-        $data=json_decode($data['value']);
-        $uam_secret = $data->secret;
+        $radius = Setting::where('option', 'radius')->first();
+        $radius=json_decode($radius['value']);
+        $uam_secret = $radius->secret;
         function encode_password($plain, $challenge, $secret)
         {
             if ((strlen($challenge) % 2) != 0 ||
@@ -52,8 +52,8 @@ class CloudtraxController extends Controller
         }
 
         $parameter = Session::get('cloudtrax');
-        $username = $data->username;
-        $password = $data->password;
+        $username = $radius->username;
+        $password = $radius->password;
         $uamip = $parameter["uamip"];
         $uamport = $parameter["uamport"];
         $challenge = $parameter["challenge"];

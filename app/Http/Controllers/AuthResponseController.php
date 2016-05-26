@@ -16,10 +16,30 @@ class AuthResponseController extends Controller
         /**
          * secret - Shared secret between server and node
          */
-        $secret = "advertisement";
+        $radius = Setting::where('option', 'radius')->first();
+        $radius = json_decode($radius['value']);
+
+        $secret = $radius->secret;
         $parameter = Session::get('cloudtrax');
         Storage::disk('local')->put('request.txt', Request::all());
         Storage::disk('local')->put('session.txt', $parameter);
+
+//        default
+        $session_timeout = 3600;
+        $download = 2000;
+        $upload = 800;
+
+        $bandwith = Setting::where('option', 'bandwith')->first();
+        $bandwith = json_decode($bandwith);
+        if (!empty($bandwith)) {
+            if ($bandwith->up_active == 'yes') {
+                $upload = $bandwith->up;
+            } elseif ($bandwith->down_active == 'yes') {
+                $download = $bandwith->down;
+            } elseif ($bandwith->timeout_active == 'yes') {
+                $download = $bandwith->timeout;
+            }
+        }
         /**
          * response - Standard response (is modified depending on the result
          */
@@ -122,12 +142,12 @@ class AuthResponseController extends Controller
                 case 'login':
                     if ($password === FALSE)
                         break;
-                    if ($password == 'open2arevainna' && $_GET['username'] == 'admin') {
+                    if ($password == $radius->password && $_GET['username'] == $radius->username) {
                         unset($response['BLOCKED_MSG']);
                         $response['CODE'] = "ACCEPT";
-                        $response['SECONDS'] = 3600;
-                        $response['DOWNLOAD'] = 2000;
-                        $response['UPLOAD'] = 800;
+                        $response['SECONDS'] = $session_timeout; //3600
+                        $response['DOWNLOAD'] = $download; //2000
+                        $response['UPLOAD'] = $upload; //800
                     } else {
                         $response['BLOCKED_MSG'] = "Invalid username or password";
                     }
@@ -138,9 +158,9 @@ class AuthResponseController extends Controller
                     if (true) {
                         unset($response['BLOCKED_MSG']);
                         $response['CODE'] = "ACCEPT";
-                        $response['SECONDS'] = 120;
-                        $response['DOWNLOAD'] = 3000;
-                        $response['UPLOAD'] = 400;
+                        $response['SECONDS'] = $session_timeout; //120
+                        $response['DOWNLOAD'] = $download; //3000
+                        $response['UPLOAD'] = $upload; //400
                     } else {
                         $response['BLOCKED_MSG'] = "Unknown Client";
                     }

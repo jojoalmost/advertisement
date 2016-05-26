@@ -17,7 +17,7 @@
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-sm-8">
                 <textarea class="form-control" placeholder="placeholder without label" name="terms" id="terms">
-                    {{$data->value}}
+                    {{@$data->value}}
                 </textarea>
                             </div>
                         </div>
