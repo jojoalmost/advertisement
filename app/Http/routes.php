@@ -29,7 +29,7 @@ Route::group(['middleware' => Authenticate::class], function()
     Route::get('admin/terms', 'TermsController@index');
     Route::put('admin/terms/update', 'TermsController@update');
     Route::get('admin/report', 'LogController@report');
-    Route::get('admin/viewreport/{id}', 'LogController@viewreport');
+    Route::get('admin/report/viewreport/{id}', 'LogController@viewreport');
 });
 
 
