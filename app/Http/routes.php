@@ -21,6 +21,7 @@ Route::group(['middleware' => Authenticate::class], function()
     Route::get('admin/dashboard',function (){ return view('admin.dashboard');});
     Route::resource('admin/advertisement', 'AdvertisementController');
     Route::post('admin/advertisement/sorting', 'AdvertisementController@sorting');
+    Route::post('admin/advertisement/skipduration', 'AdvertisementController@skipDuration');
     Route::resource('admin/log', 'LogController');
     Route::get('admin/bandwith', 'BandwithController@index');
     Route::put('admin/bandwith/update', 'BandwithController@update');

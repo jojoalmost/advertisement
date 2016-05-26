@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Advertisement;
+use App\Setting;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -18,7 +19,9 @@ class AdvertisementController extends Controller
     public function index()
     {
         $data = Advertisement::orderBy('sorting', 'asc')->get();
-        return view('admin.advertisement.index',compact('data'));
+        $skipduration = Setting::where('option', 'skipduration')->first();
+        $skipduration = json_decode($skipduration['value']);
+        return view('admin.advertisement.index', compact('data','skipduration'));
     }
 
     /**
@@ -34,21 +37,21 @@ class AdvertisementController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $data = $request->all();
-        $data['skipped']= isset($data['skipped'])? 'yes' : 'no';
-        $filename= $request->file('video')->getClientOriginalName();
-        $data['video']= $filename;
+        $data['skipped'] = isset($data['skipped']) ? 'yes' : 'no';
+        $filename = $request->file('video')->getClientOriginalName();
+        $data['video'] = $filename;
         $sorting = Advertisement::all()->count();
-        $data['sorting']=$sorting+1;
+        $data['sorting'] = $sorting + 1;
         Advertisement::create($data);
         if ($request->hasFile('video')) {
             $destinationPath = 'uploads/video';
-            $request->file('video')->move($destinationPath,$filename);
+            $request->file('video')->move($destinationPath, $filename);
         }
         return redirect('admin/advertisement');
 
@@ -57,7 +60,7 @@ class AdvertisementController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -68,26 +71,26 @@ class AdvertisementController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $data = Advertisement::query()->findOrFail($id);
-        return view('admin.advertisement.edit',compact('data'));
+        return view('admin.advertisement.edit', compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $data['skipped']= isset($data['skipped'])? 'yes' : 'no';
+        $data['skipped'] = isset($data['skipped']) ? 'yes' : 'no';
         $existing = Advertisement::query()->findOrFail($id);
         $existing->fill($data);
         $existing->save();
@@ -97,30 +100,48 @@ class AdvertisementController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $data=Advertisement::query()->findOrFail($id);
+        $data = Advertisement::query()->findOrFail($id);
         $data->delete();
-        $sorting=Advertisement::all();
-        $sort=1;
-        foreach ($sorting as $val){
-            $val->sorting=$sort++;
+        $sorting = Advertisement::all();
+        $sort = 1;
+        foreach ($sorting as $val) {
+            $val->sorting = $sort++;
             $val->save();
         }
     }
 
-    public function sorting(Request $request){
+    public function sorting(Request $request)
+    {
         $data = $request->get('data');
-        $data= json_decode($data);
-        $sort=1;
-        foreach($data as $key=>$value){
-                $table = Advertisement::query()->findOrFail($value->id);
-                $table->sorting = $sort++;
-                $table->save();
+        $data = json_decode($data);
+        $sort = 1;
+        foreach ($data as $key => $value) {
+            $table = Advertisement::query()->findOrFail($value->id);
+            $table->sorting = $sort++;
+            $table->save();
         }
 
+    }
+
+    public function skipDuration(Request $request)
+    {
+        $data = $request->all();
+        unset($data['_token'], $data['_method']);
+        $data['skip_duration'] = isset($data['skip_duration']) ? 'yes' : 'no';
+        $data = json_encode($data);
+        $current = Setting::where('option', 'skipduration')->first();
+        if (!empty($current)) {
+            $current->value = $data;
+            $current->save();
+        } else {
+            $create['option'] = 'skipduration';
+            $create['value'] = $data;
+            Setting::create($create);
+        }
     }
 }

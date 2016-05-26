@@ -50,11 +50,13 @@ class HomeController extends Controller
             ->get()
             ->first();
 
+        $skipdurationSet = Setting::where('option', 'skipduration')->first();
+        $skipdurationSet = json_decode($skipdurationSet['value']);
 
         if (empty($data)) {
             return redirect('cloudtraxauth');
         }
-        return view('index', compact('data'));
+        return view('index', compact('data','skipdurationSet'));
     }
 
     /**
