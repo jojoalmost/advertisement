@@ -88,13 +88,12 @@
         });
 
         video.onprogress = function () {
-                    {{$timer}}
-                        @if($skipdurationSet->skip_duration == "yes")
-                        {{$timer = $skipdurationSet->duration}}
-                        @else
-                        {{$timer = $data->skip_duration}}
-                        @endif
-                       var skip_duration = '{{$timer}}';
+                    @if($skipdurationSet->skip_duration == "yes")
+                                           var skip_duration = {{$skipdurationSet->duration}};
+                    @else
+                                var skip_duration = {{$timer = $data->skip_duration}};
+            @endif
+
             if (skipbool) {
                 if (video.currentTime >= skip_duration) {
                     $('#skip').show();
