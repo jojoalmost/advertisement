@@ -22,8 +22,12 @@ class HomeController extends Controller
     {
 
         $this->ip = Request::ip();
+        $parameter = Session::get('cloudtrax');
+        DB::enableQueryLog();
         $this->maxPlayed = AdsLog::where('log.ip_address', $this->ip)
+            ->where('log.mac',$parameter['mac'])
             ->max('played');
+//        dd(DB::getQueryLog());
         if ($this->maxPlayed === null) {
             $this->maxPlayed = 1;
         } else {
@@ -31,25 +35,26 @@ class HomeController extends Controller
             $data = Advertisement::whereHas('log', function ($q) {
                 $q->where('log.ip_address', $this->ip)
                     ->where('log.played', $this->maxPlayed);
-            }, '=', 0)
-                ->where('played', '<', DB::raw('max_played'));
+            }, '=', 0);
+              //  ->where('played', '<', DB::raw('max_played'));
             $count = $data->count();
-            if ($count == 0 && $this->maxPlayed > 1) {
+//            dd($count);
+            if ($count == 0 ) {
                 $this->maxPlayed = $this->maxPlayed + 1;
 
             }
         }
 
-
+//dd($this->maxPlayed);
         DB::enableQueryLog();
         $data = Advertisement::whereHas('log', function ($q) {
             $q->where('log.ip_address', $this->ip)
                 ->where('log.played', $this->maxPlayed);
         }, '=', 0)
-            ->where('advertisement.played', '<', DB::raw('max_played'))
+            //->where('advertisement.played', '<', DB::raw('max_played'))
             ->get()
             ->first();
-
+//        dd(DB::getQueryLog());
         $skipdurationSet = Setting::where('option', 'skipduration')->first();
         $skipdurationSet = json_decode($skipdurationSet['value']);
 

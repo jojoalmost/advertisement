@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class LogController extends Controller
 {
@@ -92,7 +93,9 @@ class LogController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function report(){
-        $data = Advertisement::orderBy('sorting', 'asc')->get();
+                DB::enableQueryLog();
+        $data = Advertisement::leftJoin(DB::raw('(SELECT sum(played) as coba from log GROUP BY advertisement_id) as v'),'v.advertisement_id', '=', 'advertisement.id')->get();
+                dd(DB::getQueryLog());
         return view('admin.report.index',compact('data'));
     }
 

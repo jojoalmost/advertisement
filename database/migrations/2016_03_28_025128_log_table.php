@@ -15,6 +15,7 @@ class LogTable extends Migration
         Schema::create('log',function (Blueprint $table){
             $table->increments('id');
             $table->string('advertisement_id');
+            $table->string('mac');
             $table->string('ip_address');
             $table->string('user_agent');
             $table->integer('played')->default(1);

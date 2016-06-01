@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class AdsLog extends Model
 {
     protected $table = 'log';
-    protected $fillable = ['advertisement_id','ip_address','user_agent','date_time','played'];
+    protected $fillable = ['advertisement_id','mac','ip_address','user_agent','date_time','played'];
 
     public function advertisement()
     {

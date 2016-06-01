@@ -109,6 +109,9 @@ class CloudtraxController extends Controller
         if ($this->maxPlayed >= 1 && $vidPlayedCount == 0)
             $played = $played + 1;
 
+        $parameter = Session::get('cloudtrax');
+
+        $data['mac']=$parameter['mac'];
         $data['ip_address'] = $request->ip();
         $data['user_agent'] = $request->header('User-Agent');
         $data['played'] = $played;

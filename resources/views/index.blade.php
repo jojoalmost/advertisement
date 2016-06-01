@@ -84,11 +84,11 @@
 
         // initialize the plugin, passing in autoDisable
         player.disableProgress({
-            autoDisable: true
+            autoDisable: false
         });
 
         video.onprogress = function () {
-                    @if($skipdurationSet->skip_duration == "yes")
+                    @if(@$skipdurationSet->skip_duration == "yes")
                                            var skip_duration = {{$skipdurationSet->duration}};
                     @else
                                 var skip_duration = {{$timer = $data->skip_duration}};
