@@ -30,13 +30,10 @@
     </style>
 @endsection
 @section('content')
-    <div class="row panel panel-default">
-        <div class="col-xs-12">
-            <h2 class="text-center">{{ $data->name }}</h2>
-        </div>
-        <div class="col-xs-12">
+    <div class="row panel-default">
+        <div class="">
             <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls
-                   width="640" height="360"
+                   width="100%"
                    poster="" data-setup='{}'>
                 <source src="{{url('/uploads/video/'.$data->video)}}" type="video/mp4"/>
                 <p class="vjs-no-js">
@@ -58,61 +55,70 @@
 @endsection
 @section('body_extra')
     <script>
-        var skipped = "{{$data->skipped}}";
-        var skipbool = false;
-        if (skipped == "yes") {
-            skipbool = true;
-        }
-
-        // save a reference to the video element
-        video = document.querySelector('video');
-
-        // disable right click
-        if (video.addEventListener) {
-            video.addEventListener('contextmenu', function (e) {
-                e.preventDefault();
-            }, false);
-        } else {
-            video.attachEvent('oncontextmenu', function () {
-                window.event.returnValue = false;
-            });
-        }
-
-        // save a reference to the video.js player for that element
-        player = videojs(video, {"controls": true, "autoplay": true, "preload": "auto"});
-
-
-        // initialize the plugin, passing in autoDisable
-        player.disableProgress({
-            autoDisable: false
-        });
-
-        video.onprogress = function () {
-                    @if(@$skipdurationSet->skip_duration == "yes")
-                                           var skip_duration = {{$skipdurationSet->duration}};
-                    @else
-                                var skip_duration = {{$timer = $data->skip_duration}};
-            @endif
-
-            if (skipbool) {
-                if (video.currentTime >= skip_duration) {
-                    $('#skip').show();
-                }
+        $(function () {
+            var skipped = "{{$data->skipped}}";
+            var skipbool = false;
+            if (skipped == "yes") {
+                skipbool = true;
             }
-        };
 
-        player.on('ended', function () {
-            skipbool = false;
-            $('#skip').hide();
-            $.ajax({
-                type: 'POST',
-                url: '{{url('cloudtraxauth')}}',
-                data: $('form').serialize(),
-                success: function () {
-                    window.location.href = "{{url('cloudtraxauth')}}";
-                }
+            // save a reference to the video element
+            video = document.querySelector('video');
+
+            // disable right click
+            if (video.addEventListener) {
+                video.addEventListener('contextmenu', function (e) {
+                    e.preventDefault();
+                }, false);
+            } else {
+                video.attachEvent('oncontextmenu', function () {
+                    window.event.returnValue = false;
+                });
+            }
+
+            // save a reference to the video.js player for that element
+            player = videojs(video, {"controls": true, "autoplay": true, "preload": "auto"});
+
+
+            // initialize the plugin, passing in autoDisable
+            player.disableProgress({
+                autoDisable: false
             });
+
+            video.onprogress = function () {
+                        @if(@$skipdurationSet->skip_duration == "yes")
+                                               var skip_duration = {{$skipdurationSet->duration}};
+                        @else
+                                    var skip_duration = {{$timer = $data->skip_duration}};
+                @endif
+
+                if (skipbool) {
+                    if (video.currentTime >= skip_duration) {
+                        $('#skip').show();
+                    }
+                }
+            };
+
+            player.on('ended', function () {
+                skipbool = false;
+                $('#skip').hide();
+                $.ajax({
+                    type: 'POST',
+                    url: '{{url('cloudtraxauth')}}',
+                    data: $('form').serialize(),
+                    success: function () {
+                        window.location.href = "{{url('cloudtraxauth')}}";
+                    }
+                });
+            });
+
+            var titan = $(".my-video-dimensions");
+            var width = $(window).width()-1;
+            var height = $(window).height()-1;
+            titan.css('width',width);
+            titan.css('height',height);
         })
+
 
 
     </script>

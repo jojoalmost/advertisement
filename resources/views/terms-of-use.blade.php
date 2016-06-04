@@ -37,7 +37,7 @@
         <div class="col-xs-6 col-xs-offset-3 panel panel-default">
 
             <h1 class="margin-base-vertical">Terms of use</h1>
-            {{$data->value}}
+            {!!$data->value!!}
             <div class="margin-base-vertical">
                 <div class="col-xs-12 text-center">
                     <a href="{!!url('ads')!!}" class="btn btn-raised btn-primary btn-lg">I Agree</a>
