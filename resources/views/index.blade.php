@@ -77,7 +77,7 @@
             }
 
             // save a reference to the video.js player for that element
-            player = videojs(video, {"controls": true, "autoplay": true, "preload": "auto"});
+            player = videojs(video, {"controls": true, "autoplay": false, "preload": "auto"});
 
 
             // initialize the plugin, passing in autoDisable
@@ -98,6 +98,17 @@
                     }
                 }
             };
+
+            player.on('play',function(){
+//                alert('play');
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.mozRequestFullScreen) {
+                    video.mozRequestFullScreen(); // Firefox
+                } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen(); // Chrome and Safari
+                }
+            });
 
             player.on('ended', function () {
                 skipbool = false;
