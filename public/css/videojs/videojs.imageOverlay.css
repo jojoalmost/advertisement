@@ -10,3 +10,7 @@
     margin: auto;
     cursor: pointer;
 }
+#vjs-image-overlay-holder img:hover {
+    opacity: 1;
+}
+
