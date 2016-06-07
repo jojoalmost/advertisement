@@ -53,15 +53,9 @@
         }
 
         holderDiv.onclick = function() {
-          player.pause();
-          $.ajax({
-            type: 'POST',
-            url: settings.click_url,
-            data: $('form').serialize(),
-            success: function () {
-              window.location.href = settings.click_url;
-            }
-          });
+          document.getElementById('form').submit();
+          return false; // cancel the actual link
+              //window.location.href = settings.click_url;
         };
 
         player.el().appendChild(holderDiv);

@@ -83,7 +83,7 @@
 
             // initialize the plugin, passing in autoDisable
             player.disableProgress({
-                autoDisable: false
+                autoDisable: true
             });
 
             player.on('play', function () {
