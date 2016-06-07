@@ -1,9 +1,11 @@
 @extends('layouts.frontend')
 @section('head_extra')
     <link href="{{url('/css/videojs/video-js.css')}}" rel="stylesheet">
+    <link href="{{url('/css/videojs/videojs.imageOverlay.css')}}" rel="stylesheet">
     <script src="{{url('/js/videojs/video.js')}}"></script>
     <script src="{{url('/js/videojs/videojs.disableProgress.js')}}"></script>
     <script src="{{url('/js/videojs/videojs-playlist.js')}}"></script>
+    <script src="{{url('/js/videojs/videojs.imageOverlay.js')}}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <style>
         .my-video-dimensions {
@@ -45,7 +47,6 @@
                 <form action="{{url('cloudtraxauth')}}" method="post" id="skip" style="display: none">
                     {!! csrf_field() !!}
                     <input type="hidden" name="advertisement_id" value="{{$data->id}}">
-                    <button class="btn btn-raised btn-primary btn-lg">Skip
                     </button>
                 </form>
             </div>
@@ -85,22 +86,7 @@
                 autoDisable: false
             });
 
-            video.onprogress = function () {
-                        @if(@$skipdurationSet->skip_duration == "yes")
-                                               var skip_duration = {{$skipdurationSet->duration}};
-                        @else
-                                    var skip_duration = {{$timer = $data->skip_duration}};
-                @endif
-
-                if (skipbool) {
-                    if (video.currentTime >= skip_duration) {
-                        $('#skip').show();
-                    }
-                }
-            };
-
-            player.on('play',function(){
-//                alert('play');
+            player.on('play', function () {
                 if (video.requestFullscreen) {
                     video.requestFullscreen();
                 } else if (video.mozRequestFullScreen) {
@@ -111,7 +97,6 @@
             });
 
             player.on('ended', function () {
-                skipbool = false;
                 $('#skip').hide();
                 $.ajax({
                     type: 'POST',
@@ -122,14 +107,29 @@
                     }
                 });
             });
+            var skip_duration = 0;
+            @if(@$skipdurationSet->skip_duration == "yes")
+               skip_duration = {{$skipdurationSet->duration}};
+            @else
+               skip_duration = {{$timer = $data->skip_duration}};
+            @endif
 
+            if (skipbool) {
+                player.imageOverlay({
+                    image_url: "{{url('/css/videojs/skip_button.png')}}",
+                    click_url: "{{url('cloudtraxauth')}}",
+                    opacity: 0.5,
+                    start_time: skip_duration,
+                    height: '4%'
+                });
+
+            }
             var titan = $(".my-video-dimensions");
-            var width = $(window).width()-1;
-            var height = $(window).height()-1;
-            titan.css('width',width);
-            titan.css('height',height);
+            var width = $(window).width() - 1;
+            var height = $(window).height() - 1;
+            titan.css('width', width);
+            titan.css('height', height);
         })
-
 
 
     </script>
