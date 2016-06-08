@@ -51,7 +51,7 @@ class HomeController extends Controller
             $q->where('log.ip_address', $this->ip)
                 ->where('log.played', $this->maxPlayed);
         }, '=', 0)
-            //->where('advertisement.played', '<', DB::raw('max_played'))
+            ->where('advertisement.active', 'yes')
             ->get()
             ->first();
 //        dd(DB::getQueryLog());

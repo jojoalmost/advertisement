@@ -21,7 +21,7 @@ class AdvertisementController extends Controller
         $data = Advertisement::orderBy('sorting', 'asc')->get();
         $skipduration = Setting::where('option', 'skipduration')->first();
         $skipduration = json_decode($skipduration['value']);
-        return view('admin.advertisement.index', compact('data','skipduration'));
+        return view('admin.advertisement.index', compact('data', 'skipduration'));
     }
 
     /**
@@ -44,15 +44,29 @@ class AdvertisementController extends Controller
     {
         $data = $request->all();
         $data['skipped'] = isset($data['skipped']) ? 'yes' : 'no';
-        $filename = $request->file('video')->getClientOriginalName();
-        $data['video'] = $filename;
+        $data['active'] = isset($data['skipped']) ? 'yes' : 'no';
         $sorting = Advertisement::all()->count();
         $data['sorting'] = $sorting + 1;
-        Advertisement::create($data);
-        if ($request->hasFile('video')) {
-            $destinationPath = 'uploads/video';
-            $request->file('video')->move($destinationPath, $filename);
+
+        $destinationPath = 'uploads/video';
+
+        if ($request->hasFile('video_mp4')) {
+            $video_mp4 = $request->file('video_mp4')->getClientOriginalName();
+            $data['video_mp4'] = $video_mp4;
+            $request->file('video_mp4')->move($destinationPath, $video_mp4);
         }
+        if ($request->hasFile('video_ogg')) {
+            $video_ogg = $request->file('video_ogg')->getClientOriginalName();
+            $data['video_ogg'] = $video_ogg;
+            $request->file('video_ogg')->move($destinationPath, $video_ogg);
+        }
+        if ($request->hasFile('video_webm')) {
+            $video_webm = $request->file('video_webm')->getClientOriginalName();
+            $data['video_webm'] = $video_webm;
+            $request->file('video_webm')->move($destinationPath, $video_webm);
+        }
+        Advertisement::create($data);
+
         return redirect('admin/advertisement');
 
     }
@@ -91,7 +105,27 @@ class AdvertisementController extends Controller
     {
         $data = $request->all();
         $data['skipped'] = isset($data['skipped']) ? 'yes' : 'no';
+        $data['active'] = isset($data['skipped']) ? 'yes' : 'no';
         $existing = Advertisement::query()->findOrFail($id);
+
+        $destinationPath = 'uploads/video';
+
+        if ($request->hasFile('video_mp4')) {
+            $video_mp4 = $request->file('video_mp4')->getClientOriginalName();
+            $data['video_mp4'] = $video_mp4;
+            $request->file('video_mp4')->move($destinationPath, $video_mp4);
+        }
+        if ($request->hasFile('video_ogg')) {
+            $video_ogg = $request->file('video_ogg')->getClientOriginalName();
+            $data['video_ogg'] = $video_ogg;
+            $request->file('video_ogg')->move($destinationPath, $video_ogg);
+        }
+        if ($request->hasFile('video_webm')) {
+            $video_webm = $request->file('video_webm')->getClientOriginalName();
+            $data['video_webm'] = $video_webm;
+            $request->file('video_webm')->move($destinationPath, $video_webm);
+        }
+
         $existing->fill($data);
         $existing->save();
         return redirect('admin/advertisement');

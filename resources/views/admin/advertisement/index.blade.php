@@ -45,7 +45,7 @@
                             <th>Order</th>
                             <th>File description</th>
                             <th>Valid Runs</th>
-                            <th>File upload</th>
+                            {{--<th>File upload</th>--}}
                             <th>Runs completed</th>
                             <th>Skip duration(in sec)</th>
                             <th>Disable video</th>
@@ -58,10 +58,10 @@
                                 <td>{{$i+1}}</td>
                                 <td>{{$value->name}}</td>
                                 <td>{{$value->max_played}}</td>
-                                <td>{{$value->video}}</td>
+                                {{--<td>{{$value->video_mp4}}</td>--}}
                                 <td>{{$value->played}}</td>
                                 <td>{{$value->skip_duration}}</td>
-                                <td>{{$value->skipped}}</td>
+                                <td>{{$value->active}}</td>
                                 <td class="column-action">
                                     <div class="button-group">
                                         <a href="{{url('admin/advertisement/'.$value->id.'/edit')}}">
@@ -87,7 +87,8 @@
                                 </div>
                             </div>
                             <div class="form-group label-static">
-                                <div class="col-sm-1">
+                                <div class="col-sm-5">
+                                    <label for="" class="control-label">Force Skip Duration</label>
                                     <input type="text" class="form-control" name="duration" placeholder="Sec" value="{{@$skipduration->duration}}"
                                            id="skip_duration" @if(@$skipduration->skip_duration !== "yes") disabled="disabled" @endif >
                                 </div>

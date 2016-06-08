@@ -14,18 +14,34 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputFile" class="col-md-3 control-label">File</label>
+                <label for="inputFile" class="col-md-3 control-label">Mp4 File</label>
 
                 <div class="col-md-6">
                     <input type="text" readonly="" class="form-control" placeholder="Browse...">
-                    <input type="file" name="video" id="video">
+                    <input type="file" name="video_mp4" id="video">
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Max Played</label>
+                <label for="inputFile" class="col-md-3 control-label">Ogg File</label>
+
+                <div class="col-md-6">
+                    <input type="text" readonly="" class="form-control" placeholder="Browse...">
+                    <input type="file" name="video_ogg" id="video">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputFile" class="col-md-3 control-label">Webm File</label>
+
+                <div class="col-md-6">
+                    <input type="text" readonly="" class="form-control" placeholder="Browse...">
+                    <input type="file" name="video_webm" id="video">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">Valid Runs</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="max_played" id="max_played" class="form-control" placeholder="Max Played">
+                    <input type="text" name="max_played" id="max_played" class="form-control" placeholder="Valid Runs">
                 </div>
             </div>
             <div class="form-group">
@@ -34,8 +50,11 @@
                     <input type="text" name="skip_duration" id="skip_duration" class="form-control" placeholder="Skip Duration">
                     <p class="help-block">Set duration value in second</p>
                     <div class="checkbox">
-                        <label class="control-label">
+                        <label class="control-label col-sm-3">
                             <input type="checkbox" name="skipped"><span class="check"></span></span> Skipped
+                        </label>
+                        <label class="control-label col-sm-3">
+                            <input type="checkbox" name="active"><span class="check"></span></span> Active
                         </label>
                     </div>
                 </div>
