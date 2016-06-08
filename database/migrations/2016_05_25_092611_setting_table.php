@@ -15,7 +15,7 @@ class SettingTable extends Migration
         Schema::create('general_setting',function (Blueprint $table){
             $table->increments('id');
             $table->string('option');
-            $table->string('value')->default(null);
+            $table->string('value')->nullable();
             $table->timestamps();
         });
     }
