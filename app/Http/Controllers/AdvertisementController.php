@@ -105,7 +105,7 @@ class AdvertisementController extends Controller
     {
         $data = $request->all();
         $data['skipped'] = isset($data['skipped']) ? 'yes' : 'no';
-        $data['active'] = isset($data['skipped']) ? 'yes' : 'no';
+        $data['active'] = isset($data['active']) ? 'yes' : 'no';
         $existing = Advertisement::query()->findOrFail($id);
 
         $destinationPath = 'uploads/video';
@@ -177,5 +177,10 @@ class AdvertisementController extends Controller
             $create['value'] = $data;
             Setting::create($create);
         }
+    }
+
+    public function adsTest($id){
+        $data = Advertisement::query()->findOrFail($id);
+        return view('index', compact('data'));
     }
 }

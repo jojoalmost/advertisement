@@ -62,6 +62,11 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-6 pull-right">
+                    <a href="{{url('admin/adstest/').$data->id}}" target="_blank" class="btn btn-warning">Test Play Ads</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6 pull-right">
                     <a href="{{url('admin/advertisement')}}" class="btn btn-default">Cancel</a>
                     <button class="btn btn-raised btn-primary">Save</button>
                 </div>

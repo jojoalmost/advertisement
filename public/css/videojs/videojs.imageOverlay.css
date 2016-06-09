@@ -11,6 +11,6 @@
     cursor: pointer;
 }
 #vjs-image-overlay-holder img:hover {
-    opacity: 1;
+    opacity: 1 !important;
 }
 

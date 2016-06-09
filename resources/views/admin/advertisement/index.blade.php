@@ -77,24 +77,24 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <div class="com-sm-12">
-                        <form id="skip_form">
-                            <div class="col-sm-1">
-                                <div class="checkbox pull-right">
-                                    <label>
-                                        <input type="checkbox" name="skip_duration" id="skip_duration_active" @if(@$skipduration->skip_duration == "yes") checked @endif>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group label-static">
-                                <div class="col-sm-5">
-                                    <label for="" class="control-label">Force Skip Duration</label>
-                                    <input type="text" class="form-control" name="duration" placeholder="Sec" value="{{@$skipduration->duration}}"
-                                           id="skip_duration" @if(@$skipduration->skip_duration !== "yes") disabled="disabled" @endif >
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                    {{--<div class="com-sm-12">--}}
+                        {{--<form id="skip_form">--}}
+                            {{--<div class="col-sm-1">--}}
+                                {{--<div class="checkbox pull-right">--}}
+                                    {{--<label>--}}
+                                        {{--<input type="checkbox" name="skip_duration" id="skip_duration_active" @if(@$skipduration->skip_duration == "yes") checked @endif>--}}
+                                    {{--</label>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group label-static">--}}
+                                {{--<div class="col-sm-5">--}}
+                                    {{--<label for="" class="control-label">Force Skip Duration</label>--}}
+                                    {{--<input type="text" class="form-control" name="duration" placeholder="Sec" value="{{@$skipduration->duration}}"--}}
+                                           {{--id="skip_duration" @if(@$skipduration->skip_duration !== "yes") disabled="disabled" @endif >--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</form>--}}
+                    {{--</div>--}}
                 </div>
             </div>
         </div>
@@ -103,38 +103,38 @@
 @section('body_extra')
     <script>
         $(function () {
-            $("#skip_duration_active").change(function () {
-                if (this.checked) {
-                    $('#skip_duration').removeAttr('disabled');
-                    if ($('#skip_duration').val() != '') {
-                        postSkipDuration();
-                    }
+            {{--$("#skip_duration_active").change(function () {--}}
+                {{--if (this.checked) {--}}
+                    {{--$('#skip_duration').removeAttr('disabled');--}}
+                    {{--if ($('#skip_duration').val() != '') {--}}
+                        {{--postSkipDuration();--}}
+                    {{--}--}}
 
-                }
-                else {
-                    $('#skip_duration').attr('disabled', '');
-                    postSkipDuration();
-                }
-            });
+                {{--}--}}
+                {{--else {--}}
+                    {{--$('#skip_duration').attr('disabled', '');--}}
+                    {{--postSkipDuration();--}}
+                {{--}--}}
+            {{--});--}}
 
-            $('#skip_duration').change(function () {
-                postSkipDuration()
-            });
+            {{--$('#skip_duration').change(function () {--}}
+                {{--postSkipDuration()--}}
+            {{--});--}}
 
-            function postSkipDuration() {
-                var data = $('#skip_form').serialize();
-                $.ajax({
-                    type: "POST",
-                    url: '{{url('admin/advertisement/skipduration')}}' + '?_token=' + $('[name=_xhr_token]').attr('content'),
-                    data: data,
-                    success: function () {
-                        console.log('skipped updated')
-                    },
-                    error: function () {
-                        console.log('skipped failed')
-                    }
-                })
-            }
+            {{--function postSkipDuration() {--}}
+                {{--var data = $('#skip_form').serialize();--}}
+                {{--$.ajax({--}}
+                    {{--type: "POST",--}}
+                    {{--url: '{{url('admin/advertisement/skipduration')}}' + '?_token=' + $('[name=_xhr_token]').attr('content'),--}}
+                    {{--data: data,--}}
+                    {{--success: function () {--}}
+                        {{--console.log('skipped updated')--}}
+                    {{--},--}}
+                    {{--error: function () {--}}
+                        {{--console.log('skipped failed')--}}
+                    {{--}--}}
+                {{--})--}}
+            {{--}--}}
 
             $("[name=delete_link]").click(function (event) {
 
