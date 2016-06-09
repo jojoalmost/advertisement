@@ -77,7 +77,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    {{--<div class="com-sm-12">--}}
+                    <div class="com-sm-12">
                         {{--<form id="skip_form">--}}
                             {{--<div class="col-sm-1">--}}
                                 {{--<div class="checkbox pull-right">--}}
@@ -94,7 +94,7 @@
                                 {{--</div>--}}
                             {{--</div>--}}
                         {{--</form>--}}
-                    {{--</div>--}}
+                    </div>
                 </div>
             </div>
         </div>
