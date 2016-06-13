@@ -47,7 +47,7 @@
                                 <td class="column-action">
                                     <div class="button-group">
                                         <a href="{{url('admin/report/viewreport/'.$value->id)}}">
-                                            {{$value->played}}
+                                            {{$value->log->sum('advertisement_id')}}
                                         </a>
                                     </div>
                                 </td>

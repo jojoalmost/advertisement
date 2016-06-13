@@ -20,7 +20,7 @@ class LogController extends Controller
     public function index()
     {
         $data = AdsLog::with('advertisement')->get();
-        return view('admin.log.index',compact('data'));
+        return view('admin.log.index', compact('data'));
     }
 
     /**
@@ -36,7 +36,7 @@ class LogController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -47,7 +47,7 @@ class LogController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -58,7 +58,7 @@ class LogController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -69,8 +69,8 @@ class LogController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -81,7 +81,7 @@ class LogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -92,15 +92,18 @@ class LogController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function report(){
-                DB::enableQueryLog();
-        $data = Advertisement::leftJoin(DB::raw('(SELECT sum(played) as coba from log GROUP BY advertisement_id) as v'),'v.advertisement_id', '=', 'advertisement.id')->get();
-                dd(DB::getQueryLog());
-        return view('admin.report.index',compact('data'));
+    public function report()
+    {
+        DB::enableQueryLog();
+//        $data = Advertisement::leftJoin(DB::raw('(SELECT sum(played) as coba from log GROUP BY advertisement_id) as v'),'v.advertisement_id', '=', 'advertisement.id')->get();
+//        dd(DB::getQueryLog());
+        $data = Advertisement::orderBy('sorting', 'asc')->get();
+        return view('admin.report.index', compact('data'));
     }
 
-    public function viewreport($id){
-        $data = AdsLog::where('advertisement_id',$id)->findOrFail();
-        return view('admin.report.view',compact('data'));
+    public function viewreport($id)
+    {
+        $data = AdsLog::where('advertisement_id', $id)->findOrFail();
+        return view('admin.report.view', compact('data'));
     }
 }
