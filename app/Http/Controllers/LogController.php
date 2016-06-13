@@ -104,7 +104,6 @@ class LogController extends Controller
     public function viewreport($id)
     {
         $data = AdsLog::with('advertisement')->where('advertisement_id', $id)->get();
-        dd($data);
         return view('admin.report.view', compact('data'));
     }
 }
