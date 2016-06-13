@@ -7,7 +7,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3>
-                        {{$data->advertisement->name}}
+                        {{$data[0]->advertisement->name}}
                     </h3>
                 </div>
                 <div class="panel-body">
