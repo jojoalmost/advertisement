@@ -35,7 +35,6 @@
                         <thead>
                         <tr>
                             <th>Destcription</th>
-                            <th>Filename</th>
                             <th>Total Runs</th>
                             <th class="action"></th>
                         </tr>
@@ -43,11 +42,10 @@
                         <tbody>
                         @foreach($data as $value)
                                 <td>{{$value->name}}</td>
-                                <td>{{$value->video}}</td>
                                 <td class="column-action">
                                     <div class="button-group">
                                         <a href="{{url('admin/report/viewreport/'.$value->id)}}">
-                                            {{$value->log->sum('advertisement_id')}}
+                                            {{$value->log->count()}}
                                         </a>
                                     </div>
                                 </td>
