@@ -16,7 +16,6 @@
                         <tr>
                             <th>Time</th>
                             <th>Date</th>
-                            <th>Watched</th>
                             <th>IP Address</th>
                             <th>User Agent</th>
                         </tr>
@@ -26,7 +25,6 @@
                             <tr data-id="{{$value->id}}">
                                 <td>{{$value->created_at->format('Y-m-d')}}</td>
                                 <td>{{$value->created_at->format('H:i:s')}}</td>
-                                <td>{{$value->advertisement->name}}</td>
                                 <td>{{$value->ip_address}}</td>
                                 <td>{{$value->user_agent}}</td>
                             </tr>
