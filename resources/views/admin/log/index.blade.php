@@ -14,8 +14,8 @@
                     <table class="table table-hover table-striped sorted_table" id="data_table">
                         <thead>
                         <tr>
-                            <th>Time</th>
                             <th>Date</th>
+                            <th>Time</th>
                             <th>Watched</th>
                             <th>IP Address</th>
                             <th>User Agent</th>

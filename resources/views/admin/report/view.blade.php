@@ -7,15 +7,14 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3>
-                        {{$data[0]->advertisement->name}}
                     </h3>
                 </div>
                 <div class="panel-body">
                     <table class="table table-hover table-striped sorted_table" id="data_table">
                         <thead>
                         <tr>
-                            <th>Time</th>
                             <th>Date</th>
+                            <th>Time</th>
                             <th>IP Address</th>
                             <th>User Agent</th>
                         </tr>
