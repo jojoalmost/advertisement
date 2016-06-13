@@ -22,7 +22,7 @@ class CloudtraxController extends Controller
     public function index()
     {
         $radius = Setting::where('option', 'radius')->first();
-        $radius=json_decode($radius['value']);
+        $radius = json_decode($radius['value']);
         $uam_secret = $radius->secret;
         function encode_password($plain, $challenge, $secret)
         {
@@ -61,7 +61,13 @@ class CloudtraxController extends Controller
         $redirect_url = "http://$uamip:$uamport/logon?" .
             "username=" . urlencode($username) .
             "&password=" . urlencode($encoded_password);
-        return redirect($redirect_url);
+
+        $method = Request::all();
+        if (isset($method['pressd'])) {
+            return redirect($method['url']);
+        } else {
+            return redirect($redirect_url);
+        }
 //            $http= curl_init($redirect_url);
 //            curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
 //            $http_result = curl_exec($http);
@@ -111,7 +117,7 @@ class CloudtraxController extends Controller
 
         $parameter = Session::get('cloudtrax');
 
-        $data['mac']=$parameter['mac'];
+        $data['mac'] = $parameter['mac'];
         $data['ip_address'] = $request->ip();
         $data['user_agent'] = $request->header('User-Agent');
         $data['played'] = $played;
@@ -122,7 +128,13 @@ class CloudtraxController extends Controller
         $ads = Advertisement::query()->findOrFail($data['advertisement_id']);
         $ads->played++;
         $ads->save();
-        return redirect('cloudtraxauth');
+
+        $redirect_url = $ads['redirect_url'];
+        if ($data['method'] == 'pressed') {
+            return redirect("cloudtraxauth?url=$redirect_url&method={$data['method']}");
+        } else {
+            return redirect('cloudtraxauth');
+        }
     }
 
     /**

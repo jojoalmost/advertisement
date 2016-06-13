@@ -38,6 +38,13 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">Redirect URL</label>
+
+                <div class="col-sm-6">
+                    <input type="text" name="redirect_url" id="redirect_url" class="form-control" value="{{$data->redirect_url}}" placeholder="Redirect URL">
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">Valid Runs</label>
 
                 <div class="col-sm-6">

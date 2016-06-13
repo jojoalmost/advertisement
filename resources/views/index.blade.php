@@ -45,13 +45,20 @@
                     <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
                 </p>
             </video>
-            <div class="col-xs-12 text-center">
-                <form action="{{url('cloudtraxauth')}}" method="post" id="skip" style="display: none">
-                    {!! csrf_field() !!}
-                    <input type="hidden" name="advertisement_id" value="{{$data->id}}">
-                    </button>
-                </form>
-            </div>
+
+            <form action="{{url('cloudtraxauth')}}" method="post" id="skip-ended" style="display: none">
+                {!! csrf_field() !!}
+                <input type="hidden" name="method" value="ended">
+                <input type="hidden" name="advertisement_id" value="{{$data->id}}">
+                </button>
+            </form>
+
+            <form action="{{url('cloudtraxauth')}}" method="post" id="skip-redirect-ads" style="display: none">
+                {!! csrf_field() !!}
+                <input type="hidden" name="method" value="pressed">
+                <input type="hidden" name="advertisement_id" value="{{$data->id}}">
+                </button>
+            </form>
         </div>
     </div>
 
@@ -99,11 +106,10 @@
             });
 
             player.on('ended', function () {
-                $('#skip').hide();
                 $.ajax({
                     type: 'POST',
                     url: '{{url('cloudtraxauth')}}',
-                    data: $('form').serialize(),
+                    data: $('#skip-ended').serialize(),
                     success: function () {
                         window.location.href = "{{url('cloudtraxauth')}}";
                     }
@@ -119,7 +125,6 @@
             if (skipbool) {
                 player.imageOverlay({
                     image_url: "{{url('/css/videojs/skip_button.png')}}",
-                    click_url: "{{url('cloudtraxauth')}}",
                     opacity: 0.5,
                     start_time: skip_duration,
                     height: '4%'
