@@ -19,7 +19,7 @@ class CloudtraxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $radius = Setting::where('option', 'radius')->first();
         $radius = json_decode($radius['value']);
@@ -62,8 +62,7 @@ class CloudtraxController extends Controller
             "username=" . urlencode($username) .
             "&password=" . urlencode($encoded_password);
 
-        $method = Request::all();
-        dd($method);
+        $method = $request->all();
         if (isset($method['pressed'])) {
             return redirect($method['url']);
         } else {
