@@ -21,8 +21,6 @@ class CloudtraxController extends Controller
      */
     public function index()
     {
-        $method = Request::all();
-        dd($method);
         $radius = Setting::where('option', 'radius')->first();
         $radius = json_decode($radius['value']);
         $uam_secret = $radius->secret;
@@ -64,7 +62,7 @@ class CloudtraxController extends Controller
             "username=" . urlencode($username) .
             "&password=" . urlencode($encoded_password);
 
-
+        $method = Request::all();
         if (isset($method['pressed'])) {
             return redirect($method['url']);
         } else {
