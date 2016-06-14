@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\AdsLog;
 use App\Advertisement;
 use App\Setting;
-use Illuminate\Http\Request;
+use Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -19,8 +19,10 @@ class CloudtraxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
+        $method = Request::all();
+        dd($method);
         $radius = Setting::where('option', 'radius')->first();
         $radius = json_decode($radius['value']);
         $uam_secret = $radius->secret;
@@ -62,7 +64,7 @@ class CloudtraxController extends Controller
             "username=" . urlencode($username) .
             "&password=" . urlencode($encoded_password);
 
-        $method = $request->all();
+
         if (isset($method['pressed'])) {
             return redirect($method['url']);
         } else {
