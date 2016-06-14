@@ -63,7 +63,8 @@ class CloudtraxController extends Controller
             "&password=" . urlencode($encoded_password);
 
         $method = Request::all();
-        if (isset($method['pressd'])) {
+        dd($method);
+        if (isset($method['pressed'])) {
             return redirect($method['url']);
         } else {
             return redirect($redirect_url);
