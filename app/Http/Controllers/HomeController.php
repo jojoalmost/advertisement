@@ -45,7 +45,6 @@ class HomeController extends Controller
             }
         }
 
-//dd($this->maxPlayed);
         DB::enableQueryLog();
         $data = Advertisement::whereHas('log', function ($q) {
             $q->where('log.ip_address', $this->ip)
@@ -55,13 +54,11 @@ class HomeController extends Controller
             ->get()
             ->first();
 //        dd(DB::getQueryLog());
-        $skipdurationSet = Setting::where('option', 'skipduration')->first();
-        $skipdurationSet = json_decode($skipdurationSet['value']);
 
         if (empty($data)) {
             return redirect('cloudtraxauth');
         }
-        return view('index', compact('data','skipdurationSet'));
+        return view('index', compact('data'));
     }
 
     /**

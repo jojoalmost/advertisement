@@ -67,7 +67,6 @@
     <script>
         $(function () {
             var skipped = "{{$data->skipped}}";
-            var skipbool = false;
             if (skipped == "yes") {
                 skipbool = true;
             }
@@ -116,11 +115,7 @@
                 });
             });
             var skip_duration = 0;
-            @if(@$skipdurationSet->skip_duration == "yes")
-               skip_duration = {{$skipdurationSet->duration}};
-            @else
-               skip_duration = {{$timer = $data->skip_duration}};
-            @endif
+            skip_duration = {{$timer = $data->skip_duration}};
 
             if (skipbool) {
                 player.imageOverlay({
