@@ -62,12 +62,10 @@ class CloudtraxController extends Controller
             "username=" . urlencode($username) .
             "&password=" . urlencode($encoded_password);
 
-        $method =$request->all();
-        if (isset($method['method'])) {
-            return redirect()->to($method['url']);
-        } else {
-            return redirect($redirect_url);
-        }
+        $method = $request->all();
+        return redirect()->to($method['url']);
+
+//            return redirect($redirect_url);
 //            $http= curl_init($redirect_url);
 //            curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
 //            $http_result = curl_exec($http);
@@ -129,12 +127,7 @@ class CloudtraxController extends Controller
         $ads->played++;
         $ads->save();
 
-        $redirect_url = $ads['redirect_url'];
-        if ($data['method'] == 'pressed') {
-            return redirect("cloudtraxauth?url=$redirect_url&method={$data['method']}");
-        } else {
-            return redirect('cloudtraxauth');
-        }
+        return redirect("cloudtraxauth?url={$ads['redirect_url']}");
     }
 
     /**
@@ -143,7 +136,8 @@ class CloudtraxController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public
+    function show($id)
     {
         //
     }
@@ -154,7 +148,8 @@ class CloudtraxController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
         //
     }
@@ -166,7 +161,8 @@ class CloudtraxController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
         //
     }
@@ -177,7 +173,8 @@ class CloudtraxController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         //
     }
