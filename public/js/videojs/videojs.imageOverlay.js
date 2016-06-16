@@ -53,7 +53,7 @@
         }
 
         holderDiv.onclick = function() {
-          document.getElementById('skip-redirect-ads').submit();
+          document.getElementById('skip').submit();
           return false; // cancel the actual link
               //window.location.href = settings.click_url;
         };

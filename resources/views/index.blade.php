@@ -46,16 +46,8 @@
                 </p>
             </video>
 
-            <form action="{{url('cloudtraxauth')}}" method="post" id="skip-ended" style="display: none">
+            <form action="{{url('cloudtraxauth')}}" method="post" id="skip" style="display: none">
                 {!! csrf_field() !!}
-                <input type="hidden" name="method" value="ended">
-                <input type="hidden" name="advertisement_id" value="{{$data->id}}">
-                </button>
-            </form>
-
-            <form action="{{url('cloudtraxauth')}}" method="post" id="skip-redirect-ads" style="display: none">
-                {!! csrf_field() !!}
-                <input type="hidden" name="method" value="pressed">
                 <input type="hidden" name="advertisement_id" value="{{$data->id}}">
                 </button>
             </form>
@@ -108,7 +100,7 @@
                 $.ajax({
                     type: 'POST',
                     url: '{{url('cloudtraxauth')}}',
-                    data: $('#skip-ended').serialize(),
+                    data: $('#skip').serialize(),
                     success: function () {
                         window.location.href = "{{url('cloudtraxauth')}}";
                     }
