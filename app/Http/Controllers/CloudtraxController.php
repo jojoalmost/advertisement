@@ -19,7 +19,7 @@ class CloudtraxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $radius = Setting::where('option', 'radius')->first();
         $radius = json_decode($radius['value']);
@@ -62,9 +62,8 @@ class CloudtraxController extends Controller
             "username=" . urlencode($username) .
             "&password=" . urlencode($encoded_password);
 
-        $method = $request->all();
-        dd($method);
-//        return redirect()->to($method['url']);
+        $ads = Session::get('ads');
+        return redirect()->to($ads['redirect_url']);
 
 //            return redirect($redirect_url);
 //            $http= curl_init($redirect_url);
@@ -127,8 +126,9 @@ class CloudtraxController extends Controller
         $ads = Advertisement::query()->findOrFail($data['advertisement_id']);
         $ads->played++;
         $ads->save();
+        Session::put(compact('ads'));
 
-        return redirect("cloudtraxauth?url={$ads['redirect_url']}");
+        return redirect("cloudtraxauth");
     }
 
     /**
