@@ -63,7 +63,8 @@ class CloudtraxController extends Controller
             "&password=" . urlencode($encoded_password);
 
         $ads = Session::get('ads');
-        return redirect()->to($ads['redirect_url']);
+//        return redirect()->to($ads['redirect_url']);
+        return redirect($ads['redirect_url']);
 
 //            return redirect($redirect_url);
 //            $http= curl_init($redirect_url);
