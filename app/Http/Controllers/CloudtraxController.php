@@ -64,7 +64,7 @@ class CloudtraxController extends Controller
 
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "http://$uamip:$uamport/logon?");
+        curl_setopt($ch, CURLOPT_URL, "http://$uamip:$uamport/logon");
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS,
             "username=" . urlencode($username) .
