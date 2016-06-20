@@ -23,7 +23,7 @@ class CloudtraxController extends Controller
     {
         $radius = Setting::where('option', 'radius')->first();
         $radius = json_decode($radius['value']);
-        $redirect_setting = Setting::where('option', 'radius')->first();
+        $redirect_setting = Setting::where('option', 'portal_mode')->first();
         $redirect_setting = $redirect_setting['value'];
         $uam_secret = $radius->secret;
         function encode_password($plain, $challenge, $secret)
