@@ -70,11 +70,13 @@ class CloudtraxController extends Controller
             $http = curl_init();
             curl_setopt($http, CURLOPT_URL, $redirect_url);
             curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
-            curl_exec($http);
+            $data = curl_exec($http);
             $http_status = curl_getinfo($http, CURLINFO_HTTP_CODE);
+            $err = curl_error($http);
             curl_close($http);
             $ads = Session::get('ads');
-            return redirect()->to($ads['redirect_url']);
+            dd($data);
+//            return redirect()->to($ads['redirect_url']);
         }
     }
 
