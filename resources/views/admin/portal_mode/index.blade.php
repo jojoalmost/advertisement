@@ -30,7 +30,7 @@
 @section('body_extra')
     <script>
         $(function(){
-            $("#portal_mode").val("{{$data->value}}");
+            $("#portal_mode").val("{{@$data->value}}");
         })
     </script>
 @endsection
