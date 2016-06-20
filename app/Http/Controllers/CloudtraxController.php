@@ -23,6 +23,8 @@ class CloudtraxController extends Controller
     {
         $radius = Setting::where('option', 'radius')->first();
         $radius = json_decode($radius['value']);
+        $redirect_setting = Setting::where('option', 'radius')->first();
+        $redirect_setting = $redirect_setting['value'];
         $uam_secret = $radius->secret;
         function encode_password($plain, $challenge, $secret)
         {
@@ -62,16 +64,18 @@ class CloudtraxController extends Controller
             "username=" . urlencode($username) .
             "&password=" . urlencode($encoded_password);
 
-//            return redirect($redirect_url);
-        $http = curl_init();
-        curl_setopt($http, CURLOPT_URL, $redirect_url);
-        curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_exec($http);
-//            $http_status = curl_getinfo($http, CURLINFO_HTTP_CODE);
-        curl_close($http);
-//        return redirect()->to($ads['redirect_url']);
-//        $ads = Session::get('ads');
-//        return redirect($ads['redirect_url');
+        if ($redirect_setting == 'without') {
+            return redirect($redirect_url);
+        } elseif ($redirect_setting == 'with') {
+            $http = curl_init();
+            curl_setopt($http, CURLOPT_URL, $redirect_url);
+            curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
+            curl_exec($http);
+            $http_status = curl_getinfo($http, CURLINFO_HTTP_CODE);
+            curl_close($http);
+            $ads = Session::get('ads');
+            return redirect()->to($ads['redirect_url']);
+        }
     }
 
     /**

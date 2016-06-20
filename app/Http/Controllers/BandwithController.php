@@ -33,7 +33,7 @@ class BandwithController extends Controller
             $current->value = $data;
             $current->save();
         } else {
-            $create['option'] = 'radius';
+            $create['option'] = 'bandwith';
             $create['value'] = $data;
             Setting::create($create);
         }

@@ -32,6 +32,8 @@ Route::group(['middleware' => Authenticate::class], function()
     Route::get('admin/report', 'LogController@report');
     Route::get('admin/report/viewreport/{id}', 'LogController@viewreport');
     Route::get('admin/adstest/{id}', 'AdvertisementController@adsTest');
+    Route::get('admin/portal_mode', 'PortalModeController@index');
+    Route::put('admin/portal_mode/update', 'PortalModeController@update');
 });
 
 
