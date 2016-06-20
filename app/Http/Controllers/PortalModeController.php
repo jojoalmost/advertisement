@@ -22,7 +22,7 @@ class PortalModeController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
-        $current = Setting::where('option', 'portal_mode')->firstOrFail();
+        $current = Setting::where('option', 'portal_mode')->first();
         if (!empty($current)) {
             $current->value = $data['portal_mode'];
             $current->save();
