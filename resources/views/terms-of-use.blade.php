@@ -35,12 +35,12 @@
 @section('content')
     <div class="row">
         <div class="col-xs-6 col-xs-offset-3 panel panel-default">
-
+{{dd($portal_mode)}}
             <h1 class="margin-base-vertical">Terms of use</h1>
             {!!$data->value!!}
             <div class="margin-base-vertical">
                 <div class="col-xs-12 text-center">
-                    @if(@$portal_mode['value'] === 'without')
+                    @if(@$portal_mode['value'] == 'without')
                         <a href="{!!url('bypass')!!}" class="btn btn-raised btn-primary btn-lg">I Agree</a>
                     @else
                         <a href="{!!url('ads')!!}" class="btn btn-raised btn-primary btn-lg">I Agree</a>
