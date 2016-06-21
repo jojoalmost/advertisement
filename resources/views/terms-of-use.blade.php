@@ -35,7 +35,6 @@
 @section('content')
     <div class="row">
         <div class="col-xs-6 col-xs-offset-3 panel panel-default">
-{{dd($portal_mode)}}
             <h1 class="margin-base-vertical">Terms of use</h1>
             {!!$data->value!!}
             <div class="margin-base-vertical">
