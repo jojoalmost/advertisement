@@ -64,7 +64,7 @@ class CloudtraxController extends Controller
             "username=" . urlencode($username) .
             "&password=" . urlencode($encoded_password);
 
-        if ($redirect_setting == 'radius') {
+        if ($redirect_setting == 'radius' || $redirect_setting == 'without') {
             return redirect($redirect_url);
         } elseif ($redirect_setting == 'with') {
             $http = curl_init();
