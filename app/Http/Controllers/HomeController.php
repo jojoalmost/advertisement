@@ -152,7 +152,8 @@ class HomeController extends Controller
                     break;
                 case "notyet":
                     $data = Setting::where('option', 'terms')->firstOrFail();
-                    return view('terms-of-use',compact('data'));
+                    $portal_mode = Setting::where('option', 'portal_moda')->where('value', 'without')->firstOrFail();
+                    return view('terms-of-use',compact('data','portal_mode'));
                     break;
                 default:
                     http_response_code(400);
