@@ -78,9 +78,6 @@ class CloudtraxController extends Controller
             dd($data,$http_status,$err);
             return redirect()->to($ads['redirect_url']);
         }
-        else{
-            return redirect($redirect_url);
-        }
     }
 
     /**
