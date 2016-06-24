@@ -19,8 +19,7 @@ class AdvertisementController extends Controller
     public function index()
     {
         $data = Advertisement::orderBy('sorting', 'asc')->get();
-        $skipduration = Setting::where('option', 'skipduration')->first();
-        $skipduration = json_decode($skipduration['value']);
+        dd($data);
         return view('admin.advertisement.index', compact('data', 'skipduration'));
     }
 
