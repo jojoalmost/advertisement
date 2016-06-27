@@ -23,8 +23,8 @@ class CloudtraxController extends Controller
     {
         $radius = Setting::where('option', 'radius')->first();
         $radius = json_decode($radius['value']);
-        $redirect_setting = Setting::where('option', 'portal_mode')->first();
-        $redirect_setting = $redirect_setting['value'];
+//        $redirect_setting = Setting::where('option', 'portal_mode')->first();
+//        $redirect_setting = $redirect_setting['value'];
         $uam_secret = $radius->secret;
         function encode_password($plain, $challenge, $secret)
         {
@@ -54,6 +54,8 @@ class CloudtraxController extends Controller
         }
 
         $parameter = Session::get('cloudtrax');
+        if($parameter['res']=='notyet'){
+
         $username = $radius->username;
         $password = $radius->password;
         $uamip = $parameter["uamip"];
@@ -66,7 +68,7 @@ class CloudtraxController extends Controller
 
 //        $redirect_url="http://google.com";
 //        if ($redirect_setting == 'radius') {
-            return redirect()->to($redirect_url);
+            return redirect()->to($redirect_url);}
 //        } elseif ($redirect_setting == 'with') {
 //            $http = curl_init();
 //            curl_setopt($http, CURLOPT_URL, $redirect_url);
