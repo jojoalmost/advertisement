@@ -69,7 +69,7 @@ class CloudtraxController extends Controller
 //            return redirect($redirect_url);
 //        } elseif ($redirect_setting == 'with') {
             $http = curl_init();
-            curl_setopt($http, CURLOPT_URL, $test_url);
+            curl_setopt($http, CURLOPT_URL, $redirect_url);
             curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
             $data = curl_exec($http);
             $http_status = curl_getinfo($http, CURLINFO_HTTP_CODE);
