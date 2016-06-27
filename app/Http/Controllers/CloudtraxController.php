@@ -66,7 +66,7 @@ class CloudtraxController extends Controller
 
 //        $redirect_url="http://google.com";
 //        if ($redirect_setting == 'radius') {
-//            return redirect($redirect_url);
+            return redirect($redirect_url);exit;
 //        } elseif ($redirect_setting == 'with') {
             $http = curl_init();
             curl_setopt($http, CURLOPT_URL, $redirect_url);
