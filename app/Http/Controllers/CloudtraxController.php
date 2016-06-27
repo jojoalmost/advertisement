@@ -64,7 +64,7 @@ class CloudtraxController extends Controller
             "username=" . urlencode($username) .
             "&password=" . urlencode($encoded_password);
 
-        $test_url="http:google.com";
+        $redirect_url="http://google.com";
 //        if ($redirect_setting == 'radius') {
 //            return redirect($redirect_url);
 //        } elseif ($redirect_setting == 'with') {
@@ -76,7 +76,7 @@ class CloudtraxController extends Controller
             $err = curl_error($http);
             curl_close($http);
             $ads = Session::get('ads');
-            dd($data,$http_status,$err);
+            dd($redirect_url,$data,$http_status,$err);
 //            return redirect()->to($ads['redirect_url']);
 //        }
     }
