@@ -21,11 +21,6 @@ class CloudtraxController extends Controller
      */
     public function index()
     {
-
-    }
-
-
-    public function auth(){
         $radius = Setting::where('option', 'radius')->first();
         $radius = json_decode($radius['value']);
 //        $redirect_setting = Setting::where('option', 'portal_mode')->first();
@@ -73,7 +68,7 @@ class CloudtraxController extends Controller
 
 //        $redirect_url="http://google.com";
 //        if ($redirect_setting == 'radius') {
-            return redirect()->to($redirect_url);
+            return redirect($redirect_url);
         }
 //        } elseif ($redirect_setting == 'with') {
 //            $http = curl_init();
@@ -144,7 +139,7 @@ class CloudtraxController extends Controller
         $ads->save();
         Session::put(compact('ads'));
 
-        return redirect("auth");
+        return redirect("cloudtraxauth");
     }
 
     /**
