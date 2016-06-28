@@ -19,8 +19,7 @@ class AdvertisementController extends Controller
     public function index()
     {
         $data = Advertisement::orderBy('sorting', 'asc')->get();
-        dd($data);
-        return view('admin.advertisement.index', compact('data', 'skipduration'));
+        return view('admin.advertisement.index', compact('data'));
     }
 
     /**

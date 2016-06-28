@@ -21,6 +21,11 @@ class CloudtraxController extends Controller
      */
     public function index()
     {
+
+    }
+
+
+    public function auth(){
         $radius = Setting::where('option', 'radius')->first();
         $radius = json_decode($radius['value']);
 //        $redirect_setting = Setting::where('option', 'portal_mode')->first();
@@ -54,21 +59,22 @@ class CloudtraxController extends Controller
         }
 
         $parameter = Session::get('cloudtrax');
-        if($parameter['res']=='notyet'){
+        if ($parameter['res'] == 'notyet') {
 
-        $username = $radius->username;
-        $password = $radius->password;
-        $uamip = $parameter["uamip"];
-        $uamport = $parameter["uamport"];
-        $challenge = $parameter["challenge"];
-        $encoded_password = encode_password($password, $challenge, $uam_secret);
-        $redirect_url = "http://$uamip:$uamport/logon?" .
-            "username=" . urlencode($username) .
-            "&password=" . urlencode($encoded_password);
+            $username = $radius->username;
+            $password = $radius->password;
+            $uamip = $parameter["uamip"];
+            $uamport = $parameter["uamport"];
+            $challenge = $parameter["challenge"];
+            $encoded_password = encode_password($password, $challenge, $uam_secret);
+            $redirect_url = "http://$uamip:$uamport/logon?" .
+                "username=" . urlencode($username) .
+                "&password=" . urlencode($encoded_password);
 
 //        $redirect_url="http://google.com";
 //        if ($redirect_setting == 'radius') {
-            return redirect()->to($redirect_url);}
+            return redirect()->to($redirect_url);
+        }
 //        } elseif ($redirect_setting == 'with') {
 //            $http = curl_init();
 //            curl_setopt($http, CURLOPT_URL, $redirect_url);
@@ -138,7 +144,7 @@ class CloudtraxController extends Controller
         $ads->save();
         Session::put(compact('ads'));
 
-        return redirect("cloudtraxauth");
+        return redirect("auth");
     }
 
     /**
@@ -147,8 +153,7 @@ class CloudtraxController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function show($id)
+    public function show($id)
     {
         //
     }
@@ -159,8 +164,7 @@ class CloudtraxController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function edit($id)
+    public function edit($id)
     {
         //
     }
@@ -172,8 +176,7 @@ class CloudtraxController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function update(Request $request, $id)
+    public  function update(Request $request, $id)
     {
         //
     }
@@ -184,8 +187,7 @@ class CloudtraxController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function destroy($id)
+    public  function destroy($id)
     {
         //
     }

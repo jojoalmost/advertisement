@@ -55,3 +55,4 @@ Route::resource('ads', 'HomeController');
 Route::resource('cloudtraxauth', 'CloudtraxController');
 Route::get('cloudtraxres','AuthResponseController@response');
 Route::post('fetch/{sorting}', 'HomeController@fetch');
+Route::get('auth}', 'CloudtraxController@auth');
