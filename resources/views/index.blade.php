@@ -119,8 +119,8 @@
 
             }
             var titan = $(".my-video-dimensions");
-            var width = $(window).width() - 1;
-            var height = $(window).height() - 1;
+            var width = $(window).width();
+            var height = $(window).height();
             titan.css('width', width);
             titan.css('height', height);
         })
