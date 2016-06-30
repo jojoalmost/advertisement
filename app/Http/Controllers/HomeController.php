@@ -151,6 +151,7 @@ class HomeController extends Controller
                     return view('response',compact('data'));
                     break;
                 case "notyet":
+                    dd($cloudtrax);
                     $data = Setting::where('option', 'terms')->firstOrFail();
                     return view('terms-of-use',compact('data'));
                     break;

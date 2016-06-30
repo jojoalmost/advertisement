@@ -31,6 +31,8 @@
     <script>
         $(function(){
             $("#portal_mode").val("{{@$data->value}}");
+//            if($("#portal_mode").val() == 0) //I'm supposing the "Other" option value is 0.
+//                $("#yourTextBox").hide();
         })
     </script>
 @endsection
