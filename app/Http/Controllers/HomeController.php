@@ -23,23 +23,24 @@ class HomeController extends Controller
 
         $this->ip = Request::ip();
         $parameter = Session::get('cloudtrax');
+
         DB::enableQueryLog();
         $this->maxPlayed = AdsLog::where('log.ip_address', $this->ip)
-            ->where('log.mac',$parameter['mac'])
+            ->where('log.mac', $parameter['mac'])
             ->max('played');
 //        dd(DB::getQueryLog());
         if ($this->maxPlayed === null) {
             $this->maxPlayed = 1;
         } else {
-
+            DB::enableQueryLog();
             $data = Advertisement::whereHas('log', function ($q) {
                 $q->where('log.ip_address', $this->ip)
                     ->where('log.played', $this->maxPlayed);
             }, '=', 0);
-              //  ->where('played', '<', DB::raw('max_played'));
+            //  ->where('played', '<', DB::raw('max_played'));
             $count = $data->count();
 //            dd($count);
-            if ($count == 0 ) {
+            if ($count == 0) {
                 $this->maxPlayed = $this->maxPlayed + 1;
 
             }
@@ -53,7 +54,7 @@ class HomeController extends Controller
             ->where('advertisement.active', 'yes')
             ->get()
             ->first();
-        dd(DB::getQueryLog(),$data);
+        dd(DB::getQueryLog(), $data);
 
         if (empty($data)) {
             return redirect('cloudtraxauth');
@@ -138,7 +139,7 @@ class HomeController extends Controller
     {
         $cloudtrax = Request::all();
         if (!empty($cloudtrax)) {
-//            Session::put(compact('cloudtrax'));
+            Session::put(compact('cloudtrax'));
 //            switch ($cloudtrax['res']) {
 //                case "logoff":
 //                    $data= "logoff";
@@ -152,15 +153,14 @@ class HomeController extends Controller
 //                    return view('response',compact('data'));
 //                    break;
 //                case "notyet":
-                    $data = Setting::where('option', 'terms')->firstOrFail();
-                    return view('terms-of-use',compact('data'));
+            $data = Setting::where('option', 'terms')->firstOrFail();
+            return view('terms-of-use', compact('data'));
 //                    break;
 //                default:
 //                    http_response_code(400);
 //                    exit();
 //            }
-        }
-        else {
+        } else {
             return view('errors/503request');
         }
     }
