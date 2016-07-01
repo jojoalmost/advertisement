@@ -66,22 +66,8 @@ class CloudtraxController extends Controller
                 "username=" . urlencode($username) .
                 "&password=" . urlencode($encoded_password);
 
-//        $redirect_url="http://google.com";
-//        if ($redirect_setting == 'radius') {
             return redirect($redirect_url);
         }
-//        } elseif ($redirect_setting == 'with') {
-//            $http = curl_init();
-//            curl_setopt($http, CURLOPT_URL, $redirect_url);
-//            curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
-//            $data = curl_exec($http);
-//            $http_status = curl_getinfo($http, CURLINFO_HTTP_CODE);
-//            $err = curl_error($http);
-//            curl_close($http);
-//            $ads = Session::get('ads');
-//            dd($redirect_url,$data,$http_status,$err);
-//            return redirect()->to($ads['redirect_url']);
-//        }
     }
 
     public function redirect()
@@ -143,26 +129,7 @@ class CloudtraxController extends Controller
         $ads = Advertisement::query()->findOrFail($data['advertisement_id']);
         $ads->played++;
         $ads->save();
-        $parameter = Session::get('cloudtrax');
-        switch ($parameter['res']) {
-            case "logoff":
-                $data = "logoff";
-                return view('response', compact('data'));
-                break;
-            case "success":
-                return redirect($parameter['userurl']);
-                break;
-            case "failed":
-                $data = "failed";
-                return view('response', compact('data'));
-                break;
-            case "notyet":
-                return redirect("cloudtraxauth");
-                break;
-            default:
-                http_response_code(400);
-                exit();
-        }
+        return redirect("cloudtraxauth");
     }
 
     /**

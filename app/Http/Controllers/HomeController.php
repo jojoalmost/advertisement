@@ -23,10 +23,11 @@ class HomeController extends Controller
 
         $this->ip = Request::ip();
         $parameter = Session::get('cloudtrax');
+        $this->mac=$parameter['mac'];
 
         DB::enableQueryLog();
         $this->maxPlayed = AdsLog::where('log.ip_address', $this->ip)
-            ->where('log.mac', $parameter['mac'])
+            ->where('log.mac', $this->mac)
             ->max('played');
 //        dd(DB::getQueryLog());
         if ($this->maxPlayed === null) {
@@ -35,9 +36,9 @@ class HomeController extends Controller
             DB::enableQueryLog();
             $data = Advertisement::whereHas('log', function ($q) {
                 $q->where('log.ip_address', $this->ip)
+                    ->where('log.mac', $this->mac)
                     ->where('log.played', $this->maxPlayed);
             }, '=', 0);
-            //  ->where('played', '<', DB::raw('max_played'));
             $count = $data->count();
 //            dd($count);
             if ($count == 0) {
@@ -49,15 +50,17 @@ class HomeController extends Controller
         DB::enableQueryLog();
         $data = Advertisement::whereHas('log', function ($q) {
             $q->where('log.ip_address', $this->ip)
+                ->where('log.mac', $this->mac)
                 ->where('log.played', $this->maxPlayed);
         }, '=', 0)
             ->where('advertisement.active', 'yes')
             ->get()
             ->first();
-        dd(DB::getQueryLog(), $data);
+
 
         if (empty($data)) {
-            return redirect('cloudtraxauth');
+            dd(DB::getQueryLog(), $data);
+//            return redirect('cloudtraxauth');
         }
 
         return view('index', compact('data'));
@@ -140,26 +143,26 @@ class HomeController extends Controller
         $cloudtrax = Request::all();
         if (!empty($cloudtrax)) {
             Session::put(compact('cloudtrax'));
-//            switch ($cloudtrax['res']) {
-//                case "logoff":
-//                    $data= "logoff";
-//                    return view('response',compact('data'));
-//                    break;
-//                case "success":
-//                    return redirect($cloudtrax['userurl']);
-//                    break;
-//                case "failed":
-//                    $data = "failed";
-//                    return view('response',compact('data'));
-//                    break;
-//                case "notyet":
-            $data = Setting::where('option', 'terms')->firstOrFail();
-            return view('terms-of-use', compact('data'));
-//                    break;
-//                default:
-//                    http_response_code(400);
-//                    exit();
-//            }
+            switch ($cloudtrax['res']) {
+                case "logoff":
+                    $data = "logoff";
+                    return view('response', compact('data'));
+                    break;
+                case "success":
+                    return redirect($cloudtrax['userurl']);
+                    break;
+                case "failed":
+                    $data = "failed";
+                    return view('response', compact('data'));
+                    break;
+                case "notyet":
+                    $data = Setting::where('option', 'terms')->firstOrFail();
+                    return view('terms-of-use', compact('data'));
+                    break;
+                default:
+                    http_response_code(400);
+                    exit();
+            }
         } else {
             return view('errors/503request');
         }
