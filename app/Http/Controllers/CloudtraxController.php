@@ -54,20 +54,18 @@ class CloudtraxController extends Controller
         }
 
         $parameter = Session::get('cloudtrax');
-        if ($parameter['res'] == 'notyet') {
 
-            $username = $radius->username;
-            $password = $radius->password;
-            $uamip = $parameter["uamip"];
-            $uamport = $parameter["uamport"];
-            $challenge = $parameter["challenge"];
-            $encoded_password = encode_password($password, $challenge, $uam_secret);
-            $redirect_url = "http://$uamip:$uamport/logon?" .
-                "username=" . urlencode($username) .
-                "&password=" . urlencode($encoded_password);
+        $username = $radius->username;
+        $password = $radius->password;
+        $uamip = $parameter["uamip"];
+        $uamport = $parameter["uamport"];
+        $challenge = $parameter["challenge"];
+        $encoded_password = encode_password($password, $challenge, $uam_secret);
+        $redirect_url = "http://$uamip:$uamport/logon?" .
+            "username=" . urlencode($username) .
+            "&password=" . urlencode($encoded_password);
 
-            return redirect($redirect_url);
-        }
+        return redirect($redirect_url);
     }
 
     public function redirect()
