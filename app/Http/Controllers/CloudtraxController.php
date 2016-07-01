@@ -84,10 +84,12 @@ class CloudtraxController extends Controller
 //        }
     }
 
-    public  function redirect(){
+    public function redirect()
+    {
         $ads = Session::get('ads');
         return redirect()->to($ads['redirect_url']);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -141,9 +143,26 @@ class CloudtraxController extends Controller
         $ads = Advertisement::query()->findOrFail($data['advertisement_id']);
         $ads->played++;
         $ads->save();
-        Session::put(compact('ads'));
-
-        return redirect("cloudtraxauth");
+        $parameter = Session::get('cloudtrax');
+        switch ($parameter['res']) {
+            case "logoff":
+                $data = "logoff";
+                return view('response', compact('data'));
+                break;
+            case "success":
+                return redirect($parameter['userurl']);
+                break;
+            case "failed":
+                $data = "failed";
+                return view('response', compact('data'));
+                break;
+            case "notyet":
+                return redirect("cloudtraxauth");
+                break;
+            default:
+                http_response_code(400);
+                exit();
+        }
     }
 
     /**
@@ -175,7 +194,7 @@ class CloudtraxController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public  function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -186,7 +205,7 @@ class CloudtraxController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public  function destroy($id)
+    public function destroy($id)
     {
         //
     }

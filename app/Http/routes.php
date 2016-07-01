@@ -51,9 +51,7 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 //frontend
-//Route::resource('ads', 'HomeController');
-Route::get('ads','HomeController@index');
-Route::post('ads','HomeController@store');
+Route::resource('ads', 'HomeController');
 Route::resource('cloudtraxauth', 'CloudtraxController');
 Route::get('cloudtraxres','AuthResponseController@response');
 Route::post('fetch/{sorting}', 'HomeController@fetch');

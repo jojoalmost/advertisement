@@ -137,27 +137,27 @@ class HomeController extends Controller
     {
         $cloudtrax = Request::all();
         if (!empty($cloudtrax)) {
-            Session::put(compact('cloudtrax'));
-            switch ($cloudtrax['res']) {
-                case "logoff":
-                    $data= "logoff";
-                    return view('response',compact('data'));
-                    break;
-                case "success":
-                    return redirect($cloudtrax['userurl']);
-                    break;
-                case "failed":
-                    $data = "failed";
-                    return view('response',compact('data'));
-                    break;
-                case "notyet":
+//            Session::put(compact('cloudtrax'));
+//            switch ($cloudtrax['res']) {
+//                case "logoff":
+//                    $data= "logoff";
+//                    return view('response',compact('data'));
+//                    break;
+//                case "success":
+//                    return redirect($cloudtrax['userurl']);
+//                    break;
+//                case "failed":
+//                    $data = "failed";
+//                    return view('response',compact('data'));
+//                    break;
+//                case "notyet":
                     $data = Setting::where('option', 'terms')->firstOrFail();
-                    return view('terms-of-use',compact('data'));
-                    break;
-                default:
-                    http_response_code(400);
-                    exit();
-            }
+//                    return view('terms-of-use',compact('data'));
+//                    break;
+//                default:
+//                    http_response_code(400);
+//                    exit();
+//            }
         }
         else {
             return view('errors/503request');
