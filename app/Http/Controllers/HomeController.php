@@ -152,7 +152,7 @@ class HomeController extends Controller
 //                    break;
 //                case "notyet":
                     $data = Setting::where('option', 'terms')->firstOrFail();
-//                    return view('terms-of-use',compact('data'));
+                    return view('terms-of-use',compact('data'));
 //                    break;
 //                default:
 //                    http_response_code(400);
