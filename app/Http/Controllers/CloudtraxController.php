@@ -127,6 +127,7 @@ class CloudtraxController extends Controller
         $ads = Advertisement::query()->findOrFail($data['advertisement_id']);
         $ads->played++;
         $ads->save();
+        Session::put(compact('ads'));
 
         return redirect("cloudtraxauth");
     }
