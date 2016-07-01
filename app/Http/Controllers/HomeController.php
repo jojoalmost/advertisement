@@ -53,11 +53,12 @@ class HomeController extends Controller
             ->where('advertisement.active', 'yes')
             ->get()
             ->first();
-//        dd(DB::getQueryLog());
+        dd(DB::getQueryLog(),$data);
 
         if (empty($data)) {
             return redirect('cloudtraxauth');
         }
+
         return view('index', compact('data'));
     }
 
