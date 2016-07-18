@@ -63,11 +63,6 @@ class AdvertisementController extends Controller
             $data['video_webm'] = $video_webm;
             $request->file('video_webm')->move($destinationPath, $video_webm);
         }
-        if ($request->hasFile('video_h264')) {
-            $video_h264 = $request->file('video_h264')->getClientOriginalName();
-            $data['video_h264'] = $video_h264;
-            $request->file('video_h264')->move($destinationPath, $video_h264);
-        }
         Advertisement::create($data);
 
         return redirect('admin/advertisement');
@@ -128,12 +123,6 @@ class AdvertisementController extends Controller
             $data['video_webm'] = $video_webm;
             $request->file('video_webm')->move($destinationPath, $video_webm);
         }
-        if ($request->hasFile('video_h264')) {
-            $video_h264 = $request->file('video_h264')->getClientOriginalName();
-            $data['video_h264'] = $video_h264;
-            $request->file('video_h264')->move($destinationPath, $video_h264);
-        }
-
         $existing->fill($data);
         $existing->save();
         return redirect('admin/advertisement');
