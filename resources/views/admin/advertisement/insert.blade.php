@@ -38,6 +38,14 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="inputFile" class="col-md-3 control-label">H264 File</label>
+
+                <div class="col-md-6">
+                    <input type="text" readonly="" class="form-control" placeholder="Browse...">
+                    <input type="file" name="video_h264" id="video">
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">Redirect URL</label>
 
                 <div class="col-sm-6">
