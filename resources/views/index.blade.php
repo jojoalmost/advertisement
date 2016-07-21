@@ -37,10 +37,10 @@
             <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls
                    width="100%"
                    poster="" data-setup='{}'>
+
                 <source src="{{url('/uploads/video/'.$data->video_mp4)}}" type="video/mp4"/>
                 <source src="{{url('/uploads/video/'.$data->video_ogg)}}" type="video/ogg"/>
                 <source src="{{url('/uploads/video/'.$data->video_webm)}}" type="video/webm"/>
-                <source src="{{url('/uploads/video/'.$data->video_h264)}}" type="video/h.264"/>
                 <p class="vjs-no-js">
                     To view this video please enable JavaScript, and consider upgrading to a web browser that
                     <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
