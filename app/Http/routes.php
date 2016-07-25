@@ -34,6 +34,10 @@ Route::group(['middleware' => Authenticate::class], function()
     Route::get('admin/adstest/{id}', 'AdvertisementController@adsTest');
     Route::get('admin/portal_mode', 'PortalModeController@index');
     Route::put('admin/portal_mode/update', 'PortalModeController@update');
+    Route::resource('admin/default_packages', 'DefaultPackagesController');
+    Route::resource('admin/customer_settings', 'CustomerSettingsController');
+    Route::resource('admin/rates_price', 'RatesPriceController');
+    Route::resource('admin/billing_entries', 'BillingEntriesController');
 });
 
 
