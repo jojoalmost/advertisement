@@ -2,50 +2,93 @@
 @section('content')
     <div class="panel-body">
         <!-- New Task Form -->
-        <form action="{{url('admin/advertisement')}}" method="POST" class="form-horizontal"
+        <form action="{{url('admin/default_packages')}}" method="POST" class="form-horizontal"
               enctype="multipart/form-data">
             {!! csrf_field() !!}
 
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Entry UID</label>
+                <label for="name" class="col-sm-3 control-label">Billing Type</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="uid" id="uid" class="form-control" placeholder="Entry UID">
+                    <input type="text" name="billing_type" id="billing_type" class="form-control" placeholder="Billing Type">
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Document Reference Number</label>
+                <label for="name" class="col-sm-3 control-label">Disk Space</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="doc_ref_no" id="doc_ref_no" class="form-control"
-                           placeholder="Document Reference Number">
+                    <input type="text" name="disk_space" id="disk_space" class="form-control" placeholder="Disk Space">
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Amount to add/reduce</label>
+                <label for="name" class="col-sm-3 control-label">Total Disk Space Price</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="amoount" id="amount" class="form-control"
-                           placeholder="Amount to add/reduce">
+                    <input type="text" name="total_disk_space_price" id="total_disk_space_price" class="form-control" placeholder="Total Disk Space Price">
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Used by</label>
+                <label for="name" class="col-sm-3 control-label">Allocated Bandwith</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="used" id="used" class="form-control" placeholder="Used by">
+                    <input type="text" name="allocated_bandwith" id="allocated_bandwith" class="form-control" placeholder="Allocated Bandwith">
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-lg-offset-2 col-sm-8">
-                <textarea class="form-control" placeholder="placeholder without label" name="notes" id="notes">
-                </textarea>
+                <label for="name" class="col-sm-3 control-label">Allocated Airtime</label>
+
+                <div class="col-sm-6">
+                    <input type="text" name="allocated_airtime" id="allocated_airtime" class="form-control" placeholder="Allocated Airtime">
                 </div>
             </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">Allocated Number of Plays</label>
 
+                <div class="col-sm-6">
+                    <input type="text" name="allocated_number_of_plays" id="allocated_number_of_plays" class="form-control" placeholder="Allocated Number of Plays">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-md-3 control-label">Can Exceed</label>
+
+                <div class="col-md-6">
+                    <select id="can_exceed" name="can_exceed" class="form-control">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">Monthly Price</label>
+
+                <div class="col-sm-6">
+                    <input type="text" name="monthly_price" id="monthly_price" class="form-control" placeholder="Monthly Price">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">Bandwidth Rates</label>
+
+                <div class="col-sm-6">
+                    <input type="text" name="bandwidth_rates" id="bandwidth_rates" class="form-control" placeholder="Bandwidth Rates">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">Air Time Rate</label>
+
+                <div class="col-sm-6">
+                    <input type="text" name="air_time_rate" id="air_time_rate" class="form-control" placeholder="Air Time Rate">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">Per Play Rate</label>
+
+                <div class="col-sm-6">
+                    <input type="text" name="per_play_rate" id="per_play_rate" class="form-control" placeholder="Entry UID">
+                </div>
+            </div>
             <div class="form-group">
                 <div class="col-sm-6 pull-right">
-                    <a href="{{url('admin/advertisement')}}" class="btn btn-default">Cancel</a>
+                    <a href="{{url('admin/default_packages')}}" class="btn btn-default">Cancel</a>
                     <button class="btn btn-raised btn-primary">Save</button>
                 </div>
             </div>

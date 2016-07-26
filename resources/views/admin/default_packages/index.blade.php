@@ -32,16 +32,16 @@
                 </div>
                 <div class="panel-body">
                     <div class="panel-fab">
-                        <a href="{{url('admin/advertisement/create')}}" class="btn btn-primary btn-fab">
+                        <a href="{{url('admin/default_packages/create')}}" class="btn btn-primary btn-fab">
                             <i class="material-icons">add</i>
                         </a>
                     </div>
                     <table class="table table-hover table-striped sorted_table" id="data_table">
                         <thead>
                         <tr>
-                            <th>Billing Type UID (cannot be changed)</th>
+                            <th>UID</th>
                             <th>Customer Billing Type</th>
-                            <th>Disk space (in mb)</th>
+                            <th>Disk space</th>
                             <th>Disk space total price</th>
                             <th>Allocated Bandwidth (per month)</th>
                             <th>Allocated airtime(secs)
@@ -58,27 +58,33 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {{--@foreach($data as $i =>$value)--}}
-                            {{--<tr data-id="{{$value->id}}">--}}
-                                {{--<td>{{$i+1}}</td>--}}
-                                {{--<td>{{$value->name}}</td>--}}
-                                {{--<td>{{$value->max_played}}</td>--}}
-                                {{--<td>{{$value->played}}</td>--}}
-                                {{--<td>{{$value->skip_duration}}</td>--}}
-                                {{--<td>{{$value->active}}</td>--}}
-                                {{--<td class="column-action">--}}
-                                    {{--<div class="button-group">--}}
-                                        {{--<a href="{{url('admin/advertisement/'.$value->id.'/edit')}}">--}}
-                                            {{--<i class="material-icons">edit</i>--}}
-                                        {{--</a>--}}
-                                        {{--<a href="{{url('admin/advertisement/'.$value->id)}}" data-id="{{$value->id}}"--}}
-                                           {{--class="text-danger" name="delete_link">--}}
-                                            {{--<i class="material-icons">delete_forever</i>--}}
-                                        {{--</a>--}}
-                                    {{--</div>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                        {{--@endforeach--}}
+                        @foreach($data as $i =>$value)
+                            <tr data-id="{{$value->id}}">
+                                <td>{{$value->id}}</td>
+                                <td>{{$value->billing_type}}</td>
+                                <td>{{$value->disk_space}}</td>
+                                <td>{{$value->total_disk_space_price}}</td>
+                                <td>{{$value->allocated_bandwith}}</td>
+                                <td>{{$value->allocated_airtime}}</td>
+                                <td>{{$value->allocated_number_of_plays}}</td>
+                                <td>{{$value->can_exceed}}</td>
+                                <td>{{$value->monthly_price}}</td>
+                                <td>{{$value->bandwidth_rates}}</td>
+                                <td>{{$value->air_time_rate}}</td>
+                                <td>{{$value->per_play_rate}}</td>
+                                <td class="column-action">
+                                    <div class="button-group">
+                                        <a href="{{url('admin/default_packages/'.$value->id.'/edit')}}">
+                                            <i class="material-icons">edit</i>
+                                        </a>
+                                        <a href="{{url('admin/default_packages/'.$value->id)}}" data-id="{{$value->id}}"
+                                           class="text-danger" name="delete_link">
+                                            <i class="material-icons">delete_forever</i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

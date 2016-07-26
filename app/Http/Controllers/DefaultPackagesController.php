@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DefaultPackages;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +17,8 @@ class DefaultPackagesController extends Controller
      */
     public function index()
     {
-        return view('admin.default_packages.index');
+        $data = DefaultPackages::all();
+        return view('admin.default_packages.index',compact('data'));
     }
 
     /**
@@ -26,7 +28,8 @@ class DefaultPackagesController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('admin.default_packages.insert');
     }
 
     /**
@@ -37,7 +40,10 @@ class DefaultPackagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        DefaultPackages::create($data);
+
+        return redirect('admin/default_packages');
     }
 
     /**
@@ -59,7 +65,8 @@ class DefaultPackagesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = DefaultPackages::query()->findOrFail($id);
+        return view('admin.default_packages.edit', compact('data'));
     }
 
     /**
@@ -71,7 +78,11 @@ class DefaultPackagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $existing = DefaultPackages::query()->findOrFail($id);
+        $existing->fill($data);
+        $existing->save();
+        return redirect('admin/advertisement');
     }
 
     /**
@@ -82,6 +93,7 @@ class DefaultPackagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = DefaultPackages::query()->findOrFail($id);
+        $data->delete();
     }
 }
