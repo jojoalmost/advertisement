@@ -2,16 +2,6 @@
 @section('head_extra')
     <meta name="_xhr_token" content="{{csrf_token()}}"/>
     <style>
-        body.dragging, body.dragging * {
-            cursor: move !important;
-        }
-
-        .dragged {
-            position: absolute;
-            opacity: 0.5;
-            z-index: 2000;
-        }
-
         table tr.placeholder {
             position: relative;
         }
@@ -32,7 +22,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="panel-fab">
-                        <a href="{{url('admin/advertisement/create')}}" class="btn btn-primary btn-fab">
+                        <a href="{{url('admin/billing_entries/create')}}" class="btn btn-primary btn-fab">
                             <i class="material-icons">add</i>
                         </a>
                     </div>
