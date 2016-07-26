@@ -32,7 +32,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="panel-fab">
-                        <a href="{{url('admin/advertisement/create')}}" class="btn btn-primary btn-fab">
+                        <a href="{{url('admin/customer_settings/create')}}" class="btn btn-primary btn-fab">
                             <i class="material-icons">add</i>
                         </a>
                     </div>

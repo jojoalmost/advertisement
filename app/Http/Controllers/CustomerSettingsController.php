@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DefaultPackages;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -26,7 +27,8 @@ class CustomerSettingsController extends Controller
      */
     public function create()
     {
-        //
+        $modal = DefaultPackages::all();
+        return view('admin.customer_settings.insert',compact('modal'));
     }
 
     /**
