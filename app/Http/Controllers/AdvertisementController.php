@@ -42,7 +42,7 @@ class AdvertisementController extends Controller
     {
         $data = $request->all();
         $data['skipped'] = isset($data['skipped']) ? 'yes' : 'no';
-        $data['active'] = isset($data['skipped']) ? 'yes' : 'no';
+        $data['active'] = isset($data['active']) ? 'yes' : 'no';
         $sorting = Advertisement::all()->count();
         $data['sorting'] = $sorting + 1;
 

@@ -52,27 +52,30 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {{--@foreach($data as $i =>$value)--}}
-                            {{--<tr data-id="{{$value->id}}">--}}
-                                {{--<td>{{$i+1}}</td>--}}
-                                {{--<td>{{$value->name}}</td>--}}
-                                {{--<td>{{$value->max_played}}</td>--}}
-                                {{--<td>{{$value->played}}</td>--}}
-                                {{--<td>{{$value->skip_duration}}</td>--}}
-                                {{--<td>{{$value->active}}</td>--}}
-                                {{--<td class="column-action">--}}
-                                    {{--<div class="button-group">--}}
-                                        {{--<a href="{{url('admin/advertisement/'.$value->id.'/edit')}}">--}}
-                                            {{--<i class="material-icons">edit</i>--}}
-                                        {{--</a>--}}
-                                        {{--<a href="{{url('admin/advertisement/'.$value->id)}}" data-id="{{$value->id}}"--}}
-                                           {{--class="text-danger" name="delete_link">--}}
-                                            {{--<i class="material-icons">delete_forever</i>--}}
-                                        {{--</a>--}}
-                                    {{--</div>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                        {{--@endforeach--}}
+                        @foreach($data as $i =>$value)
+                            <tr data-id="{{$value->id}}">
+                                <th>{{$value->active}}</th>
+                                <th>{{$value->customer}}</th>
+                                <th>{{$value->directory}}</th>
+                                <th>{{$value->credit_terms}}</th>
+                                <th>{{$value->credit_limit}}</th>
+                                <th>{{$value->username}}</th>
+                                <th>{{$value->password}}</th>
+                                <th>{{$value->max_active_videos}}</th>
+                                <th>{{$value->disk_space_available}}</th>
+                                <td class="column-action">
+                                    <div class="button-group">
+                                        <a href="{{url('admin/customer_settings/'.$value->id.'/edit')}}">
+                                            <i class="material-icons">edit</i>
+                                        </a>
+                                        <a href="{{url('admin/customer_settings/'.$value->id)}}" data-id="{{$value->id}}"
+                                           class="text-danger" name="delete_link">
+                                            <i class="material-icons">delete_forever</i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

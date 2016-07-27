@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CustomerSettings;
 use App\DefaultPackages;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,8 @@ class CustomerSettingsController extends Controller
      */
     public function index()
     {
-        return view('admin.customer_settings.index');
+        $data = CustomerSettings::all();
+        return view('admin.customer_settings.index',compact('data'));
     }
 
     /**
@@ -39,7 +41,11 @@ class CustomerSettingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['active'] = isset($data['active']) ? 'yes' : 'no';
+        CustomerSettings::create($data);
+
+        return redirect('admin/customer_settings');
     }
 
     /**
@@ -61,7 +67,8 @@ class CustomerSettingsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = CustomerSettings::query()->findOrFail($id);
+        return view('admin.customer_settings.edit', compact('data'));
     }
 
     /**
@@ -73,7 +80,12 @@ class CustomerSettingsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['active'] = isset($data['active']) ? 'yes' : 'no';
+        $existing = CustomerSettings::query()->findOrFail($id);
+        $existing->fill($data);
+        $existing->save();
+        return redirect('admin/advertisement');
     }
 
     /**
@@ -84,6 +96,7 @@ class CustomerSettingsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = CustomerSettings::query()->findOrFail($id);
+        $data->delete();
     }
 }
