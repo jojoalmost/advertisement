@@ -3,7 +3,7 @@
 @section('content')
     <div class="panel-body">
         <!-- New Task Form -->
-        <form action="{{url('admin/advertisement/'.$data->id)}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+        <form action="{{url('admin/customer_settings/'.$data->id)}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
             {!! csrf_field() !!}
             {!! method_field('put') !!}
             <div class="form-group">
@@ -74,7 +74,7 @@
 
                     <div class="checkbox">
                         <label class="control-label col-sm-3">
-                            <input type="checkbox" name="active"><span class="check"></span></span> Active
+                            <input type="checkbox" name="active" @if($data->active == "yes") checked @endif><span class="check"></span> Active
                         </label>
                     </div>
                 </div>

@@ -68,7 +68,8 @@ class CustomerSettingsController extends Controller
     public function edit($id)
     {
         $data = CustomerSettings::query()->findOrFail($id);
-        return view('admin.customer_settings.edit', compact('data'));
+        $modal = DefaultPackages::all();
+        return view('admin.customer_settings.edit', compact('data','modal'));
     }
 
     /**

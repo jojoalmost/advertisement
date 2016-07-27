@@ -16,17 +16,15 @@
             <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">Default Packages</label>
 
-                <div class="col-sm-6">
+                <div class="col-sm-5">
                     <input type="text" id="default_package" class="form-control"
-                           placeholder="Default Packages" disabled="disabled">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#complete-dialog">
-                        ...
-                    </button>
-                    <input type="hidden" name="default_package_id" id="default_package_id" class="form-control"
-                           placeholder="Default Packages">
-                    <input type="hidden" name="disk_space_available" id="disk_space_available" class="form-control"
-                           placeholder="Default Packages">
+                           placeholder="Default Packages" disabled="disabled" data-target="default_package">
+                    <input type="hidden" name="default_package_id" id="default_package_id" data-target="default_package_id">
+                    <input type="hidden" name="disk_space_available" id="disk_space_available" data-target="disk_space_available">
                 </div>
+                <div class="col-sm-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#complete-dialog">
+                        ...
+                    </button></div>
             </div>
             <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">Directory</label>
