@@ -6,88 +6,60 @@
             {!! csrf_field() !!}
             {!! method_field('put') !!}
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Billing Type</label>
+                <label for="name" class="col-sm-3 control-label">Username</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="billing_type" id="billing_type" class="form-control" value="{{$data->billing_type}}" placeholder="Billing Type">
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Username">
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Disk Space</label>
+                <label for="name" class="col-sm-3 control-label">Password</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="disk_space" id="disk_space" class="form-control" value="{{$data->disk_space}}" placeholder="Disk Space">
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Password">
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Total Disk Space Price</label>
+                <label for="name" class="col-sm-3 control-label">Name</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="total_disk_space_price" id="total_disk_space_price" class="form-control" value="{{$data->total_disk_space_price}}" placeholder="Total Disk Space Price">
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Name">
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Allocated Bandwith</label>
+                <label for="name" class="col-sm-3 control-label">Email</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="allocated_bandwith" id="allocated_bandwith" class="form-control" value="{{$data->allocated_bandwith}}" placeholder="Allocated Bandwith">
+                    <input type="text" name="email" id="email" class="form-control" placeholder="Email">
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Allocated Airtime</label>
+                <label for="name" class="col-sm-3 control-label">Phone</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="allocated_airtime" id="allocated_airtime" class="form-control" value="{{$data->allocated_airtime}}" placeholder="Allocated Airtime">
+                    <input type="text" name="phone" id="phone" class="form-control" placeholder="Phone">
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Allocated Number of Plays</label>
+                <label for="name" class="col-sm-3 control-label">Address</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="allocated_number_of_plays" id="allocated_number_of_plays" class="form-control" value="{{$data->allocated_number_of_plays}}" placeholder="Allocated Number of Plays">
+                    <input type="text" name="disk_space" id="disk_space" class="form-control" placeholder="Disk Space">
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-md-3 control-label">Can Exceed</label>
+                <label for="select" class="col-md-3 control-label">Role</label>
 
                 <div class="col-md-6">
-                    <select id="can_exceed" name="can_exceed" class="form-control">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
+                    <select id="role" name="role" class="form-control">
+                        <option value="admin">Admin</option>
+                        <option value="customers">Customers</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Monthly Price</label>
-
-                <div class="col-sm-6">
-                    <input type="text" name="monthly_price" id="monthly_price" class="form-control" value="{{$data->monthly_price}}" placeholder="Monthly Price">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Bandwidth Rates</label>
-
-                <div class="col-sm-6">
-                    <input type="text" name="bandwidth_rates" id="bandwidth_rates" class="form-control" value="{{$data->bandwidth_rates}}" placeholder="Bandwidth Rates">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Air Time Rate</label>
-
-                <div class="col-sm-6">
-                    <input type="text" name="air_time_rate" id="air_time_rate" class="form-control" value="{{$data->air_time_rate}}" placeholder="Air Time Rate">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Per Play Rate</label>
-
-                <div class="col-sm-6">
-                    <input type="text" name="per_play_rate" id="per_play_rate" class="form-control" value="{{$data->per_play_rate}}" placeholder="Entry UID">
-                </div>
-            </div>
-            <div class="form-group">
                 <div class="col-sm-6 pull-right">
-                    <a href="{{url('admin/default_packages')}}" class="btn btn-default">Cancel</a>
+                    <a href="{{url('admin/user_manager')}}" class="btn btn-default">Cancel</a>
                     <button class="btn btn-raised btn-primary">Save</button>
                 </div>
             </div>
@@ -97,9 +69,7 @@
 @section('body_extra')
     <script>
         $(function(){
-            $("#can_exceed").val("{{@$data->can_exceed}}");
-//            if($("#portal_mode").val() == 0) //I'm supposing the "Other" option value is 0.
-//                $("#yourTextBox").hide();
+            $("#role").val("{{@$data->can_exceed}}");
         })
     </script>
 @endsection

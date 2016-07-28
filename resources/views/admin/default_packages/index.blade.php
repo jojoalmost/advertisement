@@ -1,25 +1,6 @@
 @extends('layouts.admin')
 @section('head_extra')
     <meta name="_xhr_token" content="{{csrf_token()}}"/>
-    <style>
-        body.dragging, body.dragging * {
-            cursor: move !important;
-        }
-
-        .dragged {
-            position: absolute;
-            opacity: 0.5;
-            z-index: 2000;
-        }
-
-        table tr.placeholder {
-            position: relative;
-        }
-
-        table tr.placeholder:before {
-            position: absolute;
-        }
-    </style>
 @endsection
 @section('content')
     <div class="row">

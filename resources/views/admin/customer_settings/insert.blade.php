@@ -137,7 +137,6 @@
             var id = $(this).attr('data-id');
             var disk_space = $(this).attr('data-disk');
             var billing_type =  $(this).attr('data-type');
-            console.log(id,disk_space,billing_type);
             $('#complete-dialog').modal('hide');
             $('#default_package').val(billing_type);
             $('#default_package_id').val(id);

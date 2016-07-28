@@ -1,25 +1,6 @@
 @extends('layouts.admin')
 @section('head_extra')
     <meta name="_xhr_token" content="{{csrf_token()}}"/>
-    <style>
-        body.dragging, body.dragging * {
-            cursor: move !important;
-        }
-
-        .dragged {
-            position: absolute;
-            opacity: 0.5;
-            z-index: 2000;
-        }
-
-        table tr.placeholder {
-            position: relative;
-        }
-
-        table tr.placeholder:before {
-            position: absolute;
-        }
-    </style>
 @endsection
 @section('content')
     <div class="row">
@@ -40,6 +21,7 @@
                         <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Username</th>
                             <th>Email</th>
                             <th>Role</th>
                             <th class="action"></th>
@@ -48,9 +30,7 @@
                         <tbody>
                         @foreach($data as $i =>$value)
                             <tr data-id="{{$value->id}}">
-                                <td>{{$value->billing_type}}</td>
-                                <td>{{$value->disk_space}}</td>
-                                <td>{{$value->total_disk_space_price}}</td>
+                                {{--<td>{{$value->billing_type}}</td>--}}
                                 <td class="column-action">
                                     <div class="button-group">
                                         <a href="{{url('admin/user_manager/'.$value->id.'/edit')}}">
