@@ -46,6 +46,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></span> Billing Portal</a>
                     <ul class="dropdown-menu">
+                        <li><a href="{{url('admin/user_manager')}}">User Manager</a></li>
                         <li><a href="{{url('admin/billing_entries')}}">Biling Entries</a></li>
                         <li><a href="{{url('admin/customer_settings')}}">Customer Settings</a></li>
                         <li><a href="{{url('admin/default_packages')}}">Default Packages</a></li>

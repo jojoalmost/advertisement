@@ -82,7 +82,7 @@ class DefaultPackagesController extends Controller
         $existing = DefaultPackages::query()->findOrFail($id);
         $existing->fill($data);
         $existing->save();
-        return redirect('admin/advertisement');
+        return redirect('admin/default_packages');
     }
 
     /**
