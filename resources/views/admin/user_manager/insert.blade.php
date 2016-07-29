@@ -45,7 +45,7 @@
                 <label for="name" class="col-sm-3 control-label">Address</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="disk_space" id="disk_space" class="form-control" placeholder="Disk Space">
+                    <input type="text" name="address" id="address" class="form-control" placeholder="Address">
                 </div>
             </div>
             <div class="form-group">
@@ -53,8 +53,8 @@
 
                 <div class="col-md-6">
                     <select id="role" name="role" class="form-control">
-                        <option value="admin">Admin</option>
-                        <option value="customers">Customers</option>
+                        <option value="1">Admin</option>
+                        <option value="2">Customers</option>
                     </select>
                 </div>
             </div>

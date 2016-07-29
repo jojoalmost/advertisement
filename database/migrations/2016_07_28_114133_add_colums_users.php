@@ -13,7 +13,10 @@ class AddColumsUsers extends Migration
     public function up()
     {
         Schema::table('users', function($table) {
-            $table->string('')->nullable();
+            $table->string('username')->nullable();
+            $table->integer('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('role')->nullable();
         });
     }
 
@@ -25,7 +28,10 @@ class AddColumsUsers extends Migration
     public function down()
     {
         Schema::table('users', function($table) {
-            $table->dropColumn('redirect_url');
+            $table->dropColumn('username');
+            $table->dropColumn('phone');
+            $table->dropColumn('address');
+            $table->dropColumn('role');
         });
     }
 }

@@ -30,7 +30,9 @@
                         <tbody>
                         @foreach($data as $i =>$value)
                             <tr data-id="{{$value->id}}">
-                                {{--<td>{{$value->billing_type}}</td>--}}
+                                <td>{{$value->name}}</td>
+                                <td>{{$value->username}}</td>
+                                <td>{{$value->email}}</td>
                                 <td class="column-action">
                                     <div class="button-group">
                                         <a href="{{url('admin/user_manager/'.$value->id.'/edit')}}">

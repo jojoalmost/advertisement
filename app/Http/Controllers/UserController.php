@@ -40,6 +40,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $data['password']= bcrypt($data['password']);
         User::create($data);
 
         return redirect('admin/user_manager');
@@ -78,6 +79,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+        $data['password']= isset($data['password'])? bcrypt($data['password']): null;
         $existing = User::query()->findOrFail($id);
         $existing->fill($data);
         $existing->save();
