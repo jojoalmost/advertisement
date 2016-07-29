@@ -9,8 +9,10 @@
             <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">Customer</label>
 
-                <div class="col-sm-6">
-                    <input type="text" name="customer" id="customer" class="form-control" value="{{$data->customer}}" placeholder="Customer">
+                <div class="col-sm-5">
+                    <input type="text" id="customer" class="form-control"
+                           placeholder="Customer" disabled="disabled" data-target="customer">
+                    <input type="hidden" name="user_id" id="user_id" data-target="user_id">
                 </div>
             </div>
             <div class="form-group">
@@ -19,7 +21,7 @@
                 <div class="col-sm-6">
                     <input type="text" id="default_package" class="form-control"
                            placeholder="Default Packages" disabled="disabled">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#complete-dialog">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#default-package-modal">
                         ...
                     </button>
                     <input type="hidden" name="default_package_id" id="default_package_id" class="form-control"
@@ -52,20 +54,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Username</label>
-
-                <div class="col-sm-6">
-                    <input type="text" name="username" id="username" class="form-control" value="{{$data->username}}" placeholder="Username">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Password</label>
-
-                <div class="col-sm-6">
-                    <input type="password" name="password" id="password" class="form-control" value="{{$data->password}}" placeholder="Password">
-                </div>
-            </div>
-            <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">Max Active Videos</label>
 
                 <div class="col-sm-6">
@@ -87,9 +75,42 @@
             </div>
         </form>
     </div>
+    <div id="user-modal" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Default Packages</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover table-striped" id="user-table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($modal2 as $i =>$value)
+                            <tr data-id="{{$value->id}}" data-value1 = "{{$value->name}}">
+                                <td>{{$value->name}}</td>
+                                <td>{{$value->username}}</td>
+                                <td>{{$value->email}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Dismiss
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-    <div id="complete-dialog" class="modal fade">
+    <div id="default-package-modal" class="modal fade">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -140,10 +161,18 @@
             var disk_space = $(this).attr('data-disk');
             var billing_type =  $(this).attr('data-type');
             console.log(id,disk_space,billing_type);
-            $('#complete-dialog').modal('hide');
+            $('#default-package-modal').modal('hide');
             $('#default_package').val(billing_type);
             $('#default_package_id').val(id);
             $('#disk_space_available').val(disk_space);
+        });
+        $("#user-table").on('click', 'tr', function (e) {
+            e.preventDefault();
+            var id = $(this).attr('data-id');
+            var value1 = $(this).attr('data-value1');
+            $('#user-modal').modal('hide');
+            $('#user_id').val(id);
+            $('#customer').val(value1);
         });
     </script>
 @endsection

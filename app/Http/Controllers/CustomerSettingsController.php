@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\CustomerSettings;
 use App\DefaultPackages;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class CustomerSettingsController extends Controller
 {
@@ -18,7 +20,10 @@ class CustomerSettingsController extends Controller
      */
     public function index()
     {
-        $data = CustomerSettings::all();
+        DB::enableQueryLog();
+        $data = CustomerSettings::with('customer')->get();
+//        dd(DB::getQueryLog());
+//        dd($data);
         return view('admin.customer_settings.index',compact('data'));
     }
 
@@ -30,7 +35,9 @@ class CustomerSettingsController extends Controller
     public function create()
     {
         $modal = DefaultPackages::all();
-        return view('admin.customer_settings.insert',compact('modal'));
+        DB::enableQueryLog();
+        $modal2 = User::where('role',2)->get();
+        return view('admin.customer_settings.insert',compact('modal','modal2'));
     }
 
     /**
@@ -69,7 +76,8 @@ class CustomerSettingsController extends Controller
     {
         $data = CustomerSettings::query()->findOrFail($id);
         $modal = DefaultPackages::all();
-        return view('admin.customer_settings.edit', compact('data','modal'));
+        $modal2 = User::where('role',2)->get();
+        return view('admin.customer_settings.edit', compact('data','modal','modal2'));
     }
 
     /**

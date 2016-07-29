@@ -82,7 +82,7 @@
                 <label for="name" class="col-sm-3 control-label">Per Play Rate</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="per_play_rate" id="per_play_rate" class="form-control" value="{{$data->per_play_rate}}" placeholder="Entry UID">
+                    <input type="text" name="per_play_rate" id="per_play_rate" class="form-control" value="{{$data->per_play_rate}}" placeholder="Per Play Rate">
                 </div>
             </div>
             <div class="form-group">
