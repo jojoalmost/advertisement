@@ -10,6 +10,6 @@ class CustomerSettings extends Model
     protected $guarded = [];
 
     public function customer(){
-        return $this->hasMany('app\User','id','user_id');
+        return $this->hasOne('App\User','id','user_id');
     }
 }

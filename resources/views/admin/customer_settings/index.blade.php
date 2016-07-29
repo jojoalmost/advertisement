@@ -25,8 +25,7 @@
                             <th>Directory</th>
                             <th>Credit terms</th>
                             <th>Credit Limit</th>
-                            <th>login</th>
-                            <th>password</th>
+                            <th>username</th>
                             <th>Max active videos</th>
                             <th>Disk space available (in mb)</th>
                             <th class="action"></th>
@@ -37,12 +36,11 @@
                         @foreach($data as $i =>$value)
                             <tr data-id="{{$value->id}}">
                                 <th>{{$value->active}}</th>
-                                <th>{{$value->customer->username}}</th>
+                                <th>{{$value->customer->name}}</th>
                                 <th>{{$value->directory}}</th>
                                 <th>{{$value->credit_terms}}</th>
                                 <th>{{$value->credit_limit}}</th>
                                 <th>{{$value->customer->username}}</th>
-                                <th>{{$value->customer->password}}</th>
                                 <th>{{$value->max_active_videos}}</th>
                                 <th>{{$value->disk_space_available}}</th>
                                 <td class="column-action">
