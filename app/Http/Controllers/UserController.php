@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -43,7 +44,7 @@ class UserController extends Controller
         $data = $request->all();
         $data['password']= bcrypt($data['password']);
         User::create($data);
-        File::makeDirectory('/path/to/directory');
+        Storage::disk('local')->makeDirectory('path/to');
 
         return redirect('admin/user_manager');
     }
