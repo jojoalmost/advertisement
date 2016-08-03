@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Faker\Provider\File;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -42,6 +43,7 @@ class UserController extends Controller
         $data = $request->all();
         $data['password']= bcrypt($data['password']);
         User::create($data);
+        File::makeDirectory('/path/to/directory');
 
         return redirect('admin/user_manager');
     }
