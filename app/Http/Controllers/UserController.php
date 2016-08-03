@@ -43,8 +43,8 @@ class UserController extends Controller
     {
         $data = $request->all();
         $data['password']= bcrypt($data['password']);
-        User::create($data);
-        Storage::makeDirectory($data->id);
+        $id =  User::create($data)->id;
+        Storage::makeDirectory($id);
 
         return redirect('admin/user_manager');
     }
