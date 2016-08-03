@@ -98,6 +98,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $data = User::query()->findOrFail($id);
+        Storage::delete($id);
         $data->delete();
     }
 }
