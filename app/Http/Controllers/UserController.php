@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Faker\Provider\File;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -44,7 +45,8 @@ class UserController extends Controller
         $data = $request->all();
         $data['password']= bcrypt($data['password']);
         $id =  User::create($data)->id;
-        Storage::makeDirectory($id);
+        $path = 'video/'.$id;
+        File::makeDirectory($path, $mode = 0777, true, true);
 
         return redirect('admin/user_manager');
     }
@@ -98,7 +100,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         $data = User::query()->findOrFail($id);
-        Storage::delete($id);
         $data->delete();
+        $path = 'video/'.$id;
+        File::deleteDirectory($path);
     }
 }

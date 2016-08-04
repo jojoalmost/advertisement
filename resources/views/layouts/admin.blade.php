@@ -32,7 +32,8 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"> </span> Menu</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"> </span> Menu</a>
                     <ul class="dropdown-menu">
                         <li><a href="{{url('admin/advertisement')}}">Advertisement</a></li>
                         <li><a href="{{url('admin/radius')}}">Radius</a></li>
@@ -43,20 +44,24 @@
                         <li><a href="{{url('admin/portal_mode')}}">Portal Mode</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></span> Billing Portal</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{url('admin/user_manager')}}">User Manager</a></li>
-                        <li><a href="{{url('admin/billing_entries')}}">Biling Entries</a></li>
-                        <li><a href="{{url('admin/customer_settings')}}">Customer Settings</a></li>
-                        <li><a href="{{url('admin/default_packages')}}">Default Packages</a></li>
-                        <li><a href="{{url('admin/rates_price')}}">Rates - Price</a></li>
-                    </ul>
-                </li>
+                @if(Auth::user()->role == '1')
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"></span> Billing Portal</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{url('admin/user_manager')}}">User Manager</a></li>
+                            <li><a href="{{url('admin/billing_entries')}}">Biling Entries</a></li>
+                            <li><a href="{{url('admin/customer_settings')}}">Customer Settings</a></li>
+                            <li><a href="{{url('admin/default_packages')}}">Default Packages</a></li>
+                            <li><a href="{{url('admin/rates_price')}}">Rates - Price</a></li>
+                        </ul>
+                    </li>
+                @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{Auth::user()->name}} <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"> {{Auth::user()->name}} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{url('auth/logout')}}">Logout</a></li>
                     </ul>
@@ -66,11 +71,11 @@
     </div><!-- /.container-fluid -->
 </nav>
 <div class="container">
-@yield('content')
+    @yield('content')
 </div>
 @yield('body_extra')
 <script>
-    $(function(){
+    $(function () {
         $.material.init();
     })
 </script>

@@ -14,6 +14,7 @@ class AdvertisingTable extends Migration
     {
         Schema::create('advertisement',function (Blueprint $table){
             $table->increments('id');
+            $table->string('user_id');
             $table->string('name');
             $table->string('video_mp4')->nullable();
             $table->string('video_ogg')->nullable();

@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class AdvertisementController extends Controller
 {
@@ -18,7 +21,7 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        $data = Advertisement::orderBy('sorting', 'asc')->get();
+        $data = Advertisement::where('user_id', Auth::user()->id)->orderBy('sorting', 'asc')->get();
         return view('admin.advertisement.index', compact('data'));
     }
 
@@ -41,27 +44,28 @@ class AdvertisementController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $data['user_id']= Auth::user()->id;
         $data['skipped'] = isset($data['skipped']) ? 'yes' : 'no';
         $data['active'] = isset($data['active']) ? 'yes' : 'no';
         $sorting = Advertisement::all()->count();
         $data['sorting'] = $sorting + 1;
 
-        $destinationPath = 'uploads/video';
+        $path = 'video/'.Auth::user()->id;
 
         if ($request->hasFile('video_mp4')) {
             $video_mp4 = $request->file('video_mp4')->getClientOriginalName();
             $data['video_mp4'] = $video_mp4;
-            $request->file('video_mp4')->move($destinationPath, $video_mp4);
+            $request->file('video_mp4')->move($path, $video_mp4);
         }
         if ($request->hasFile('video_ogg')) {
             $video_ogg = $request->file('video_ogg')->getClientOriginalName();
             $data['video_ogg'] = $video_ogg;
-            $request->file('video_ogg')->move($destinationPath, $video_ogg);
+            $request->file('video_ogg')->move($path, $video_ogg);
         }
         if ($request->hasFile('video_webm')) {
             $video_webm = $request->file('video_webm')->getClientOriginalName();
             $data['video_webm'] = $video_webm;
-            $request->file('video_webm')->move($destinationPath, $video_webm);
+            $request->file('video_webm')->move($path, $video_webm);
         }
         Advertisement::create($data);
 
@@ -106,22 +110,22 @@ class AdvertisementController extends Controller
         $data['active'] = isset($data['active']) ? 'yes' : 'no';
         $existing = Advertisement::query()->findOrFail($id);
 
-        $destinationPath = 'uploads/video';
+        $path = 'video/'.Auth::user()->id;
 
         if ($request->hasFile('video_mp4')) {
             $video_mp4 = $request->file('video_mp4')->getClientOriginalName();
             $data['video_mp4'] = $video_mp4;
-            $request->file('video_mp4')->move($destinationPath, $video_mp4);
+            $request->file('video_mp4')->move($path, $video_mp4);
         }
         if ($request->hasFile('video_ogg')) {
             $video_ogg = $request->file('video_ogg')->getClientOriginalName();
             $data['video_ogg'] = $video_ogg;
-            $request->file('video_ogg')->move($destinationPath, $video_ogg);
+            $request->file('video_ogg')->move($path, $video_ogg);
         }
         if ($request->hasFile('video_webm')) {
             $video_webm = $request->file('video_webm')->getClientOriginalName();
             $data['video_webm'] = $video_webm;
-            $request->file('video_webm')->move($destinationPath, $video_webm);
+            $request->file('video_webm')->move($path, $video_webm);
         }
         $existing->fill($data);
         $existing->save();
@@ -176,7 +180,8 @@ class AdvertisementController extends Controller
         }
     }
 
-    public function adsTest($id){
+    public function adsTest($id)
+    {
         $data = Advertisement::query()->findOrFail($id);
         return view('index', compact('data'));
     }
