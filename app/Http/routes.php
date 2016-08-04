@@ -13,7 +13,7 @@
 
 use App\Http\Middleware\Authenticate;
 
-Route::get('/', 'HomeController@termsOfUse');
+Route::get('/{key}', 'HomeController@termsOfUse');
 //backend
 
 Route::group(['middleware' => Authenticate::class], function()

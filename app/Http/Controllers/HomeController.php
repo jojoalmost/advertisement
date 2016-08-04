@@ -138,8 +138,9 @@ class HomeController extends Controller
         //
     }
 
-    public function termsOfUse()
+    public function termsOfUse($key)
     {
+        dd($key);
         $cloudtrax = Request::all();
         if (!empty($cloudtrax)) {
             Session::put(compact('cloudtrax'));

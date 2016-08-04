@@ -17,6 +17,7 @@ class AddColumsUsers extends Migration
             $table->integer('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('role')->nullable();
+            $table->string('key')->nullable();
         });
     }
 
@@ -32,6 +33,7 @@ class AddColumsUsers extends Migration
             $table->dropColumn('phone');
             $table->dropColumn('address');
             $table->dropColumn('role');
+            $table->dropColumn('key');
         });
     }
 }
