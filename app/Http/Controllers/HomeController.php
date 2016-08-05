@@ -140,7 +140,6 @@ class HomeController extends Controller
 
     public function termsOfUse($key)
     {
-        dd($key);
         $cloudtrax = Request::all();
         if (!empty($cloudtrax)) {
             Session::put(compact('cloudtrax'));
@@ -169,6 +168,11 @@ class HomeController extends Controller
         }
     }
 
+    public function apiKey($key){
+        dd($key);
+//        Session::put('apikey',$key);
+//        return redirect('/');
+    }
 //    public function fetch(Request $request)
 //    {
 //        $this->ip = $request->ip();
