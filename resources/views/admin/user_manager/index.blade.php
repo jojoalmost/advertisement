@@ -24,6 +24,7 @@
                             <th>Username</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>API Key</th>
                             <th class="action"></th>
                         </tr>
                         </thead>
@@ -33,6 +34,7 @@
                                 <td>{{$value->name}}</td>
                                 <td>{{$value->username}}</td>
                                 <td>{{$value->email}}</td>
+                                <td>{{$value->key}}</td>
                                 <td class="column-action">
                                     <div class="button-group">
                                         <a href="{{url('admin/user_manager/'.$value->id.'/edit')}}">

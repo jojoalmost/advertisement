@@ -6,6 +6,13 @@
             {!! csrf_field() !!}
             {!! method_field('put') !!}
             <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">API Key</label>
+
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" value="{{@$data->key}}"  disabled="disabled">
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">Username</label>
 
                 <div class="col-sm-6">

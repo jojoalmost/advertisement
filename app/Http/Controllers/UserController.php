@@ -44,6 +44,7 @@ class UserController extends Controller
     {
         $data = $request->all();
         $data['password']= bcrypt($data['password']);
+        $data['key']=  uniqid();
         $id =  User::create($data)->id;
         $path = 'video/'.$id;
         File::makeDirectory($path, $mode = 0777, true, true);
