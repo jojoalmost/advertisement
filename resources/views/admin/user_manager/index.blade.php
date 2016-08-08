@@ -34,7 +34,7 @@
                                 <td>{{$value->name}}</td>
                                 <td>{{$value->username}}</td>
                                 <td>{{$value->email}}</td>
-                                <td>@if$value->role == 1) Admin @else Customers @endif</td>
+                                <td>@if($value->role == 1) Admin @else Customers @endif</td>
                                 <td>{{$value->key}}</td>
                                 <td class="column-action">
                                     <div class="button-group">
