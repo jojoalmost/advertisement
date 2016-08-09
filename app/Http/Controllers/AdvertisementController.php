@@ -21,6 +21,14 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
+        $file_size = 0;
+        foreach( File::allFiles('video/'.Auth::user()->id) as $file)
+        {
+            $file_size += $file->getSize();
+        }
+        $directory_size = number_format($file_size / 1048576,2);
+
+
         $data = Advertisement::where('user_id', Auth::user()->id)->orderBy('sorting', 'asc')->get();
         return view('admin.advertisement.index', compact('data'));
     }
