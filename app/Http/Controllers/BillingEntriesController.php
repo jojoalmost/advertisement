@@ -26,7 +26,7 @@ class BillingEntriesController extends Controller
      */
     public function create()
     {
-
+        return view('admin.billing_entries.insert');
     }
 
     /**

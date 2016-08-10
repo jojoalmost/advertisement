@@ -37,8 +37,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-lg-offset-2 col-sm-8">
-                <textarea class="form-control" placeholder="placeholder without label" name="notes" id="notes">
+                <label for="name" class="col-sm-3 control-label">Notes</label>
+                <div class="col-sm-6">
+                <textarea class="form-control" placeholder="Notes" name="notes" id="notes">
                 </textarea>
                 </div>
             </div>
