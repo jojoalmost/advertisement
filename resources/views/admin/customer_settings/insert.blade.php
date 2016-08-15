@@ -14,9 +14,11 @@
                            placeholder="Customer" disabled="disabled" data-target="customer">
                     <input type="hidden" name="user_id" id="user_id" data-target="user_id">
                 </div>
-                <div class="col-sm-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#user-modal">
-                        ...
-                    </button></div>
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#user-modal">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
             </div>
             <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">Default Packages</label>
@@ -24,12 +26,17 @@
                 <div class="col-sm-5">
                     <input type="text" id="default_package" class="form-control"
                            placeholder="Default Packages" disabled="disabled" data-target="default_package">
-                    <input type="hidden" name="default_package_id" id="default_package_id" data-target="default_package_id">
-                    <input type="hidden" name="disk_space_available" id="disk_space_available" data-target="disk_space_available">
+                    <input type="hidden" name="default_package_id" id="default_package_id"
+                           data-target="default_package_id">
+                    <input type="hidden" name="disk_space_available" id="disk_space_available"
+                           data-target="disk_space_available">
                 </div>
-                <div class="col-sm-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#default-package-modal">
-                        ...
-                    </button></div>
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#default-package-modal">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
             </div>
             <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">Directory</label>
@@ -83,7 +90,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Default Packages</h4>
+                    <h4 class="modal-title">User</h4>
                 </div>
                 <div class="modal-body">
                     <table class="table table-hover table-striped" id="user-table">
@@ -96,7 +103,7 @@
                         </thead>
                         <tbody>
                         @foreach($modal2 as $i =>$value)
-                            <tr data-id="{{$value->id}}" data-value1 = "{{$value->name}}">
+                            <tr data-id="{{$value->id}}" data-value1="{{$value->name}}">
                                 <td>{{$value->name}}</td>
                                 <td>{{$value->username}}</td>
                                 <td>{{$value->email}}</td>
@@ -135,7 +142,8 @@
                         </thead>
                         <tbody>
                         @foreach($modal as $i =>$value)
-                            <tr data-id="{{$value->id}}" data-disk = "{{$value->disk_space}}" data-type="{{$value->billing_type}}">
+                            <tr data-id="{{$value->id}}" data-disk="{{$value->disk_space}}"
+                                data-type="{{$value->billing_type}}">
                                 <td>{{$value->id}}</td>
                                 <td>{{$value->billing_type}}</td>
                                 <td>{{$value->disk_space}}</td>
@@ -162,7 +170,7 @@
             e.preventDefault();
             var id = $(this).attr('data-id');
             var disk_space = $(this).attr('data-disk');
-            var billing_type =  $(this).attr('data-type');
+            var billing_type = $(this).attr('data-type');
             $('#default-package-modal').modal('hide');
             $('#default_package').val(billing_type);
             $('#default_package_id').val(id);

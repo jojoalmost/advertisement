@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -26,7 +27,8 @@ class BillingEntriesController extends Controller
      */
     public function create()
     {
-        return view('admin.billing_entries.insert');
+        $modal = User::where('role',2)->get();
+        return view('admin.billing_entries.insert',compact('modal'));
     }
 
     /**
