@@ -15,11 +15,11 @@ class BillingTable extends Migration
         Schema::create('billing',function (Blueprint $table){
             $table->increments('id');
             $table->string('user_id');
-            $table->string('doc_ref_no');
-            $table->string('amount');
-            $table->string('amount_used')->nullable();
-            $table->string('amount_left')->nullable();
-            $table->integer('sorting')->default(0);
+            $table->string('doc_ref_no')->nullable();
+            $table->string('amount')->default(0);
+            $table->string('amount_used')->default(0);
+            $table->string('amount_left')->default(0);
+            $table->string('notes')->nullable();
             $table->timestamps();
         });
     }

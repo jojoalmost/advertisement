@@ -18,6 +18,7 @@ class AddColumsUsers extends Migration
             $table->string('address')->nullable();
             $table->string('role')->nullable();
             $table->string('key')->nullable();
+            $table->string('active');
         });
     }
 
@@ -34,6 +35,7 @@ class AddColumsUsers extends Migration
             $table->dropColumn('address');
             $table->dropColumn('role');
             $table->dropColumn('key');
+            $table->dropColumn('active');
         });
     }
 }

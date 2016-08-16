@@ -36,15 +36,15 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Amount</label>
+                <label for="name" class="col-sm-3 control-label">Amount Used</label>
                 <div class="col-sm-1">
-                    <select id="amount" class="form-control">
+                    <select name="amount_used_status" class="form-control">
                         <option value="add">+</option>
                         <option value="reduce">-</option>
                     </select>
                 </div>
                 <div class="col-sm-5">
-                    <input type="text" name="amount" id="amount" class="form-control"
+                    <input type="text" name="amount_used" id="amount" class="form-control"
                            placeholder="Amount">
                 </div>
             </div>

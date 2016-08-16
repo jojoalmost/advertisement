@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BillingEntries;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,8 @@ class BillingEntriesController extends Controller
      */
     public function index()
     {
-        return view('admin.billing_entries.index');
+        $data = BillingEntries::with('customers')->get();
+        return view('admin.billing_entries.index',compact('data'));
     }
 
     /**
@@ -27,25 +29,45 @@ class BillingEntriesController extends Controller
      */
     public function create()
     {
-        $modal = User::where('role',2)->get();
-        return view('admin.billing_entries.insert',compact('modal'));
+        $modal = User::where('role', 2)->get();
+        return view('admin.billing_entries.insert', compact('modal'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $status = $data['amount_used_status'];
+        unset($data['amount_used_status']);
+
+        $data['amount'] = 0;
+        $billing = BillingEntries::where('user_id', $data['user_id'])->orderby('created_at', 'desc')->get();
+        $count = $billing->count();
+        if ($count > 0) {
+            $data['amount'] = $billing->first()->amount_left;
+        }
+        if ($status == 'reduce') {
+            $data['amount_used'] = $data['amount_used'] * (-1);
+        }
+        $data['amount_left'] = $data['amount'] + $data['amount_used'];
+        if ($data['amount_left'] < 0) {
+            $data['amount_left'] = 0;
+        }
+        BillingEntries::create($data);
+
+        return redirect('admin/billing_entries');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -56,7 +78,7 @@ class BillingEntriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -67,8 +89,8 @@ class BillingEntriesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -79,7 +101,7 @@ class BillingEntriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

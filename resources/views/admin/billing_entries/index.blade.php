@@ -29,7 +29,7 @@
                     <table class="table table-hover table-striped sorted_table" id="data_table">
                         <thead>
                         <tr>
-                            <th>Customer</th>
+                            {{--<th>Customer</th>--}}
                             <th>Entry UID</th>
                             <th>Document Reference No</th>
                             <th>Amount</th>
@@ -37,31 +37,20 @@
                             <th>Amount Left</th>
                             <th>To be used by</th>
                             <th>Notes</th>
-                            <th class="action"></th>
                         </tr>
                         </thead>
                         <tbody>
-                        {{--@foreach($data as $i =>$value)--}}
-                            {{--<tr data-id="{{$value->id}}">--}}
-                                {{--<td>{{$i+1}}</td>--}}
-                                {{--<td>{{$value->name}}</td>--}}
-                                {{--<td>{{$value->max_played}}</td>--}}
-                                {{--<td>{{$value->played}}</td>--}}
-                                {{--<td>{{$value->skip_duration}}</td>--}}
-                                {{--<td>{{$value->active}}</td>--}}
-                                {{--<td class="column-action">--}}
-                                    {{--<div class="button-group">--}}
-                                        {{--<a href="{{url('admin/advertisement/'.$value->id.'/edit')}}">--}}
-                                            {{--<i class="material-icons">edit</i>--}}
-                                        {{--</a>--}}
-                                        {{--<a href="{{url('admin/advertisement/'.$value->id)}}" data-id="{{$value->id}}"--}}
-                                           {{--class="text-danger" name="delete_link">--}}
-                                            {{--<i class="material-icons">delete_forever</i>--}}
-                                        {{--</a>--}}
-                                    {{--</div>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                        {{--@endforeach--}}
+                        @foreach($data as $i =>$value)
+                            <tr data-id="{{$value->id}}">
+                                <td>{{$value->id}}</td>
+                                <td>{{$value->doc_ref_no}}</td>
+                                <td>{{$value->amount}}</td>
+                                <td>{{$value->amount_used}}</td>
+                                <td>{{$value->amount_left}}</td>
+                                <td>{{$value->customers->name}}</td>
+                                <td>{{$value->notes}}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
