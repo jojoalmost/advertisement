@@ -158,6 +158,7 @@ class HomeController extends Controller
         if (!empty($key)) {
             Session::put('apikey', $key);
             $user=User::where('key',$key)->get();
+            dd($user);
             Session::put('user_id', $user['id']);
         }
         $cloudtrax = Request::all();
