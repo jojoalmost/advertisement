@@ -146,7 +146,6 @@ class HomeController extends Controller
 
     public function termsOfUse()
     {
-        dd(Session::get('user_id'));
         $data = Setting::whereHas('user', function ($test) {
             $test->where('key', Session::get('apikey'));
         })->where('option', 'terms')->get()->first();

@@ -131,8 +131,9 @@ class CloudtraxController extends Controller
         Session::put(compact('ads'));
 
         //calculate amount
+        $user_id=Session::get('user_id');
         $file_size = 0;
-        $file_size = File::size('video/'.Auth::user()->id.'/'.$ads['video_mp4']);
+        $file_size = File::size('video/'.$user_id.'/'.$ads['video_mp4']);
         dd($file_size);
 
 
