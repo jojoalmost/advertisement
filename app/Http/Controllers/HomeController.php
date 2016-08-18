@@ -142,7 +142,7 @@ class HomeController extends Controller
     {
         $data = Setting::whereHas('user', function ($test) {
             $test->where('key', Session::get('apikey'));
-        })->where('option', 'terms')->get();
+        })->where('option', 'terms')->get()->first();
         return view('terms-of-use', compact('data'));
     }
 
