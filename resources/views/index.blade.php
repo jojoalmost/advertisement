@@ -50,6 +50,8 @@
             <form action="{{url('cloudtraxauth')}}" method="post" id="skip" style="display: none">
                 {!! csrf_field() !!}
                 <input type="hidden" name="advertisement_id" value="{{$data->id}}">
+                <input type="hidden" name="video_duration">
+                <input type="hidden" name="video_watched">
                 </button>
             </form>
         </div>
@@ -66,6 +68,10 @@
 
             // save a reference to the video element
             video = document.querySelector('video');
+
+            $('[name=video_duration]').val(video.currentTime);
+            $('[name=video_watched]').val(video.duration);
+
 
             // disable right click
             if (video.addEventListener) {
@@ -86,6 +92,7 @@
             player.disableProgress({
                 autoDisable: true
             });
+
 
             player.on('play', function () {
                 if (video.requestFullscreen) {

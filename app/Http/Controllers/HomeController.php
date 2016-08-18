@@ -138,9 +138,9 @@ class HomeController extends Controller
         //
     }
 
-    public function termsOfUse($key)
+    public function termsOfUse()
     {
-        dd(Session::get('apikey'));
+//        dd(Session::get('apikey'));
         $cloudtrax = Request::all();
         if (!empty($cloudtrax)) {
             Session::put(compact('cloudtrax'));
@@ -172,7 +172,7 @@ class HomeController extends Controller
     public function apiKey($key){
         dd($key);
         Session::put('apikey',$key);
-//        return redirect('/');
+        return redirect('/');
     }
 //    public function fetch(Request $request)
 //    {
