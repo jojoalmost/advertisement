@@ -140,10 +140,11 @@ class HomeController extends Controller
 
     public function termsOfUse()
     {
+        DB::enableQueryLog();
         $data = Setting::with('user', function ($test) {
             $test->where('key', Session::get('apikey'));
         })->where('option', 'terms')->get();
-        dd($data);
+        dd(DB::getQueryLog(), $data);
         return view('terms-of-use', compact('data'));
     }
 
