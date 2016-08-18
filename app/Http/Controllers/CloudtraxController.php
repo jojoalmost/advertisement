@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -128,6 +129,12 @@ class CloudtraxController extends Controller
         $ads->played++;
         $ads->save();
         Session::put(compact('ads'));
+
+        //calculate amount
+        $file_size = 0;
+        $file_size = File::size('video/'.Auth::user()->id.'/'.$ads['video_mp4']);
+        dd($file_size);
+
 
         return redirect("cloudtraxauth");
     }
