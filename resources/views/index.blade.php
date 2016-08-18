@@ -68,12 +68,6 @@
             // save a reference to the video element
             video = document.querySelector('video');
 
-            $('[name=video_watched]').val(video.currentTime);
-            $('[name=video_duration]').val(video.duration);
-
-            console.log(video.currentTime,video.duration);
-
-
             // disable right click
             if (video.addEventListener) {
                 video.addEventListener('contextmenu', function (e) {
@@ -103,6 +97,10 @@
                 } else if (video.webkitRequestFullscreen) {
                     video.webkitRequestFullscreen(); // Chrome and Safari
                 }
+                $('[name=video_watched]').val(video.currentTime);
+                $('[name=video_duration]').val(video.duration);
+
+                console.log(video.currentTime,video.duration);
             });
 
             player.on('ended', function () {
