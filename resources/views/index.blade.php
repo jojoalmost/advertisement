@@ -52,7 +52,6 @@
                 <input type="hidden" name="advertisement_id" value="{{$data->id}}">
                 <input type="hidden" name="video_duration">
                 <input type="hidden" name="video_watched">
-                </button>
             </form>
         </div>
     </div>
@@ -69,8 +68,10 @@
             // save a reference to the video element
             video = document.querySelector('video');
 
-            $('[name=video_duration]').val(video.currentTime);
-            $('[name=video_watched]').val(video.duration);
+            $('[name=video_watched]').val(video.currentTime);
+            $('[name=video_duration]').val(video.duration);
+
+            console.log(video.currentTime,video.duration);
 
 
             // disable right click
