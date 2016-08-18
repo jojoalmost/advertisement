@@ -141,8 +141,9 @@ class HomeController extends Controller
     public function termsOfUse()
     {
         $apikey = Session::get('apikey');
+
+        dd($apikey);
         $data = Setting::with('user')->where('option', 'terms')->where('key',$apikey['apikey'])->get();
-        dd($data);
         return view('terms-of-use', compact('data'));
     }
 
