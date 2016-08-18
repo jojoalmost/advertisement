@@ -124,7 +124,7 @@
                     image_url: "{{url('/css/videojs/skip_button.png')}}",
                     opacity: 0.5,
                     start_time: skip_duration,
-                    height: '4%'
+                    height: '5%'
                 });
 
             }

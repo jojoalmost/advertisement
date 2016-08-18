@@ -1,7 +1,7 @@
 #vjs-image-overlay-holder {
     position: absolute;
-    bottom: 50;
-    left: 0;
+    bottom: 50px;
+    left: -50px;
     text-align: right;
     cursor: pointer;
 }
