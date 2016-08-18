@@ -8,4 +8,8 @@ class Setting extends Model
 {
     protected $table = 'general_setting';
     protected $fillable = ['option', 'value'];
+
+    public function user(){
+        return $this->hasOne('App\User','id','user_id');
+    }
 }

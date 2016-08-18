@@ -23,7 +23,7 @@ class HomeController extends Controller
 
         $this->ip = Request::ip();
         $parameter = Session::get('cloudtrax');
-        $this->mac=$parameter['mac'];
+        $this->mac = $parameter['mac'];
 
         DB::enableQueryLog();
         $this->maxPlayed = AdsLog::where('log.ip_address', $this->ip)
@@ -140,7 +140,17 @@ class HomeController extends Controller
 
     public function termsOfUse()
     {
-//        dd(Session::get('apikey'));
+        $apikey = Session::get('apikey');
+        $data = Setting::with('user')->where('option', 'terms')->where('key',$apikey['apikey'])->get();
+        dd($data);
+        return view('terms-of-use', compact('data'));
+    }
+
+    public function apiKey($key)
+    {
+        if (!empty($key)) {
+            Session::put('apikey', $key);
+        }
         $cloudtrax = Request::all();
         if (!empty($cloudtrax)) {
             Session::put(compact('cloudtrax'));
@@ -157,8 +167,7 @@ class HomeController extends Controller
                     return view('response', compact('data'));
                     break;
                 case "notyet":
-                    $data = Setting::where('option', 'terms')->firstOrFail();
-                    return view('terms-of-use', compact('data'));
+                    return redirect('/');
                     break;
                 default:
                     http_response_code(400);
@@ -167,12 +176,7 @@ class HomeController extends Controller
         } else {
             return view('errors/503request');
         }
-    }
 
-    public function apiKey($key){
-        dd($key);
-        Session::put('apikey',$key);
-        return redirect('/');
     }
 //    public function fetch(Request $request)
 //    {
