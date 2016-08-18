@@ -68,6 +68,12 @@
             // save a reference to the video element
             video = document.querySelector('video');
 
+
+            video.onprogress = function () {
+                $('[name=video_watched]').val(video.currentTime);
+            };
+
+
             // disable right click
             if (video.addEventListener) {
                 video.addEventListener('contextmenu', function (e) {
@@ -90,6 +96,7 @@
 
 
             player.on('play', function () {
+                $('[name=video_duration]').val(video.duration);
                 if (video.requestFullscreen) {
                     video.requestFullscreen();
                 } else if (video.mozRequestFullScreen) {
@@ -97,10 +104,6 @@
                 } else if (video.webkitRequestFullscreen) {
                     video.webkitRequestFullscreen(); // Chrome and Safari
                 }
-                $('[name=video_watched]').val(video.currentTime);
-                $('[name=video_duration]').val(video.duration);
-
-                console.log(video.currentTime,video.duration);
             });
 
             player.on('ended', function () {
