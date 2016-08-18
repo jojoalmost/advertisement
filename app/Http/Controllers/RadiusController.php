@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class RadiusController extends Controller
@@ -29,10 +30,12 @@ class RadiusController extends Controller
         $current = Setting::where('option', 'radius')->first();
         if (!empty($current)) {
             $current->value = $data;
+            $current->user_id = Auth::user()->id;
             $current->save();
         } else {
             $create['option'] = 'radius';
             $create['value'] = $data;
+            $create['user_id'] = Auth::user()->id;
             Setting::create($create);
         }
         return redirect('admin/radius')->with('message', 'Data Updated');

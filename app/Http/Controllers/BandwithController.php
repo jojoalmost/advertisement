@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class BandwithController extends Controller
 {
@@ -31,10 +32,12 @@ class BandwithController extends Controller
         $current = Setting::where('option', 'bandwith')->firstOrFail();
         if (!empty($current)) {
             $current->value = $data;
+            $current->user_id = Auth::user()->id;
             $current->save();
         } else {
             $create['option'] = 'bandwith';
             $create['value'] = $data;
+            $create['user_id'] = Auth::user()->id;
             Setting::create($create);
         }
         return redirect('admin/bandwith')->with('message', 'Data Updated');
