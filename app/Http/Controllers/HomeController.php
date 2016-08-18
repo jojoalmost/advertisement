@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Advertisement;
 use App\AdsLog;
 use App\Setting;
+use App\User;
 use Illuminate\Support\Facades\Session;
 use Request;
 use App\Http\Controllers\Controller;
