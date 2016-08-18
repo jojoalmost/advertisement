@@ -38,7 +38,9 @@ class HomeController extends Controller
                 $q->where('log.ip_address', $this->ip)
                     ->where('log.mac', $this->mac)
                     ->where('log.played', $this->maxPlayed);
-            }, '=', 0);
+            }, '=', 0)->whereHas('user', function ($test) {
+                $test->where('key', Session::get('apikey'));
+            });
             $count = $data->count();
 //            dd($count);
             if ($count == 0) {
@@ -53,6 +55,9 @@ class HomeController extends Controller
                 ->where('log.mac', $this->mac)
                 ->where('log.played', $this->maxPlayed);
         }, '=', 0)
+            ->whereHas('user', function ($test) {
+            $test->where('key', Session::get('apikey'));
+        })
             ->where('advertisement.active', 'yes')
             ->get()
             ->first();
