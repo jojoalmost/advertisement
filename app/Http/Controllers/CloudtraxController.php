@@ -138,7 +138,7 @@ class CloudtraxController extends Controller
         $watched = round($data['video_watched']);//sec
         $bandwidth = ($watched / $duration) * $file_size;
 
-        $billing = BillingEntries::where('user_id',  Session::get('user_id'))->orderby('created_at', 'desc')->first()->get();
+        $billing = BillingEntries::where('user_id',  Session::get('user_id'))->orderby('created_at', 'desc')->first();
         $billing->amount_used=$billing->amount_used-$bandwidth;
         $billing->amount_left = $billing->amount - $billing->amount_used;
         if($billing->amount_left<0)$billing->amount_left=0;
