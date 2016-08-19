@@ -3,6 +3,7 @@
     <link href="{{url('/css/videojs/video-js.css')}}" rel="stylesheet">
     <link href="{{url('/css/videojs/videojs.imageOverlay.css')}}" rel="stylesheet">
     <script src="{{url('/js/videojs/video.js')}}"></script>
+    <script src="{{url('/js/ie8/videojs-ie8.js')}}"></script>
     <script src="{{url('/js/videojs/videojs.disableProgress.js')}}"></script>
     <script src="{{url('/js/videojs/videojs-playlist.js')}}"></script>
     <script src="{{url('/js/videojs/videojs.imageOverlay.js')}}"></script>
