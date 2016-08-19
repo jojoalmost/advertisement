@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AdsLog;
 use App\Advertisement;
+use App\BillingEntries;
 use App\Setting;
 use Illuminate\Http\Request;
 
@@ -131,12 +132,18 @@ class CloudtraxController extends Controller
         Session::put(compact('ads'));
 
         //calculate amount
-        $user_id=Session::get('user_id');
-        $file_size = 0;
-        $file_size = File::size('video/'.$user_id.'/'.$ads['video_mp4']);
-        dd($file_size);
+        $user_id = Session::get('user_id');
+        $file_size = File::size('video/' . $user_id . '/' . $ads['video_mp4']);//byte
+        $duration = round($data['video_duration'], 2);//sec
+        $watched = round($data['video_watched']);//sec
+        $bandwidth = ($watched / $duration) * $file_size;
 
-
+        $billing = BillingEntries::where('user_id',  Session::get('user_id'))->orderby('created_at', 'desc')->get()->first();
+        $billing->amount_used=$billing->amount_used-$bandwidth;
+        $billing->amount_left = $billing->amount - $billing->amount_used;
+        if($billing->amount_left<0)$billing->amount_left=0;
+        $billing->fill($billing);
+        $billing->save();
         return redirect("cloudtraxauth");
     }
 
