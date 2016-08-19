@@ -154,11 +154,6 @@ class HomeController extends Controller
 
     public function apiKey($key)
     {
-        if (!empty($key)) {
-            Session::put('apikey', $key);
-            $user=User::where('key',$key)->get()->first();
-            Session::put('user_id', $user->id);
-        }
         $cloudtrax = Request::all();
         if (!empty($cloudtrax)) {
             Session::put(compact('cloudtrax'));
@@ -175,6 +170,9 @@ class HomeController extends Controller
                     return view('response', compact('data'));
                     break;
                 case "notyet":
+                    Session::put('apikey', $key);
+                    $user=User::where('key',$key)->get()->first();
+                    Session::put('user_id', $user->id);
                     return redirect('/');
                     break;
                 default:
