@@ -15,7 +15,7 @@ class RadiusController extends Controller
     public function index()
     {
 //        DB::enableQueryLog();
-        $data = Setting::where('option', 'radius')->first();
+        $data = Setting::where('option', 'radius')->where('user_id',Auth::user()->id)->first();
 //        dd(DB::getQueryLog());
         $data = json_decode($data['value']);
         return view('admin.radius.index', compact('data'));

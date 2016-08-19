@@ -15,7 +15,7 @@ class TermsController extends Controller
     public function index()
     {
 //        DB::enableQueryLog();
-        $data = Setting::where('option', 'terms')->first();
+        $data = Setting::where('option', 'terms')->where('user_id',Auth::user()->id)->first();
 //        dd(DB::getQueryLog());
         return view('admin.terms.index', compact('data'));
     }

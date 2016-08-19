@@ -14,7 +14,7 @@ class BandwithController extends Controller
     public function index()
     {
 //        DB::enableQueryLog();
-        $data = Setting::where('option', 'bandwith')->first();
+        $data = Setting::where('option', 'bandwith')->where('user_id',Auth::user()->id)->first();
 //        dd(DB::getQueryLog());
         $data = json_decode($data['value']);
         return view('admin.bandwith.index', compact('data'));
