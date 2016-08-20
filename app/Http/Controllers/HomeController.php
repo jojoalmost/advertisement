@@ -173,6 +173,7 @@ class HomeController extends Controller
                     Session::put('apikey', $key);
                     $user=User::where('key',$key)->get()->first();
                     Session::put('user_id', $user->id);
+                    Session::put('user_active', $user->active);
                     return redirect('/');
                     break;
                 default:

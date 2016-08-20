@@ -12,14 +12,19 @@
 */
 
 use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\UserActive;
 
-Route::get('/', 'HomeController@termsOfUse');
+
 Route::get('/api/{key}', 'HomeController@apiKey');
+Route::get('/suspended',function(){
+    return view('errors/503suspended');
+});
 //backend
 
-Route::group(['middleware' => Authenticate::class], function()
-{
-    Route::get('admin/dashboard',function (){ return view('admin.dashboard');});
+Route::group(['middleware' => Authenticate::class], function () {
+    Route::get('admin/dashboard', function () {
+        return view('admin.dashboard');
+    });
     Route::resource('admin/advertisement', 'AdvertisementController');
     Route::post('admin/advertisement/sorting', 'AdvertisementController@sorting');
     Route::post('admin/advertisement/skipduration', 'AdvertisementController@skipDuration');
@@ -46,7 +51,9 @@ Route::group(['middleware' => Authenticate::class], function()
 Route::get('admin', function () {
     return redirect('admin/login');
 });
-Route::get('admin/login',function(){ return view('admin.login');});
+Route::get('admin/login', function () {
+    return view('admin.login');
+});
 
 // Authentication routes...
 Route::post('auth/login', 'LoginController@authenticate');
@@ -57,8 +64,12 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 //frontend
-Route::resource('ads', 'HomeController');
-Route::resource('cloudtraxauth', 'CloudtraxController');
-Route::get('cloudtraxres','AuthResponseController@response');
-Route::post('fetch/{sorting}', 'HomeController@fetch');
-Route::get('redirect','CloudtraxController@redirect');
+Route::group(['middleware' => Useractive::class], function () {
+    Route::get('/', 'HomeController@termsOfUse');
+    Route::resource('ads', 'HomeController');
+    Route::resource('cloudtraxauth', 'CloudtraxController');
+    Route::get('cloudtraxres', 'AuthResponseController@response');
+    Route::post('fetch/{sorting}', 'HomeController@fetch');
+    Route::get('redirect', 'CloudtraxController@redirect');
+});
+
