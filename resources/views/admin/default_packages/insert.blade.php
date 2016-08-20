@@ -80,13 +80,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Per Play Rate</label>
-
-                <div class="col-sm-6">
-                    <input type="text" name="per_play_rate" id="per_play_rate" class="form-control" placeholder="Per Play Rate">
-                </div>
-            </div>
-            <div class="form-group">
                 <div class="col-sm-6 pull-right">
                     <a href="{{url('admin/default_packages')}}" class="btn btn-default">Cancel</a>
                     <button class="btn btn-raised btn-primary">Save</button>

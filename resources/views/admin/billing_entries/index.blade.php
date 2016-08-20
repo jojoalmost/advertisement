@@ -31,6 +31,7 @@
                         <tr>
                             {{--<th>Customer</th>--}}
                             <th>Entry UID</th>
+                            <th>Customers</th>
                             <th>Document Reference No</th>
                             <th>Amount</th>
                             <th>Amount Used</th>
@@ -43,11 +44,12 @@
                         @foreach($data as $i =>$value)
                             <tr data-id="{{$value->id}}">
                                 <td>{{$value->id}}</td>
+                                <td>{{$value->customers->name}}</td>
                                 <td>{{$value->doc_ref_no}}</td>
                                 <td>{{$value->amount}}</td>
                                 <td>{{$value->amount_used}}</td>
                                 <td>{{$value->amount_left}}</td>
-                                <td>{{$value->customers->name}}</td>
+                                <td>{{$value->created_at}}</td>
                                 <td>{{$value->notes}}</td>
                             </tr>
                         @endforeach

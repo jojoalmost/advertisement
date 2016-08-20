@@ -24,7 +24,6 @@ class DefaultPackagesTable extends Migration
             $table->string('monthly_price')->nullable();
             $table->string('bandwidth_rates')->nullable();
             $table->string('air_time_rate')->nullable();
-            $table->string('per_play_rate')->nullable();
             $table->timestamps();
         });
     }

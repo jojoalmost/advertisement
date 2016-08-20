@@ -134,14 +134,20 @@ class CloudtraxController extends Controller
         //calculate amount
         $user_id = Session::get('user_id');
         $file_size = File::size('video/' . $user_id . '/' . $ads['video_mp4']);//byte
+        $megabyte = $file_size / 1000000;
         $duration = round($data['video_duration'], 2);//sec
-        $watched = round($data['video_watched']);//sec
-        $bandwidth = ($watched / $duration) * $file_size;
+        $watched = round($data['video_watched'], 2);//sec
+        $bandwidth = ($watched / $duration) * $megabyte;
 
-        $billing = BillingEntries::where('user_id',  Session::get('user_id'))->orderby('created_at', 'desc')->first();
-        $billing->amount_used=$billing->amount_used-$bandwidth;
+        $packages = DefaultPackages::where('user_id', Session::get('user_id'))->first();
+        $airtime = $packages->air_time_rate;
+        $bandwuthPack = $packages->bandwidth_rates;
+
+
+        $billing = BillingEntries::where('user_id', Session::get('user_id'))->orderby('created_at', 'desc')->first();
+        $billing->amount_used = $billing->amount_used - $bandwidth;
         $billing->amount_left = $billing->amount - $billing->amount_used;
-        if($billing->amount_left<0)$billing->amount_left=0;
+        if ($billing->amount_left < 0) $billing->amount_left = 0;
         $billing->save();
         return redirect("cloudtraxauth");
     }

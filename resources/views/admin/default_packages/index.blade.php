@@ -34,7 +34,6 @@
                             <th>Monthly price</th>
                             <th>Bandwidth rates (per gig)</th>
                             <th>Air time rate( per sec)</th>
-                            <th>Per Play rate</th>
                             <th class="action"></th>
                         </tr>
                         </thead>
@@ -52,7 +51,6 @@
                                 <td>{{$value->monthly_price}}</td>
                                 <td>{{$value->bandwidth_rates}}</td>
                                 <td>{{$value->air_time_rate}}</td>
-                                <td>{{$value->per_play_rate}}</td>
                                 <td class="column-action">
                                     <div class="button-group">
                                         <a href="{{url('admin/default_packages/'.$value->id.'/edit')}}">
