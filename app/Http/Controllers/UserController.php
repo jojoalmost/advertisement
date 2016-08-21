@@ -45,6 +45,7 @@ class UserController extends Controller
         $data = $request->all();
         $data['password']= bcrypt($data['password']);
         $data['key']=  uniqid();
+        $data['active']=  'yes';
         $id =  User::create($data)->id;
         $path = 'video/'.$id;
         File::makeDirectory($path, $mode = 0777, true, true);
@@ -84,8 +85,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = User::query()->findOrFail($id);
         $data = $request->all();
-        $data['password']= isset($data['password'])? bcrypt($data['password']): null;
+        $data['password']= isset($data['password'])? bcrypt($data['password']): $user->password;
         $existing = User::query()->findOrFail($id);
         $existing->fill($data);
         $existing->save();
@@ -104,5 +106,15 @@ class UserController extends Controller
         $data->delete();
         $path = 'video/'.$id;
         File::deleteDirectory($path);
+    }
+
+    public function setactive($status,$id){
+        $data = User::query()->findOrFail($id);
+        if($status == 'active'){
+            $data->active = 'yes';
+        }else{
+            $data->active = 'no';
+        }
+        $data->save();
     }
 }

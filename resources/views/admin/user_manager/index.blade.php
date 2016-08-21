@@ -25,6 +25,7 @@
                             <th>Email</th>
                             <th>Role</th>
                             <th>API Key</th>
+                            <th>Active</th>
                             <th class="action"></th>
                         </tr>
                         </thead>
@@ -36,6 +37,14 @@
                                 <td>{{$value->email}}</td>
                                 <td>@if($value->role == 1) Admin @else Customers @endif</td>
                                 <td>{{$value->key}}</td>
+                                <td>
+                                    @if($value->active == 'yes')
+                                        <a href="{{url('admin/user_manager/set/deactive'.$value->id)}}" name="active" lass="btn btn-raised btn-success">Active<div class="ripple-container"></div></a>
+                                        @else
+                                        <a href="{{url('admin/user_manager/set/active'.$value->id)}}" name="active" class="btn btn-raised btn-warning">Deactive<div class="ripple-container"></div></a>
+                                    @endif
+                                </td>
+
                                 <td class="column-action">
                                     <div class="button-group">
                                         <a href="{{url('admin/user_manager/'.$value->id.'/edit')}}">
@@ -68,26 +77,26 @@
                     url: $(this).attr('href') + '?_token=' + $('[name=_xhr_token]').attr('content'),
                     type: 'delete',
                     success: function (xhr) {
-
-//                        var options = {
-//                            content: 'Data Deleted.',
-//                            style: 'snackbar',
-//                            timeout: 2500
-//                        };
-
                         $('#data_table').find('tr[data-id=' + id + ']').remove();
 
                         if ($('#data_table').find('tbody tr').length == 1) {
                             $('#empty_marker').css('display', 'table-row');
                         }
                     },
-//                    error: function (xhr) {
-//                        var options = {
-//                            content: 'Terjadi kesalahan saat mencoba menghapus data AXA.',
-//                            style: 'snackbar',
-//                            timeout: 2500
-//                        };
-//                    }
+                });
+            });
+
+            $("[name=active]").click(function (event) {
+
+                event.preventDefault();
+                var id = $(this).attr('data-id');
+
+                $.ajax({
+                    url: $(this).attr('href') + '?_token=' + $('[name=_xhr_token]').attr('content'),
+                    type: 'get',
+                    success: function (xhr) {
+                        location.reload()
+                    },
                 });
             });
         })

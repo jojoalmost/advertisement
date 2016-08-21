@@ -45,6 +45,7 @@ Route::group(['middleware' => Authenticate::class], function () {
     Route::resource('admin/rates_price', 'RatesPriceController');
     Route::resource('admin/billing_entries', 'BillingEntriesController');
     Route::resource('admin/user_manager', 'UserController');
+    Route::get('admin/user_manager/set/{status}/{id}','UserController@setactive');
 });
 
 
