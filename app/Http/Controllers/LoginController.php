@@ -16,14 +16,19 @@ class LoginController extends Controller
     {
         if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
             // Authentication passed...
-            return redirect()->intended('admin/dashboard');
-        }
-        else{
+            if (Auth::user()->active == 'yes') {
+                return redirect()->intended('admin/dashboard');
+            }
+            else{
+                return Redirect::back()->withErrors(['Your Account has been suspended by admin.', 'The Message']);
+            }
+        } else {
             return Redirect::back()->withErrors(['The username and password you entered did not match our records. Please double-check and try again.', 'The Message']);
         }
     }
 
-    public  function  getLogout (){
+    public function  getLogout()
+    {
         Auth::logout();
         return redirect()->intended('admin/login');
     }
