@@ -18,7 +18,7 @@ class BillingEntriesController extends Controller
      */
     public function index()
     {
-        $data = BillingEntries::with('customers')->get();
+        $data = BillingEntries::with('customers')->where('type','manual')->get();
         return view('admin.billing_entries.index',compact('data'));
     }
 
@@ -46,6 +46,7 @@ class BillingEntriesController extends Controller
         unset($data['amount_used_status']);
 
         $data['amount'] = 0;
+        $data['type'] = 'manual';
         $billing = BillingEntries::where('user_id', $data['user_id'])->orderby('created_at', 'desc')->get();
         $count = $billing->count();
         if ($count > 0) {

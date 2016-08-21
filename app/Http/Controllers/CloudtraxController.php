@@ -137,18 +137,43 @@ class CloudtraxController extends Controller
         $megabyte = $file_size / 1000000;
         $duration = round($data['video_duration'], 2);//sec
         $watched = round($data['video_watched'], 2);//sec
-        $bandwidth = ($watched / $duration) * $megabyte;
+        $bandwidth = round(($watched / $duration) * $megabyte, 2);
 
         $packages = DefaultPackages::where('user_id', Session::get('user_id'))->first();
-        $airtime = $packages->air_time_rate;
-        $bandwuthPack = $packages->bandwidth_rates;
+        $airtimePckg = $packages->air_time_rate;
+        $bandwithPckg = $packages->bandwidth_rates;
+
+        $airTimeSum = $bandwidth * $airtimePckg;
+        $bandwithSum = round(($bandwidth / 1000) * $bandwithPckg, 2);
 
 
-        $billing = BillingEntries::where('user_id', Session::get('user_id'))->orderby('created_at', 'desc')->first();
-        $billing->amount_used = $billing->amount_used - $bandwidth;
-        $billing->amount_left = $billing->amount - $billing->amount_used;
-        if ($billing->amount_left < 0) $billing->amount_left = 0;
-        $billing->save();
+        $data['amount'] = 0;
+        $data['amount_used'] = 0;
+        $data['amount_left'] = 0;
+        $billing = BillingEntries::where('user_id', $data['user_id'])->orderby('created_at', 'desc')->get();
+        $data['user_id'] = $billing->user_id;
+        $data['doc_ref_no'] = 'bandwith use';
+        $data['notes'] = '';
+        $data['type'] = 'automatic';
+        $count = $billing->count();
+        if ($count > 0) {
+            $data['amount'] = $billing->first()->amount_left;
+        }
+        $data['amount_used'] = $bandwithSum * (-1);
+        $data['amount_left'] = $data['amount'] + $data['amount_used'];
+        if ($data['amount_left'] < 0) {
+            $data['amount_left'] = 0;
+        }
+        BillingEntries::create($data);
+
+        $data['doc_ref_no'] = 'airtime use';
+        $data['amount'] = $data['amount_left'];
+        $data['amount_used'] = $airTimeSum * (-1);
+        $data['amount_left'] = $data['amount'] + $data['amount_used'];
+        if ($data['amount_left'] < 0) {
+            $data['amount_left'] = 0;
+        }
+        BillingEntries::create($data);
         return redirect("cloudtraxauth");
     }
 

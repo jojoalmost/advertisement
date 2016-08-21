@@ -20,6 +20,7 @@ class BillingTable extends Migration
             $table->string('amount_used')->default(0);
             $table->string('amount_left')->default(0);
             $table->string('notes')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }
