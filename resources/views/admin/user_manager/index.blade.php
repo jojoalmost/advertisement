@@ -39,7 +39,7 @@
                                 <td>{{$value->key}}</td>
                                 <td>
                                     @if($value->active == 'yes')
-                                        <a href="{{url('admin/user_manager/set/deactive/'.$value->id)}}" name="active" lass="btn btn-raised btn-success">Active<div class="ripple-container"></div></a>
+                                        <a href="{{url('admin/user_manager/set/deactive/'.$value->id)}}" name="active" class="btn btn-raised btn-success">Active<div class="ripple-container"></div></a>
                                         @else
                                         <a href="{{url('admin/user_manager/set/active/'.$value->id)}}" name="active" class="btn btn-raised btn-warning">Deactive<div class="ripple-container"></div></a>
                                     @endif
